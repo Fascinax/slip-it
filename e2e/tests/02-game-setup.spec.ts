@@ -51,3 +51,40 @@ test.describe('Configuration de la partie (/game-setup)', () => {
     await expect(page).toHaveURL(/card-deal/);
   });
 });
+
+// --------------------------------------------------------------------------
+// Sad paths — noms dupliqués
+// --------------------------------------------------------------------------
+test.describe('Configuration de la partie (/game-setup) — sad paths (noms dupliqués)', () => {
+  test.beforeEach(async ({ gameSetupPage }) => {
+    await gameSetupPage.goto();
+  });
+
+  test('ajouter un nom dupliqué affiche un toast d\'erreur', async ({ page, gameSetupPage }) => {
+    await gameSetupPage.addPlayer('Alice');
+    // Try to add the same name again
+    await gameSetupPage.addPlayer('Alice');
+    await expect(page.locator('ion-toast')).toBeVisible({ timeout: 5_000 });
+  });
+
+  test('ajouter un nom dupliqué ne l\'ajoute pas à la liste (compteur reste 1)', async ({ gameSetupPage }) => {
+    await gameSetupPage.addPlayer('Alice');
+    await gameSetupPage.addPlayer('Alice');
+    await expect(gameSetupPage.playerCountBadge).toContainText('1');
+  });
+
+  test('la vérification des doublons est insensible à la casse', async ({ page, gameSetupPage }) => {
+    await gameSetupPage.addPlayer('Alice');
+    // "alice" should still be rejected as duplicate
+    await gameSetupPage.addPlayer('alice');
+    await expect(page.locator('ion-toast')).toBeVisible({ timeout: 5_000 });
+    await expect(gameSetupPage.playerCountBadge).toContainText('1');
+  });
+
+  test('un nom vide ou espace ne s\'ajoute pas', async ({ gameSetupPage }) => {
+    // The add button stays disabled when the input is empty/whitespace
+    await expect(gameSetupPage.btnAddPlayer).toHaveAttribute('disabled');
+    // Player count remains 0
+    await expect(gameSetupPage.playerCountBadge).toContainText('0');
+  });
+});
