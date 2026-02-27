@@ -59,13 +59,14 @@ test.describe('Page fin de partie (/game-end) — avec piège — happy paths', 
     await runToGameEnd(page, DEFAULT_PLAYERS, { validateTrap: true });
     await expect(page).toHaveURL(/game-end/, { timeout: 15_000 });
 
-    // The podium should show at least one score-badge with value 1
+    // The podium should show at least one score-badge with value "1 pt"
+    // (score-badge renders "{{ score }} pt" for score === 1)
     const badges = page.locator('app-score-badge');
     const count = await badges.count();
     let found = false;
     for (let i = 0; i < count; i++) {
       const text = await badges.nth(i).innerText().catch(() => '');
-      if (text.trim() === '1') { found = true; break; }
+      if (/^\s*1\s+pts?\s*$/i.test(text)) { found = true; break; }
     }
     expect(found).toBeTruthy();
   });

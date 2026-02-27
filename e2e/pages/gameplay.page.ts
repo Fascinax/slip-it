@@ -78,8 +78,9 @@ export class GameplayPage extends BasePage {
   /** Navigate to the game-end page. */
   async endGame(): Promise<void> {
     await this.btnEndGame.dispatchEvent('click');
-    // App shows a ConfirmDialogComponent modal — click "Terminer" to confirm
-    const modal = this.page.locator('ion-modal');
+    // App shows a ConfirmDialogComponent modal — click "Terminer" to confirm.
+    // Use .last() in case a previous modal (e.g. trap confirmation) lingers in DOM.
+    const modal = this.page.locator('ion-modal').last();
     await modal.waitFor({ state: 'visible', timeout: 5_000 });
     const confirmBtn = modal.getByRole('button', { name: 'Terminer' });
     await confirmBtn.dispatchEvent('click');

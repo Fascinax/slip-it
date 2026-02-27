@@ -53,6 +53,8 @@ test.describe('Gameplay — chronomètre indicatif (v1.2)', () => {
   });
 
   test('le chronomètre affiche un temps au format m:ss', async ({ page }) => {
+    // Wait for Angular to render the timer value (ChangeDetectionStrategy.OnPush)
+    await page.waitForTimeout(300);
     const timerValue = page.locator('app-countdown-timer .timer-value');
     await expect(timerValue).toBeVisible({ timeout: 5_000 });
     await expect(timerValue).toHaveText(/\d+:\d{2}/);
@@ -68,8 +70,12 @@ test.describe('Gameplay — mode continu (v1.2)', () => {
   });
 
   test('le titre de la page contient "Mode continu"', async ({ page }) => {
-    const title = page.locator('ion-title').first();
-    await expect(title).toContainText('Mode continu', { timeout: 5_000 });
+    // Use component-scoped selector — Ionic keeps all previous pages in the DOM with
+    // .ion-page-hidden but ion-title text can still be matched incorrectly by first().
+    await expect(page.locator('app-gameplay ion-title').first()).toContainText(
+      'Mode continu',
+      { timeout: 8_000 },
+    );
   });
 
   test('le bouton "Manche suivante" est absent en mode continu', async ({ page }) => {

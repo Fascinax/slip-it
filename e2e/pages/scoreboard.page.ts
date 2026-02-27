@@ -29,7 +29,9 @@ export class ScoreboardPage extends BasePage {
 
   /** Tap the back button to return to gameplay. */
   async backToGameplay(): Promise<void> {
-    await this.page.locator('ion-back-button').click();
+    // Scope to app-scoreboard to avoid strict-mode violation when Ionic keeps
+    // previous pages (and their back buttons) in the DOM simultaneously.
+    await this.page.locator('app-scoreboard ion-back-button').dispatchEvent('click');
     await this.waitForNavigation(/gameplay/);
   }
 }

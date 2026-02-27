@@ -41,9 +41,10 @@ test.describe('Mode continu — flux comportemental (v1.2)', () => {
   });
 
   test('le titre contient "Mode continu"', async ({ page }) => {
-    await expect(page.locator('ion-title').first()).toContainText('Mode continu', {
-      timeout: 5_000,
-    });
+    // Use component-scoped selector — Ionic keeps all previous pages in the DOM.
+    await expect(
+      page.locator('app-gameplay ion-title').first(),
+    ).toContainText('Mode continu', { timeout: 8_000 });
   });
 
   test('valider un piège en mode continu met le score à 1', async ({ page }) => {

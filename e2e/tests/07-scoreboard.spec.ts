@@ -1,11 +1,11 @@
 import { test, expect } from '../fixtures/base.fixture';
 import { DEFAULT_PLAYERS, runToGameplay } from '../helpers/game.helper';
+import { GameplayPage } from '../pages/gameplay.page';
 
 // --------------------------------------------------------------------------
 // Helper: navigate to the scoreboard from a fresh game
 // --------------------------------------------------------------------------
 async function goToScoreboard(page: import('@playwright/test').Page): Promise<void> {
-  const { GameplayPage } = await import('../pages/gameplay.page');
   await runToGameplay(page, DEFAULT_PLAYERS);
   const gp = new GameplayPage(page);
   await gp.nextRound();
@@ -25,7 +25,8 @@ test.describe('Classement inter-manche (/scoreboard) — happy paths', () => {
   });
 
   test('le titre contient "Classement"', async ({ page }) => {
-    await expect(page.locator('ion-title').first()).toContainText('Classement');
+    // Use component-scoped selector — Ionic keeps all previous pages in the DOM.
+    await expect(page.locator('app-scoreboard ion-title').first()).toContainText('Classement');
   });
 
   test('affiche autant de lignes que de joueurs', async ({ page }) => {
@@ -60,8 +61,9 @@ test.describe('Classement inter-manche (/scoreboard) — happy paths', () => {
     await expect(page).toHaveURL(/card-deal/, { timeout: 10_000 });
   });
 
-  test('le bouton retour (<) navigue vers /gameplay', async ({ page, scoreboardPage }) => {
-    await scoreboardPage.backToGameplay();
+  test('le bouton retour (<) navigue vers /gameplay', async ({ page }) => {
+    // Ionic keeps all pages in DOM — scope to the scoreboard component to avoid strict mode violation
+    await page.locator('app-scoreboard ion-back-button').dispatchEvent('click');
     await expect(page).toHaveURL(/gameplay/, { timeout: 10_000 });
   });
 });

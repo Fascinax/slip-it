@@ -78,7 +78,7 @@ export async function runToGameEnd(
   await runToGameplay(page, players, opts.beforeStart);
 
   if (opts.validateTrap) {
-    // Click "Piégé !" for first player
+    // Click "Piege !" for first player
     await page
       .locator('ion-item')
       .filter({ hasText: players[0].name })
@@ -88,7 +88,8 @@ export async function runToGameEnd(
     const modal = page.locator('ion-modal');
     await modal.waitFor({ state: 'visible', timeout: 5_000 });
     await modal.getByRole('button', { name: 'Oui, valider' }).dispatchEvent('click');
-    await page.waitForTimeout(400);
+    // Wait for the trap modal to fully dismiss before endGame opens another modal
+    await modal.waitFor({ state: 'hidden', timeout: 5_000 });
   }
 
   const gp = new GameplayPage(page);
