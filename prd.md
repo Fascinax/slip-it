@@ -5,7 +5,7 @@
 ### 1.1 Document title and version
 
 - PRD: Piège à Mots
-- Version: 1.0
+- Version: 1.1
 - Date: 27 février 2026
 - Auteur: Équipe produit
 

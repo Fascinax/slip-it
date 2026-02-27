@@ -1,5 +1,5 @@
 <div class="card-scene" [class.card--flipped]="flipped">
-  <div class="card" (animationend)="onAnimationEnd()">
+  <div class="card" (transitionend)="onAnimationEnd()">
     <div class="card__face card__face--front">
       <ng-content select="[slot=front]"></ng-content>
     </div>

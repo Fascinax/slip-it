@@ -1,6 +1,6 @@
 {
   "name": "slip-it",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -25,6 +25,7 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@angular/service-worker": "^18.2.14",
     "@capacitor/core": "^6.0.0",
     "@ionic/angular": "^8.0.0",
     "@ionic/storage-angular": "^4.0.0",
