@@ -1,6 +1,7 @@
 // Game Setup Page Styles
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 ion-content {
