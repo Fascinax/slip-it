@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-icon name="fish"></ion-icon> Slip It
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content">
+  <div class="home-hero">
+    <div class="home-hero__logo">
+      <ion-icon name="chatbubbles" class="logo-icon"></ion-icon>
+    </div>
+    <h1 class="home-hero__title">Slip It</h1>
+    <p class="home-hero__subtitle">Fais prononcer le mot secret à ta cible… si tu oses !</p>
+  </div>
+
+  <div class="home-actions">
+    <ng-container *ngIf="game$ | async as game">
+      <ion-button
+        *ngIf="game && game.status !== 'FINISHED' && game.status !== 'SETUP'"
+        expand="block"
+        color="success"
+        class="home-actions__btn"
+        data-testid="btn-resume-game"
+        (click)="resumeGame()"
+      >
+        <ion-icon slot="start" name="play"></ion-icon>
+        Reprendre la partie
+      </ion-button>
+    </ng-container>
+
+    <ion-button expand="block" class="home-actions__btn" data-testid="btn-new-game" (click)="newGame()">
+      <ion-icon slot="start" name="add-circle"></ion-icon>
+      Nouvelle partie
+    </ion-button>
+  </div>
+
+  <div class="home-rules ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Comment jouer ?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ol>
+          <li>Chaque joueur reçoit une <strong>cible</strong> et un <strong>mot secret</strong>.</li>
+          <li>Fais prononcer ce mot à ta cible naturellement.</li>
+          <li>Quand le piège réussit, déclare-le et le groupe vote !</li>
+          <li>Celui qui a le plus de points gagne.</li>
+        </ol>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,219 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ===================================================
+   Slip It — Global Application Styles
+   =================================================== */
+
+/* Google Fonts — loaded at build time via assets or CDN */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+/* Typography */
+* {
+  box-sizing: border-box;
+}
+
+ion-content {
+  --background: var(--pam-bg-gradient);
+}
+
+ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+ion-button {
+  --border-radius: 12px;
+  font-weight: 700;
+}
+
+/* Scoreboard entry */
+.ranking-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--ion-color-light-shade);
+
+  &:last-child { border-bottom: none; }
+
+  .rank {
+    font-size: 1.2rem;
+    font-weight: 800;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .player-name {
+    flex: 1;
+    font-weight: 600;
+  }
+}
+
+/* Game end */
+.podium-winner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px 16px;
+
+  .winner-crown {
+    font-size: 56px;
+    margin-bottom: 8px;
+    animation: crown-bounce 1s ease-in-out infinite alternate;
+  }
+
+  .winner-name {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 12px 0 4px;
+    color: var(--ion-color-secondary);
+  }
+
+  .winner-subtitle {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ion-color-medium);
+  }
+}
+
+@keyframes crown-bounce {
+  from { transform: translateY(0) rotate(-5deg); }
+  to   { transform: translateY(-8px) rotate(5deg); }
+}
+
+.podium-rank {
+  font-size: 1.4rem;
+  min-width: 36px;
+  text-align: center;
+}
+
+.setup-hint {
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+}
+
+.warning-text {
+  color: var(--ion-color-danger) !important;
+  font-size: 0.8rem;
+}
+
+/* Card reveal in gameplay */
+.card-reveal {
+  .card-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ion-color-medium);
+    margin-bottom: 4px;
+  }
+  .card-target {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--ion-color-primary);
+    margin: 0 0 16px;
+  }
+  .card-word {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--ion-color-dark);
+    margin: 0 0 16px;
+  }
+}
+
+/* Gameplay content */
+.gameplay-content {
+  --background: var(--pam-bg-gradient);
+}
+
+/* Scoreboard content */
+.scoreboard-content {
+  --background: var(--pam-bg-gradient);
+}
+
+.scoreboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scoreboard-entry {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &--first  { border-color: rgba(255, 196, 9, 0.6); background: rgba(255, 196, 9, 0.12); }
+  &--second { border-color: rgba(146, 148, 156, 0.5); }
+  &--third  { border-color: rgba(205, 127, 50, 0.5); }
+
+  &__rank   { font-size: 1.8rem; min-width: 40px; text-align: center; }
+  &__name   { flex: 1; font-weight: 700; font-size: 1rem; }
+  &__score  { margin-left: auto; }
+}
+
+/* Game end */
+.game-end-content {
+  --background: var(--pam-bg-gradient);
+}
+
+.stats-card {
+  h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--ion-color-primary);
+    margin: 0 0 4px;
+  }
+  p {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ion-color-medium);
+  }
+}

@@ -1,0 +1,47 @@
+// Player List Component Styles
+:host {
+  display: block;
+}
+
+.player-count {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin: 4px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  gap: 12px;
+  transition: opacity 0.2s;
+
+  &:active {
+    opacity: 0.7;
+  }
+
+  .player-name {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .remove-btn {
+    --padding-start: 4px;
+    --padding-end: 4px;
+    height: 32px;
+    color: var(--ion-color-danger);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}

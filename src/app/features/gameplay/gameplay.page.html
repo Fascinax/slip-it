@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Partie en cours — Manche {{ game?.currentRound }}/{{ game?.totalRounds }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button data-testid="btn-end-game" (click)="endGame()">
+        <ion-icon slot="icon-only" name="stop-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding gameplay-content">
+
+  <!-- Quick ranking -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Classement rapide</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ranking-row" *ngFor="let entry of ranking; let i = index; trackBy: trackByRank">
+        <span class="rank">{{ entry.rank }}</span>
+        <app-player-avatar [name]="entry.player.name" [color]="entry.player.avatarColor" size="sm"></app-player-avatar>
+        <span class="player-name">{{ entry.player.name }}</span>
+        <app-score-badge [score]="entry.player.score"></app-score-badge>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Actions per player -->
+  <ion-list-header><ion-label>Actions joueurs</ion-label></ion-list-header>
+
+  <ion-item *ngFor="let player of players; trackBy: trackById">
+    <app-player-avatar slot="start" [name]="player.name" [color]="player.avatarColor" size="sm"></app-player-avatar>
+    <ion-label>{{ player.name }}</ion-label>
+    <ion-button slot="end" fill="outline" size="small" data-testid="btn-my-card"
+      [disabled]="viewedPlayerIds.has(player.id)"
+      (click)="openCard(player)">
+      <ion-icon slot="start" name="eye"></ion-icon>
+      Ma carte
+    </ion-button>
+    <ion-button slot="end" fill="solid" color="warning" size="small" data-testid="btn-declare-trap"
+      (click)="declareTrap(player)">
+      <ion-icon slot="start" name="flash"></ion-icon>
+      Piégé !
+    </ion-button>
+  </ion-item>
+
+  <!-- Pass phone — intermediate screen before revealing the card -->
+  <ion-card *ngIf="showCardFor && !viewingCard" class="ion-margin-top">
+    <ion-card-header>
+      <ion-card-title>
+        <app-player-avatar [name]="showCardFor.name" [color]="showCardFor.avatarColor" size="sm"></app-player-avatar>
+        📲 Passe le téléphone à {{ showCardFor.name }}
+      </ion-card-title>
+      <ion-card-subtitle>Cette carte ne peut être vue qu'une seule fois.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" data-testid="btn-reveal-card" (click)="revealCard()">
+        <ion-icon slot="start" name="eye"></ion-icon>
+        Voir ma carte
+      </ion-button>
+      <ion-button expand="block" fill="clear" (click)="showCardFor = null">Annuler</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="showCardFor && viewingCard && myAssignment" class="ion-margin-top card-reveal">
+    <ion-card-content>
+      <p class="card-label">Ta cible 🎯</p>
+      <h2 class="card-target">{{ myTarget?.name }}</h2>
+      <p class="card-label">Ton mot secret 🔑</p>
+      <h1 class="card-word">{{ myAssignment.secretWord }}</h1>
+      <ion-button expand="block" fill="outline" data-testid="btn-close-card" (click)="closeCard()">
+        Fermer
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-button expand="block" color="secondary" data-testid="btn-next-round" (click)="nextRound()">
+    <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
+    Manche suivante
+  </ion-button>
+</ion-footer>

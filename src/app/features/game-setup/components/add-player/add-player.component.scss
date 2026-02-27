@@ -1,0 +1,20 @@
+// Add Player Component Styles
+:host {
+  display: block;
+}
+
+.add-player-form {
+  padding: 16px;
+
+  ion-input,
+  ion-item {
+    --border-radius: 10px;
+    --background: rgba(255, 255, 255, 0.07);
+    margin-bottom: 8px;
+  }
+
+  ion-button {
+    --border-radius: 12px;
+    margin-top: 8px;
+  }
+}

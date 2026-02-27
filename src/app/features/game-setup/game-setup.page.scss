@@ -1,0 +1,46 @@
+// Game Setup Page Styles
+:host {
+  display: block;
+}
+
+ion-content {
+  --background: var(--pam-bg, #1a1a2e);
+}
+
+.setup-header {
+  text-align: center;
+  padding: 20px 16px 8px;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--ion-color-primary);
+    margin: 0 0 4px;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ion-color-medium);
+  padding: 12px 16px 4px;
+}
+
+.start-section {
+  padding: 16px;
+
+  ion-button {
+    --border-radius: 14px;
+    height: 56px;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+}

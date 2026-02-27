@@ -1,0 +1,17 @@
+// Score Badge Component Styles
+:host {
+  display: inline-block;
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ion-color-primary);
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  min-width: 28px;
+}

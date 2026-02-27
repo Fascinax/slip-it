@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Distribution des cartes</ion-title>
+    <ion-buttons slot="end">
+      <ion-chip>Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</ion-chip>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="deal-content">
+
+  <!-- Progress -->
+  <ion-progress-bar
+    [value]="currentIndex / players.length"
+    color="success"
+  ></ion-progress-bar>
+
+  <!-- Step counter -->
+  <p class="deal-step ion-text-center ion-padding-top">
+    Joueur {{ currentIndex + 1 }} / {{ players.length }}
+  </p>
+
+  <!-- WAITING — invite the player to take the phone -->
+  <div *ngIf="state === 'WAITING'" class="deal-invite ion-padding">
+    <app-player-avatar
+      *ngIf="currentPlayer"
+      [name]="currentPlayer.name"
+      [color]="currentPlayer.avatarColor"
+      size="lg"
+      class="deal-invite__avatar"
+    ></app-player-avatar>
+    <h2 class="deal-invite__name">{{ currentPlayer?.name }}</h2>
+    <p>📲 Passe le téléphone à <strong>{{ currentPlayer?.name }}</strong>.<br>Il peut voir sa carte une seule fois.</p>
+    <ion-button expand="block" data-testid="btn-im-ready" (click)="showCard()" class="ion-margin-top">
+      <ion-icon slot="start" name="eye"></ion-icon>
+      Voir ma carte
+    </ion-button>
+  </div>
+
+  <!-- SHOWING_CARD -->
+  <div *ngIf="state === 'SHOWING_CARD'" class="deal-card ion-padding">
+    <app-card-flip [flipped]="flipped">
+      <!-- Front (before flip) -->
+      <div slot="front" class="card-face card-face--front">
+        <ion-icon name="eye-off" style="font-size:48px; color:white"></ion-icon>
+        <p style="color:white; margin-top:16px">Retourne pour voir ta carte…</p>
+      </div>
+      <!-- Back (after flip) -->
+      <div slot="back" class="card-face card-face--back">
+        <div *ngIf="currentAssignment && targetPlayer" class="card-content">
+          <p class="card-label">Ta cible 🎯</p>
+          <h2 class="card-target" data-testid="card-target">{{ targetPlayer.name }}</h2>
+          <p class="card-label">Ton mot secret 🔑</p>
+          <h1 class="card-word" data-testid="card-word">{{ currentAssignment.secretWord }}</h1>
+          <p class="card-hint">Fais-lui prononcer ce mot naturellement !</p>
+        </div>
+      </div>
+    </app-card-flip>
+
+    <ion-button
+      expand="block"
+      class="ion-margin-top"
+      color="success"
+      data-testid="btn-confirm-card"
+      (click)="confirmCard()"
+      *ngIf="flipped"
+    >
+      <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+      J'ai mémorisé, suivant
+    </ion-button>
+  </div>
+
+</ion-content>

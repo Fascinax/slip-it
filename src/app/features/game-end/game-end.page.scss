@@ -1,0 +1,115 @@
+// Game End Page Styles
+:host {
+  display: block;
+}
+
+ion-content {
+  --background: var(--pam-bg, #1a1a2e);
+}
+
+.winner-section {
+  text-align: center;
+  padding: 24px 16px;
+
+  .winner-crown {
+    font-size: 4rem;
+    animation: crown-bounce 1s ease-in-out infinite alternate;
+  }
+
+  .winner-name {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--ion-color-secondary);
+    margin: 8px 0;
+  }
+
+  .winner-score {
+    font-size: 1.2rem;
+    color: var(--ion-color-medium);
+  }
+}
+
+@keyframes crown-bounce {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-12px) scale(1.1); }
+}
+
+.stats-section {
+  padding: 0 16px 16px;
+
+  .stats-card {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+
+    .stat-item {
+      text-align: center;
+
+      .stat-value {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--ion-color-primary);
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        color: var(--ion-color-medium);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+}
+
+.podium-section {
+  padding: 0 16px;
+
+  .podium-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+
+    &.rank-1 { background: rgba(255, 215, 0, 0.15); }
+    &.rank-2 { background: rgba(192, 192, 192, 0.1); }
+    &.rank-3 { background: rgba(205, 127, 50, 0.1); }
+
+    .rank-badge {
+      font-size: 1.4rem;
+      min-width: 36px;
+    }
+
+    .player-name {
+      flex: 1;
+      font-weight: 600;
+      padding: 0 12px;
+    }
+
+    .player-score {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.action-buttons {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  ion-button {
+    --border-radius: 12px;
+    height: 52px;
+  }
+}

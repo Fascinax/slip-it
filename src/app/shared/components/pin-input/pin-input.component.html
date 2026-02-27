@@ -1,0 +1,31 @@
+<div class="pin-input">
+  <p *ngIf="playerName" class="pin-input__player">
+    <ion-icon name="person"></ion-icon> {{ playerName }}
+  </p>
+
+  <ion-item>
+    <ion-label position="floating">{{ label }}</ion-label>
+    <ion-input
+      data-testid="input-pin"
+      [type]="showPin ? 'text' : 'password'"
+      inputmode="numeric"
+      maxlength="6"
+      [formControl]="pinControl"
+      (keyup.enter)="submit()"
+    ></ion-input>
+    <ion-button slot="end" fill="clear" (click)="showPin = !showPin">
+      <ion-icon [name]="showPin ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <div class="pin-input__errors" *ngIf="pinControl.invalid && pinControl.touched">
+    <ion-note color="danger" *ngIf="pinControl.errors?.['required']">Le PIN est requis.</ion-note>
+    <ion-note color="danger" *ngIf="pinControl.errors?.['minlength']">Minimum 4 chiffres.</ion-note>
+    <ion-note color="danger" *ngIf="pinControl.errors?.['pattern']">Chiffres uniquement.</ion-note>
+  </div>
+
+  <ion-button expand="block" class="ion-margin-top" data-testid="btn-validate-pin" (click)="submit()" [disabled]="pinControl.invalid">
+    <ion-icon slot="start" name="lock-closed"></ion-icon>
+    Valider
+  </ion-button>
+</div>

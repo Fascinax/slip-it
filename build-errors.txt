@@ -1,0 +1,44 @@
+﻿[33mÔØ»[39m Building...
+[32mÔ£ö[39m Building...
+Application bundle generation failed. [11.538 seconds]
+
+node : [1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mAngular 
+compilation initialization failed.[0m [1m[35m[plugin angular-compiler][0m
+Au caractère Ligne:1 : 83
++ ... ge-a-mots"; node node_modules/@angular/cli/bin/ng.js build --configur ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([1m[31m[31mX...r-compiler][0m 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+  Error: Cannot resolve type entity i1.CommonModule to symbol
+      at reflectTypeEntityToDeclaration (file:///C:/Users/o.razafiarison/Worksp
+ace/Perso/assassinword/piege-a-mots/node_modules/@angular/compiler-cli/bundles/
+chunk-HQICP6JA.js:745:11)
+      at extraReferenceFromTypeQuery (file:///C:/Users/o.razafiarison/Workspace
+/Perso/assassinword/piege-a-mots/node_modules/@angular/compiler-cli/bundles/chu
+nk-65SOG7CU.js:1538:26)
+      at file:///C:/Users/o.razafiarison/Workspace/Perso/assassinword/piege-a-m
+ots/node_modules/@angular/compiler-cli/bundles/chunk-65SOG7CU.js:1533:12
+      at Array.map (<anonymous>)
+      at extractReferencesFromType (file:///C:/Users/o.razafiarison/Workspace/P
+erso/assassinword/piege-a-mots/node_modules/@angular/compiler-cli/bundles/chunk
+-65SOG7CU.js:1529:23)
+      at DtsMetadataReader.getNgModuleMetadata (file:///C:/Users/o.razafiarison
+/Workspace/Perso/assassinword/piege-a-mots/node_modules/@angular/compiler-cli/b
+undles/chunk-65SOG7CU.js:1738:16)
+      at MetadataDtsModuleScopeResolver.resolve (file:///C:/Users/o.razafiariso
+n/Workspace/Perso/assassinword/piege-a-mots/node_modules/@angular/compiler-cli/
+bundles/chunk-65SOG7CU.js:3979:37)
+      at LocalModuleScopeRegistry.getExportedScope (file:///C:/Users/o.razafiar
+ison/Workspace/Perso/assassinword/piege-a-mots/node_modules/@angular/compiler-c
+li/bundles/chunk-65SOG7CU.js:4310:41)
+      at LocalModuleScopeRegistry.getScopeOfModuleReference (file:///C:/Users/o
+.razafiarison/Workspace/Perso/assassinword/piege-a-mots/node_modules/@angular/c
+ompiler-cli/bundles/chunk-65SOG7CU.js:4165:32)
+      at LocalModuleScopeRegistry.getScopeOfModule (file:///C:/Users/o.razafiar
+ison/Workspace/Perso/assassinword/piege-a-mots/node_modules/@angular/compiler-c
+li/bundles/chunk-65SOG7CU.js:4109:47)
+
+[39m[22m

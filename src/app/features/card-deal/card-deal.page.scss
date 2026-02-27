@@ -1,0 +1,67 @@
+.deal-content {
+  --background: var(--pam-bg-gradient);
+}
+
+.deal-step {
+  font-size: 0.9rem;
+  color: var(--ion-color-medium);
+  font-weight: 600;
+}
+
+.deal-invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+
+  &__avatar { margin-bottom: 16px; }
+  &__name {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+}
+
+.card-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  min-height: 240px;
+  padding: 24px;
+
+  &--front {
+    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
+    border-radius: 16px;
+  }
+}
+
+.card-content {
+  .card-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ion-color-medium);
+    margin-bottom: 4px;
+  }
+  .card-target {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--ion-color-primary);
+    margin: 0 0 24px;
+  }
+  .card-word {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--ion-color-dark);
+    margin: 0 0 16px;
+    letter-spacing: -1px;
+  }
+  .card-hint {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    font-style: italic;
+  }
+}

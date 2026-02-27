@@ -1,0 +1,92 @@
+// Scoreboard Page Styles
+:host {
+  display: block;
+}
+
+ion-content {
+  --background: var(--pam-bg, #1a1a2e);
+}
+
+.scoreboard-header {
+  text-align: center;
+  padding: 24px 16px 12px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 4px;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+.podium-section {
+  padding: 0 16px;
+
+  .podium-card {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    backdrop-filter: blur(8px);
+
+    &.rank-1 {
+      background: rgba(255, 215, 0, 0.15);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    &.rank-2 {
+      background: rgba(192, 192, 192, 0.1);
+      border: 1px solid rgba(192, 192, 192, 0.2);
+    }
+
+    &.rank-3 {
+      background: rgba(205, 127, 50, 0.1);
+      border: 1px solid rgba(205, 127, 50, 0.2);
+    }
+
+    &.rank-other {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .medal {
+      font-size: 1.6rem;
+      min-width: 40px;
+    }
+
+    .player-info {
+      flex: 1;
+      padding: 0 12px;
+
+      .player-name {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .player-traps {
+        font-size: 0.8rem;
+        color: var(--ion-color-medium);
+      }
+    }
+
+    .score-display {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.continue-button {
+  padding: 16px;
+
+  ion-button {
+    --border-radius: 12px;
+    height: 52px;
+    font-weight: 700;
+  }
+}

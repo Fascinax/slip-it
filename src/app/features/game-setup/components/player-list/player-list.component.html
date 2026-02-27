@@ -1,0 +1,15 @@
+<ion-list>
+  <ion-item *ngFor="let player of players; trackBy: trackById">
+    <app-player-avatar slot="start" [name]="player.name" [color]="player.avatarColor" size="md"></app-player-avatar>
+    <ion-label>{{ player.name }}</ion-label>
+    <ion-button slot="end" fill="clear" color="danger" (click)="playerRemoved.emit(player.id)">
+      <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <ion-item *ngIf="players.length === 0">
+    <ion-label class="ion-text-center" color="medium">
+      <p>Aucun joueur ajouté</p>
+    </ion-label>
+  </ion-item>
+</ion-list>

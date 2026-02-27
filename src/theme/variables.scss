@@ -1,0 +1,87 @@
+// Slip It — Theme
+// For information on how to create your own theme, please refer to:
+// https://ionicframework.com/docs/theming/
+
+:root {
+  --pam-bg-gradient: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+
+  --ion-font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+
+  --ion-color-primary: #e94560;
+  --ion-color-primary-rgb: 233, 69, 96;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #cd3d54;
+  --ion-color-primary-tint: #eb5870;
+
+  --ion-color-secondary: #f5a623;
+  --ion-color-secondary-rgb: 245, 166, 35;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #d8921f;
+  --ion-color-secondary-tint: #f6af39;
+
+  --ion-color-tertiary: #6a0dad;
+  --ion-color-tertiary-rgb: 106, 13, 173;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #5d0b98;
+  --ion-color-tertiary-tint: #7925b5;
+
+  --ion-color-success: #2dd36f;
+  --ion-color-success-rgb: 45, 211, 111;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #28ba62;
+  --ion-color-success-tint: #42d77d;
+
+  --ion-color-warning: #ffc409;
+  --ion-color-warning-rgb: 255, 196, 9;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e0ac08;
+  --ion-color-warning-tint: #ffca22;
+
+  --ion-color-danger: #eb445a;
+  --ion-color-danger-rgb: 235, 68, 90;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #cf3c4f;
+  --ion-color-danger-tint: #ed576b;
+
+  --ion-color-medium: #92949c;
+  --ion-color-medium-rgb: 146, 148, 156;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #808289;
+  --ion-color-medium-tint: #9d9fa6;
+
+  --ion-color-light: #f4f5f8;
+  --ion-color-light-rgb: 244, 245, 248;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d7d8da;
+  --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
+
+  --ion-background-color: #1a1a2e;
+  --ion-background-color-rgb: 26, 26, 46;
+  --ion-text-color: #f4f5f8;
+  --ion-text-color-rgb: 244, 245, 248;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --pam-bg-gradient: linear-gradient(160deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+    --ion-background-color: #f4f5f8;
+    --ion-background-color-rgb: 244, 245, 248;
+    --ion-text-color: #222428;
+    --ion-text-color-rgb: 34, 36, 40;
+  }
+}

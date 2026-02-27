@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>🏆 Résultats finaux</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="game-end-content ion-padding">
+
+  <!-- Winner spotlight -->
+  <div class="podium-winner" *ngIf="winner">
+    <div class="winner-crown">👑</div>
+    <app-player-avatar [name]="winner.name" [color]="winner.avatarColor" size="lg"></app-player-avatar>
+    <h1 class="winner-name">{{ winner.name }}</h1>
+    <p class="winner-subtitle">VAINQUEUR — {{ winner.score }} point(s)</p>
+  </div>
+
+  <!-- Stats -->
+  <ion-card class="stats-card">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <h3>{{ game?.totalRounds }}</h3>
+            <p>Manches</p>
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <h3>{{ totalTraps }}</h3>
+            <p>Pièges réussis</p>
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <h3>{{ game?.players?.length }}</h3>
+            <p>Joueurs</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Podium list -->
+  <ion-list-header><ion-label>Podium complet</ion-label></ion-list-header>
+  <ion-item *ngFor="let entry of ranking; trackBy: trackByRank">
+    <span slot="start" class="podium-rank">
+      {{ entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : '#' + entry.rank }}
+    </span>
+    <app-player-avatar slot="start" [name]="entry.player.name" [color]="entry.player.avatarColor" size="sm"></app-player-avatar>
+    <ion-label>{{ entry.player.name }}</ion-label>
+    <app-score-badge slot="end" [score]="entry.player.score"></app-score-badge>
+  </ion-item>
+
+  <!-- Best traps -->
+  <ion-list-header *ngIf="bestTrap"><ion-label>Meilleurs pièges</ion-label></ion-list-header>
+  <ion-item *ngIf="bestTrap">
+    <ion-icon slot="start" name="flash" color="warning"></ion-icon>
+    <ion-label>
+      <h3>{{ trapperName(bestTrap!) }}</h3>
+      <p>a piégé {{ targetName(bestTrap!) }} avec « {{ bestTrap!.secretWord }} »</p>
+    </ion-label>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-button expand="block" data-testid="btn-new-game-end" (click)="newGame()">
+    <ion-icon slot="start" name="refresh"></ion-icon>
+    Nouvelle partie
+  </ion-button>
+</ion-footer>

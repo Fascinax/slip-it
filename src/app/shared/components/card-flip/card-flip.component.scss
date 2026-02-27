@@ -1,0 +1,38 @@
+.card-scene {
+  perspective: 1000px;
+  display: inline-block;
+  width: 100%;
+
+  &.card--flipped .card {
+    transform: rotateY(180deg);
+  }
+}
+
+.card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(.4, 0, .2, 1);
+  width: 100%;
+  min-height: 240px;
+
+  &__face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  &__face--front {
+    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
+  }
+
+  &__face--back {
+    background: var(--ion-color-light);
+    transform: rotateY(180deg);
+  }
+}

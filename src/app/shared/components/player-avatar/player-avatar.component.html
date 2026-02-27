@@ -1,0 +1,11 @@
+<div
+  class="avatar"
+  [class.avatar--sm]="size === 'sm'"
+  [class.avatar--md]="size === 'md'"
+  [class.avatar--lg]="size === 'lg'"
+  [style.background-color]="color"
+  [attr.aria-label]="name"
+>
+  <span class="avatar__initials">{{ initials }}</span>
+  <span *ngIf="score !== null" class="avatar__score">{{ score }}</span>
+</div>

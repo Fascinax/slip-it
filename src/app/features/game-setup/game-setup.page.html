@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nouvelle partie</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!canStartGame" data-testid="btn-start-game-header" (click)="startGame()">
+        <ion-icon slot="icon-only" name="play-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Players section -->
+  <ion-list-header>
+    <ion-label>
+      <h2>Joueurs <ion-badge data-testid="player-count-badge" color="{{ players.length < 3 ? 'danger' : 'success' }}">{{ players.length }}</ion-badge></h2>
+      <p *ngIf="players.length < 3" class="warning-text">Minimum 3 joueurs requis</p>
+    </ion-label>
+  </ion-list-header>
+
+  <app-player-list
+    [players]="players"
+    (playerRemoved)="onPlayerRemoved($event)"
+  ></app-player-list>
+
+  <app-add-player
+    *ngIf="players.length < 20"
+    (playerAdded)="onPlayerAdded($event)"
+  ></app-add-player>
+
+  <ion-item-divider class="ion-margin-top">
+    <ion-label>Paramètres</ion-label>
+  </ion-item-divider>
+
+  <app-game-settings
+    [settings]="settings"
+    (settingsChanged)="onSettingsChanged($event)"
+  ></app-game-settings>
+
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-button
+    expand="block"
+    [disabled]="!canStartGame"
+    data-testid="btn-start-game"
+    (click)="startGame()"
+    size="large"
+  >
+    <ion-icon slot="start" name="game-controller"></ion-icon>
+    Distribuer les cartes
+  </ion-button>
+  <p class="ion-text-center setup-hint" *ngIf="!canStartGame">
+    Ajoutez au moins {{ 3 - players.length }} joueur(s) de plus
+  </p>
+</ion-footer>

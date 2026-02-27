@@ -1,0 +1,16 @@
+.pin-input {
+  padding: 8px 0;
+
+  &__player {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--ion-color-primary);
+    margin-bottom: 8px;
+  }
+
+  &__errors {
+    padding: 4px 16px;
+  }
+}

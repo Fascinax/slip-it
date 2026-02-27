@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/gameplay"></ion-back-button>
+    </ion-buttons>
+    <ion-title>📊 Classement — Manche {{ game?.currentRound }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="scoreboard-content">
+  <div class="scoreboard-list ion-padding">
+    <div
+      class="scoreboard-entry"
+      *ngFor="let entry of ranking; trackBy: trackByRank"
+      [class.scoreboard-entry--first]="entry.rank === 1"
+      [class.scoreboard-entry--second]="entry.rank === 2"
+      [class.scoreboard-entry--third]="entry.rank === 3"
+    >
+      <span class="scoreboard-entry__rank">
+        {{ entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : entry.rank }}
+      </span>
+      <app-player-avatar
+        [name]="entry.player.name"
+        [color]="entry.player.avatarColor"
+        size="md"
+      ></app-player-avatar>
+      <span class="scoreboard-entry__name">{{ entry.player.name }}</span>
+      <app-score-badge [score]="entry.player.score" class="scoreboard-entry__score"></app-score-badge>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="ion-padding">
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="dealNextRound()"
+        data-testid="btn-deal-next-round"
+      >
+        Distribuer les cartes
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
