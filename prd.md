@@ -5,7 +5,7 @@
 ### 1.1 Document title and version
 
 - PRD: Piège à Mots
-- Version: 1.1
+- Version: 1.2
 - Date: 27 février 2026
 - Auteur: Équipe produit
 
@@ -290,6 +290,7 @@ Un vendredi soir, Camille sort son téléphone et propose « Piège à Mots » �
 
 - **Phase 2 — Enrichissement fonctionnel v1.2** (3 semaines)
   - Chronomètre par manche configurable (indicatif visuel, pas de fin automatique)
+  - Nouveau Mode continu : Possibilité de continuer à recevoir une nouvelle carte après un piège réussi (optionnel, à activer en configuration de partie). Pas de manche définie, le jeu continue jusqu'à ce que les joueurs décident d'arrêter. Le classement est mis à jour en temps réel après chaque piège validé.
   - Historique des pièges de la partie affiché en fin de jeu
   - Partage du podium final via l'API Web Share
   - Mode « Rejouer » (même groupe de joueurs, nouvelle partie)

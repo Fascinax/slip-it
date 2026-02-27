@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Partie en cours — Manche {{ game?.currentRound }}/{{ game?.totalRounds }}
+      <span *ngIf="!continuousMode">Partie en cours — Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</span>
+      <span *ngIf="continuousMode">Mode continu — Manche {{ game?.currentRound }}</span>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button data-testid="btn-end-game" (click)="endGame()">
@@ -12,6 +13,13 @@
 </ion-header>
 
 <ion-content class="ion-padding gameplay-content">
+
+  <!-- v1.2 — Chronomètre indicatif -->
+  <app-countdown-timer
+    *ngIf="timerEnabled"
+    [durationMinutes]="timerDuration"
+    [active]="true"
+  ></app-countdown-timer>
 
   <!-- Quick ranking -->
   <ion-card>
@@ -80,8 +88,14 @@
 </ion-content>
 
 <ion-footer class="ion-padding">
-  <ion-button expand="block" color="secondary" data-testid="btn-next-round" (click)="nextRound()">
+  <!-- Mode normal : bouton manche suivante -->
+  <ion-button *ngIf="!continuousMode" expand="block" color="secondary" data-testid="btn-next-round" (click)="nextRound()">
     <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
     Manche suivante
   </ion-button>
+  <!-- Mode continu : info, pas de manche suivante -->
+  <p *ngIf="continuousMode" class="ion-text-center continuous-hint">
+    <ion-icon name="infinite"></ion-icon>
+    Mode continu — appuyez sur ⏹ pour terminer la partie
+  </p>
 </ion-footer>

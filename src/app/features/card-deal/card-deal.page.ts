@@ -64,9 +64,11 @@ export class CardDealPage implements OnInit, OnDestroy {
   }
 
   private generateAssignments(): void {
+    const settings = this.game?.settings;
     const words = this.wordService.pickRandom(
       this.players.length,
-      this.game?.settings.wordDifficulty as 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED' ?? 'MIXED'
+      (settings?.wordDifficulty ?? 'MIXED') as 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED',
+      settings?.selectedCategories?.length ? settings.selectedCategories : undefined
     );
     if (this.players.length >= 2) {
       this.assignments = this.assignmentService.generate(

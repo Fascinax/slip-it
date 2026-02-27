@@ -6,12 +6,14 @@ import { PlayerAvatarComponent } from './components/player-avatar/player-avatar.
 import { ScoreBadgeComponent } from './components/score-badge/score-badge.component';
 import { CardFlipComponent } from './components/card-flip/card-flip.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
 
 const COMPONENTS = [
   PlayerAvatarComponent,
   ScoreBadgeComponent,
   CardFlipComponent,
   ConfirmDialogComponent,
+  CountdownTimerComponent,
 ];
 
 /** Reusable presentational components — import in any feature module */

@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-title>🏆 Résultats finaux</ion-title>
+    <!-- v1.2 — Bouton partage Web Share -->
+    <ion-buttons slot="end" *ngIf="canShare">
+      <ion-button data-testid="btn-share-podium" (click)="sharePodium()">
+        <ion-icon slot="icon-only" name="share-social"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -47,20 +53,30 @@
     <app-score-badge slot="end" [score]="entry.player.score"></app-score-badge>
   </ion-item>
 
-  <!-- Best traps -->
-  <ion-list-header *ngIf="bestTrap"><ion-label>Meilleurs pièges</ion-label></ion-list-header>
-  <ion-item *ngIf="bestTrap">
-    <ion-icon slot="start" name="flash" color="warning"></ion-icon>
-    <ion-label>
-      <h3>{{ trapperName(bestTrap!) }}</h3>
-      <p>a piégé {{ targetName(bestTrap!) }} avec « {{ bestTrap!.secretWord }} »</p>
-    </ion-label>
-  </ion-item>
+  <!-- v1.2 — Historique complet des pièges -->
+  <ng-container *ngIf="validatedTraps.length > 0">
+    <ion-list-header>
+      <ion-label>Historique des pièges ({{ validatedTraps.length }})</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let trap of validatedTraps; let i = index; trackBy: trackByTrapId">
+      <ion-icon slot="start" name="flash" color="warning"></ion-icon>
+      <ion-label>
+        <h3>{{ trapperName(trap) }} a piégé {{ targetName(trap) }}</h3>
+        <p>« {{ trap.secretWord }} » — Manche {{ trap.round }}</p>
+      </ion-label>
+      <ion-badge slot="end" color="success">+1</ion-badge>
+    </ion-item>
+  </ng-container>
 
 </ion-content>
 
 <ion-footer class="ion-padding">
-  <ion-button expand="block" data-testid="btn-new-game-end" (click)="newGame()">
+  <!-- v1.2 — Rejouer avec les mêmes joueurs -->
+  <ion-button expand="block" color="secondary" data-testid="btn-replay" (click)="replayGame()">
+    <ion-icon slot="start" name="people"></ion-icon>
+    Rejouer (même équipe)
+  </ion-button>
+  <ion-button expand="block" fill="outline" data-testid="btn-new-game-end" (click)="newGame()" class="ion-margin-top">
     <ion-icon slot="start" name="refresh"></ion-icon>
     Nouvelle partie
   </ion-button>

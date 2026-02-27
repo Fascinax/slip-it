@@ -1,0 +1,15 @@
+<ion-card class="timer-card" [class.timer-urgent]="isUrgent" [class.timer-expired]="isExpired">
+  <ion-card-content class="timer-content">
+    <div class="timer-icon">⏱</div>
+    <div class="timer-display">
+      <span class="timer-label">Temps restant</span>
+      <span class="timer-value" [class.timer-expired-text]="isExpired">
+        {{ isExpired ? 'Temps écoulé !' : displayTime }}
+      </span>
+    </div>
+    <ion-progress-bar
+      [value]="progressPercent / 100"
+      [color]="isExpired ? 'danger' : isUrgent ? 'warning' : 'primary'"
+    ></ion-progress-bar>
+  </ion-card-content>
+</ion-card>

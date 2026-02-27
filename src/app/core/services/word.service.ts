@@ -51,11 +51,21 @@ export class WordService {
     );
   }
 
-  /** Pick N random words, optionally filtered by difficulty */
-  pickRandom(count: number, difficulty?: WordDifficulty | 'MIXED'): WordEntry[] {
-    const pool = difficulty && difficulty !== 'MIXED'
+  /** v1.2 — Retourne la liste dédupliquée de toutes les catégories disponibles */
+  getAvailableCategories(): string[] {
+    const all = this._words$.value.map(w => w.category);
+    return [...new Set(all)].sort((a, b) => a.localeCompare(b, 'fr'));
+  }
+
+  /** Pick N random words, optionally filtered by difficulty and/or categories */
+  pickRandom(count: number, difficulty?: WordDifficulty | 'MIXED', categories?: string[]): WordEntry[] {
+    let pool = difficulty && difficulty !== 'MIXED'
       ? this._words$.value.filter(w => w.difficulty === difficulty)
       : this._words$.value;
+
+    if (categories && categories.length > 0) {
+      pool = pool.filter(w => categories.includes(w.category));
+    }
 
     if (pool.length === 0) { return []; }
 

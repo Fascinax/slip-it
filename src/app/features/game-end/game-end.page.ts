@@ -17,6 +17,9 @@ export class GameEndPage implements OnInit, OnDestroy {
   ranking: ScoreEntry[] = [];
   winner: Player | null = null;
 
+  /** v1.2 — Indique si l'API Web Share est disponible */
+  readonly canShare = typeof navigator !== 'undefined' && !!navigator.share;
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -43,9 +46,14 @@ export class GameEndPage implements OnInit, OnDestroy {
     return this.game?.traps.filter(t => t.validated).length ?? 0;
   }
 
+  /** v1.2 — Tous les pièges validés (historique complet) */
+  get validatedTraps(): Trap[] {
+    return this.game?.traps.filter(t => t.validated) ?? [];
+  }
+
+  /** @deprecated — conservé pour rétrocompatibilité */
   get bestTrap(): Trap | null {
-    if (!this.game?.traps.length) { return null; }
-    return this.game.traps.filter(t => t.validated)[0] ?? null;
+    return this.validatedTraps[0] ?? null;
   }
 
   trapperName(trap: Trap): string {
@@ -58,13 +66,44 @@ export class GameEndPage implements OnInit, OnDestroy {
     return player?.name ?? '?';
   }
 
+  /** v1.2 — Partager le podium via Web Share API */
+  async sharePodium(): Promise<void> {
+    if (!this.canShare) { return; }
+
+    const lines = this.ranking.map(e =>
+      `${e.rank}. ${e.player.name} — ${e.player.score} pt(s)`
+    );
+    const winnerLine = this.winner
+      ? `🏆 Vainqueur : ${this.winner.name} (${this.winner.score} pt(s))`
+      : '';
+
+    try {
+      await navigator.share({
+        title: '🎯 Piège à Mots — Résultats',
+        text: `${winnerLine}\n\n${lines.join('\n')}\n\nJoue sur Piège à Mots !`,
+      });
+    } catch {
+      // L'utilisateur a annulé le partage — pas d'erreur à afficher
+    }
+  }
+
+  /** v1.2 — Rejouer avec les mêmes joueurs (scores remis à zéro) */
+  async replayGame(): Promise<void> {
+    this.playerService.resetScores();
+    await this.gameService.resetGame();
+    this.router.navigate(['/game-setup']);
+  }
+
   async newGame(): Promise<void> {
     await this.gameService.resetGame();
     this.playerService.resetScores();
+    // Vider complètement les joueurs pour repartir de zéro
+    this.playerService.setPlayers([]);
     this.router.navigate(['/home']);
   }
 
   trackByRank(_i: number, e: ScoreEntry): number { return e.rank; }
+  trackByTrapId(_i: number, t: Trap): string { return t.id; }
 
   ngOnDestroy(): void {
     this.destroy$.next();

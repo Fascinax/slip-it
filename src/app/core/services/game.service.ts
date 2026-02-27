@@ -56,12 +56,42 @@ export class GameService {
   async nextRound(): Promise<void> {
     const game = this._game$.value;
     if (!game) { return; }
+    if (game.settings?.continuousMode) {
+      // Mode continu : pas de limite de manches
+      await this.updateGame({ currentRound: game.currentRound + 1 });
+      return;
+    }
     const next = game.currentRound + 1;
     if (next > game.totalRounds) {
       await this.setStatus(GameStatus.FINISHED);
     } else {
       await this.updateGame({ currentRound: next });
     }
+  }
+
+  /**
+   * v1.2 — Rejouer avec les mêmes joueurs (remet les scores à zéro et recrée une partie).
+   * Retourne la nouvelle partie pour que l'appelant puisse naviguer.
+   */
+  async replayWithSamePlayers(settings: GameSettings): Promise<Game> {
+    const prev = this._game$.value;
+    const prevPlayers = prev ? prev.players.map(p => ({ ...p, score: 0 })) : [];
+
+    const game: Game = {
+      id: uuidv4(),
+      createdAt: new Date(),
+      status: GameStatus.SETUP,
+      mode: settings.mode,
+      currentRound: 1,
+      totalRounds: settings.totalRounds,
+      players: prevPlayers,
+      assignments: [],
+      traps: [],
+      settings,
+    };
+    this._game$.next(game);
+    await this.persist();
+    return game;
   }
 
   async addTrap(trap: Trap): Promise<void> {
