@@ -15,7 +15,7 @@
         <h3>Mode continu</h3>
         <p>Pas de limite de manches, le jeu continue jusqu'à l'arrêt</p>
       </ion-label>
-      <ion-toggle slot="end" formControlName="continuousMode"></ion-toggle>
+      <ion-toggle slot="end" formControlName="continuousMode" data-testid="toggle-continuous-mode"></ion-toggle>
     </ion-item>
 
     <ion-item [class.ion-hide]="isContinuousMode">
@@ -39,7 +39,7 @@
     </ion-item>
 
     <!-- v1.2 — Catégories sélectionnables -->
-    <ion-item *ngIf="availableCategories.length > 0">
+    <ion-item *ngIf="availableCategories.length > 0" data-testid="item-categories">
       <ion-label>
         <h3>Catégories</h3>
         <p>Vide = toutes les catégories</p>
@@ -50,6 +50,7 @@
         [multiple]="true"
         interface="popover"
         placeholder="Toutes"
+        data-testid="select-categories"
       >
         <ion-select-option *ngFor="let cat of availableCategories" [value]="cat">{{ cat }}</ion-select-option>
       </ion-select>
@@ -61,7 +62,7 @@
         <h3>Chronomètre</h3>
         <p>Afficher un compte à rebours indicatif pendant la manche</p>
       </ion-label>
-      <ion-toggle slot="end" formControlName="timerEnabled"></ion-toggle>
+      <ion-toggle slot="end" formControlName="timerEnabled" data-testid="toggle-timer-enabled"></ion-toggle>
     </ion-item>
   </ion-list>
 </form>

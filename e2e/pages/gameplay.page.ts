@@ -7,11 +7,17 @@ export class GameplayPage extends BasePage {
   readonly btnNextRound: Locator;
   /** Header "Terminer" stop icon button */
   readonly btnEndGame: Locator;
+  /** v1.2 — Countdown timer component */
+  readonly countdownTimer: Locator;
+  /** v1.2 — Hint shown in continuous mode footer */
+  readonly continuousHint: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.btnNextRound = page.locator('[data-testid="btn-next-round"]');
-    this.btnEndGame   = page.locator('[data-testid="btn-end-game"]');
+    this.btnNextRound   = page.locator('[data-testid="btn-next-round"]');
+    this.btnEndGame     = page.locator('[data-testid="btn-end-game"]');
+    this.countdownTimer = page.locator('app-countdown-timer');
+    this.continuousHint = page.locator('.continuous-hint');
   }
 
   async goto(): Promise<void> {
