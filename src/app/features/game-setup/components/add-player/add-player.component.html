@@ -15,23 +15,6 @@
         Prénom requis (2-20 caractères)
       </ion-note>
 
-      <ion-item class="ion-margin-top">
-        <ion-label position="floating">PIN secret (4-6 chiffres)</ion-label>
-        <ion-input
-          formControlName="pin"
-          data-testid="input-player-pin"
-          [type]="showPin ? 'text' : 'password'"
-          inputmode="numeric"
-          maxlength="6"
-        ></ion-input>
-        <ion-button slot="end" fill="clear" (click)="showPin = !showPin">
-          <ion-icon [name]="showPin ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-item>
-      <ion-note color="danger" *ngIf="form.controls.pin.invalid && form.controls.pin.touched">
-        PIN requis (4-6 chiffres uniquement)
-      </ion-note>
-
       <ion-button expand="block" type="submit" data-testid="btn-add-player" [disabled]="form.invalid" class="ion-margin-top">
         <ion-icon slot="start" name="add"></ion-icon>
         Ajouter

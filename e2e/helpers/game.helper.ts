@@ -5,15 +5,13 @@ import { CardDealPage }  from '../pages/card-deal.page';
 /** Shape of player test data. */
 export interface PlayerData {
   name: string;
-  /** 4-6 digit PIN used during registration and card-deal verification */
-  pin: string;
 }
 
 /** Default set of 3 players for most tests. */
 export const DEFAULT_PLAYERS: PlayerData[] = [
-  { name: 'Alice',   pin: '1234' },
-  { name: 'Bob',     pin: '5678' },
-  { name: 'Charlie', pin: '9012' },
+  { name: 'Alice' },
+  { name: 'Bob' },
+  { name: 'Charlie' },
 ];
 
 /**
@@ -27,13 +25,13 @@ export async function setupGame(
   const setup = new GameSetupPage(page);
   await setup.goto();
   for (const player of players) {
-    await setup.addPlayer(player.name, player.pin);
+    await setup.addPlayer(player.name);
   }
   await setup.clickStartGame();
 }
 
 /**
- * On the `/card-deal` page, run the full PIN + card-flip + confirm flow
+ * On the `/card-deal` page, run the full card-flip + confirm flow
  * for every player in `players` (in order).
  * After the last player confirms, the app navigates to `/gameplay`.
  */

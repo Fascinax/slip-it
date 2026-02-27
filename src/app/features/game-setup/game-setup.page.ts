@@ -38,9 +38,9 @@ export class GameSetupPage implements OnInit, OnDestroy {
       });
   }
 
-  async onPlayerAdded(event: { name: string; pin: string }): Promise<void> {
+  async onPlayerAdded(name: string): Promise<void> {
     try {
-      await this.playerService.addPlayer(event.name, event.pin);
+      this.playerService.addPlayer(name);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Erreur lors de l\'ajout du joueur.';
       const toast = await this.toastCtrl.create({ message: msg, duration: 2500, color: 'danger' });

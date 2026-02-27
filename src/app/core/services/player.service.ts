@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { Player } from '../models';
-import { hashPin } from '../utils/crypto.util';
 
 const AVATAR_COLORS = [
   '#E63946', '#F4A261', '#2A9D8F', '#457B9D', '#6A4C93',
@@ -24,7 +23,7 @@ export class PlayerService {
     this._players$.next([...players]);
   }
 
-  async addPlayer(name: string, pin: string): Promise<Player> {
+  addPlayer(name: string): Player {
     const trimmedName = name.trim();
     const existing = this._players$.value.find(
       p => p.name.toLowerCase() === trimmedName.toLowerCase()
@@ -33,12 +32,10 @@ export class PlayerService {
       throw new Error(`Un joueur nommé "${trimmedName}" existe déjà.`);
     }
 
-    const pinHash = await hashPin(pin);
     const player: Player = {
       id: uuidv4(),
       name: trimmedName,
       avatarColor: this.nextColor(),
-      pinHash,
       score: 0,
     };
     this._players$.next([...this._players$.value, player]);
@@ -47,14 +44,6 @@ export class PlayerService {
 
   removePlayer(id: string): void {
     this._players$.next(this._players$.value.filter(p => p.id !== id));
-  }
-
-  async verifyPin(playerId: string, pin: string): Promise<boolean> {
-    const player = this._players$.value.find(p => p.id === playerId);
-    if (!player) { return false; }
-    const hash = await hashPin(pin);
-    // Use timing-safe comparison by comparing full hash strings
-    return hash === player.pinHash;
   }
 
   addScore(playerId: string, points = 1): void {

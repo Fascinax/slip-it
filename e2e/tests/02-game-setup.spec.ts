@@ -19,34 +19,34 @@ test.describe('Configuration de la partie (/game-setup)', () => {
   });
 
   test('peut ajouter un joueur — le compteur passe à 1', async ({ gameSetupPage }) => {
-    await gameSetupPage.addPlayer('Alice', '1234');
+    await gameSetupPage.addPlayer('Alice');
     await expect(gameSetupPage.playerCountBadge).toContainText('1');
   });
 
   test('le bouton reste désactivé avec seulement 2 joueurs', async ({ gameSetupPage }) => {
-    await gameSetupPage.addPlayer('Alice', '1234');
-    await gameSetupPage.addPlayer('Bob', '5678');
+    await gameSetupPage.addPlayer('Alice');
+    await gameSetupPage.addPlayer('Bob');
     await expect(gameSetupPage.btnStartGame).toHaveAttribute('disabled');
   });
 
   test('le bouton est activé dès 3 joueurs', async ({ gameSetupPage }) => {
-    await gameSetupPage.addPlayer('Alice',   '1234');
-    await gameSetupPage.addPlayer('Bob',     '5678');
-    await gameSetupPage.addPlayer('Charlie', '9012');
+    await gameSetupPage.addPlayer('Alice');
+    await gameSetupPage.addPlayer('Bob');
+    await gameSetupPage.addPlayer('Charlie');
     await expect(gameSetupPage.btnStartGame).not.toHaveAttribute('disabled');
   });
 
   test('l\'avertissement disparaît dès 3 joueurs', async ({ gameSetupPage }) => {
-    await gameSetupPage.addPlayer('Alice',   '1234');
-    await gameSetupPage.addPlayer('Bob',     '5678');
-    await gameSetupPage.addPlayer('Charlie', '9012');
+    await gameSetupPage.addPlayer('Alice');
+    await gameSetupPage.addPlayer('Bob');
+    await gameSetupPage.addPlayer('Charlie');
     await expect(gameSetupPage.warningText).not.toBeVisible();
   });
 
   test('navigue vers /card-deal après avoir ajouté 3 joueurs et cliqué démarrer', async ({ page, gameSetupPage }) => {
-    await gameSetupPage.addPlayer('Alice',   '1234');
-    await gameSetupPage.addPlayer('Bob',     '5678');
-    await gameSetupPage.addPlayer('Charlie', '9012');
+    await gameSetupPage.addPlayer('Alice');
+    await gameSetupPage.addPlayer('Bob');
+    await gameSetupPage.addPlayer('Charlie');
     await gameSetupPage.clickStartGame();
     await expect(page).toHaveURL(/card-deal/);
   });

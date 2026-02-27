@@ -11,8 +11,7 @@ export class GameSetupPage extends BasePage {
   readonly warningText: Locator;
   /** Input for the player name inside the add-player form */
   readonly inputPlayerName: Locator;
-  /** Input for the player PIN inside the add-player form */
-  readonly inputPlayerPin: Locator;
+
   /** "Ajouter" submit button in the add-player form */
   readonly btnAddPlayer: Locator;
 
@@ -22,7 +21,6 @@ export class GameSetupPage extends BasePage {
     this.playerCountBadge  = page.locator('[data-testid="player-count-badge"]');
     this.warningText       = page.getByText('Minimum 3 joueurs requis');
     this.inputPlayerName   = page.locator('[data-testid="input-player-name"]');
-    this.inputPlayerPin    = page.locator('[data-testid="input-player-pin"]');
     this.btnAddPlayer      = page.locator('[data-testid="btn-add-player"]');
   }
 
@@ -35,14 +33,11 @@ export class GameSetupPage extends BasePage {
    * Add a player via the add-player form.
    * Handles shadow-DOM piercing for both ion-input elements.
    */
-  async addPlayer(name: string, pin: string): Promise<void> {
+  async addPlayer(name: string): Promise<void> {
     await this.fillIonInput('[data-testid="input-player-name"]', name);
-    await this.fillIonInput('[data-testid="input-player-pin"]', pin);
-    // Extra wait so Angular validates the form and removes [disabled] from the button
-    await this.page.waitForTimeout(200);
+    await this.page.waitForTimeout(150);
     await this.btnAddPlayer.click();
-    // Wait for the async addPlayer (hashPin) to resolve and the list to update
-    await this.page.waitForTimeout(600);
+    await this.page.waitForTimeout(200);
   }
 
   /** Click the footer "Distribuer les cartes" button and navigate to card-deal.

@@ -20,9 +20,7 @@ test.describe('Flux complet — partie de bout en bout', () => {
 
     // ── 2. Ajout des 3 joueurs ──────────────────────────────────────────────
     for (const player of DEFAULT_PLAYERS) {
-      // Fill via host element so Angular CVA picks up the value
       const nameHost = page.locator('[data-testid="input-player-name"]');
-      const pinHost  = page.locator('[data-testid="input-player-pin"]');
 
       await nameHost.locator('input').waitFor({ state: 'visible' });
       await nameHost.locator('input').fill(player.name);
@@ -31,15 +29,9 @@ test.describe('Flux complet — partie de bout en bout', () => {
         el.dispatchEvent(new CustomEvent('ionInput', { detail: { value: v }, bubbles: true }));
       }, player.name);
 
-      await pinHost.locator('input').fill(player.pin);
-      await pinHost.evaluate((el: any, v: string) => {
-        el.value = v;
-        el.dispatchEvent(new CustomEvent('ionInput', { detail: { value: v }, bubbles: true }));
-      }, player.pin);
-
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(150);
       await page.locator('[data-testid="btn-add-player"]').click();
-      await page.waitForTimeout(600);
+      await page.waitForTimeout(200);
     }
 
     await expect(page.locator('[data-testid="player-count-badge"]')).toContainText('3');

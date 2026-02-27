@@ -36,7 +36,7 @@ export class CardDealPage extends BasePage {
    * 4. Click "J'ai mémorisé, suivant"
    */
   async dealCardForPlayer(): Promise<{ target: string; word: string }> {
-    // Step 1 — WAITING → SHOWING_CARD (no PIN needed)
+    // Step 1 — WAITING → SHOWING_CARD
     await this.btnImReady.waitFor({ state: 'visible' });
     await this.btnImReady.click();
 

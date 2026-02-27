@@ -6,14 +6,12 @@ import { PlayerAvatarComponent } from './components/player-avatar/player-avatar.
 import { ScoreBadgeComponent } from './components/score-badge/score-badge.component';
 import { CardFlipComponent } from './components/card-flip/card-flip.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { PinInputComponent } from './components/pin-input/pin-input.component';
 
 const COMPONENTS = [
   PlayerAvatarComponent,
   ScoreBadgeComponent,
   CardFlipComponent,
   ConfirmDialogComponent,
-  PinInputComponent,
 ];
 
 /** Reusable presentational components — import in any feature module */
