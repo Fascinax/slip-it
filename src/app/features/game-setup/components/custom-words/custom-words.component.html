@@ -1,0 +1,45 @@
+<div class="custom-words">
+  <!-- Saisie -->
+  <div class="cw-input-row">
+    <ion-input
+      class="cw-input"
+      [formControl]="inputControl"
+      placeholder="Ajouter un mot…"
+      maxlength="30"
+      clearInput
+      data-testid="input-custom-word"
+      (keydown)="onKeydown($event)"
+    ></ion-input>
+    <ion-button
+      fill="solid"
+      color="primary"
+      size="small"
+      [disabled]="inputControl.invalid"
+      (click)="addWord()"
+      data-testid="btn-add-custom-word"
+    >
+      <ion-icon slot="icon-only" name="add"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Liste des mots ajoutés -->
+  <div class="cw-chips" *ngIf="words.length > 0">
+    <ion-chip
+      *ngFor="let word of words"
+      color="primary"
+      class="cw-chip pam-anim-pop"
+      data-testid="chip-custom-word"
+    >
+      <ion-label>{{ word }}</ion-label>
+      <ion-icon
+        name="close-circle"
+        (click)="removeWord(word)"
+        aria-label="Supprimer {{ word }}"
+      ></ion-icon>
+    </ion-chip>
+  </div>
+
+  <p class="cw-hint" *ngIf="words.length === 0">
+    Ces mots seront ajoutés au tirage pour cette partie.
+  </p>
+</div>

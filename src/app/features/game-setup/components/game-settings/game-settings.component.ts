@@ -35,6 +35,7 @@ export class GameSettingsComponent implements OnInit {
       timerEnabled: new FormControl<boolean>(this.settings.timerEnabled ?? false, { nonNullable: true }),
       continuousMode: new FormControl<boolean>(this.settings.continuousMode ?? false, { nonNullable: true }),
       selectedCategories: new FormControl<string[]>(this.settings.selectedCategories ?? [], { nonNullable: true }),
+      chainMode: new FormControl<boolean>(this.settings.chainMode ?? false, { nonNullable: true }),
     });
 
     this.form.valueChanges.subscribe(() => {

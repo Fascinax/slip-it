@@ -68,22 +68,24 @@ export class CardDealPage implements OnInit, OnDestroy {
     const words = this.wordService.pickRandom(
       this.players.length,
       (settings?.wordDifficulty ?? 'MIXED') as 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED',
-      settings?.selectedCategories?.length ? settings.selectedCategories : undefined
+      settings?.selectedCategories?.length ? settings.selectedCategories : undefined,
+      settings?.customWords?.length ? settings.customWords : undefined,
     );
     if (this.players.length >= 2) {
       this.assignments = this.assignmentService.generate(
         this.players,
         words,
-        this.game?.currentRound ?? 1
+        this.game?.currentRound ?? 1,
+        settings?.chainMode ?? false,
       );
     }
   }
 
-  showCard(): void {
+  async showCard(): Promise<void> {
     this.state = 'SHOWING_CARD';
     this.flipped = true;
     this.cdr.markForCheck();
-    this.soundService.tapFeedback();
+    await this.soundService.tapFeedback();
   }
 
   confirmCard(): void {
@@ -107,7 +109,7 @@ export class CardDealPage implements OnInit, OnDestroy {
       assignments: this.assignments,
       status: GameStatus.IN_PROGRESS,
     });
-    this.soundService.successFeedback();
+    await this.soundService.successFeedback();
     this.router.navigate(['/gameplay']);
   }
 

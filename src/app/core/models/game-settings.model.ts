@@ -12,6 +12,10 @@ export interface GameSettings {
   continuousMode: boolean;
   /** v1.2 — Catégories de mots autorisées ; tableau vide = toutes les catégories */
   selectedCategories: string[];
+  /** Phase 2 — Mode chaîne : A piège B, B piège C, ... N piège A (ordre fixe des joueurs) */
+  chainMode: boolean;
+  /** Phase 2 — Mots personnalisés ajoutés par les joueurs */
+  customWords: string[];
 }
 
 export const DEFAULT_GAME_SETTINGS: GameSettings = {
@@ -23,4 +27,6 @@ export const DEFAULT_GAME_SETTINGS: GameSettings = {
   timerEnabled: false,
   continuousMode: false,
   selectedCategories: [],
+  chainMode: false,
+  customWords: [],
 };

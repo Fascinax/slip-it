@@ -1,6 +1,4 @@
-:host {
-  display: inline-block;
-}
+:host { display: inline-block; }
 
 .avatar {
   border-radius: 50%;
@@ -9,14 +7,26 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,.4);
-  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  text-shadow: 0 1px 3px rgba(0,0,0,.45);
+  box-shadow: 0 3px 12px rgba(0,0,0,.30);
+  transition: transform var(--pam-anim-fast) ease,
+              box-shadow var(--pam-anim-fast) ease;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,.40);
+  }
 
   &--sm  { width: 36px;  height: 36px;  font-size: 0.8rem; }
   &--md  { width: 52px;  height: 52px;  font-size: 1.1rem; }
   &--lg  { width: 72px;  height: 72px;  font-size: 1.5rem; }
+
+  // Anneau lumineux autour de l'avatar (utilisé pour podium winner)
+  &--glow {
+    box-shadow: 0 0 0 3px var(--pam-gold), 0 0 20px var(--pam-gold);
+  }
 
   &__score {
     position: absolute;
@@ -32,6 +42,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid white;
+    border: 2px solid var(--ion-background-color);
+    box-shadow: var(--pam-glow-primary);
+    animation: pam-pop var(--pam-anim-slow) cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
   }
 }

@@ -15,11 +15,14 @@
 <ion-content class="ion-padding gameplay-content">
 
   <!-- v1.2 — Chronomètre indicatif -->
-  <app-countdown-timer
-    *ngIf="timerEnabled"
-    [durationMinutes]="timerDuration"
-    [active]="true"
-  ></app-countdown-timer>
+  <div class="timer-bar" *ngIf="timerEnabled">
+    <app-countdown-timer
+      [durationMinutes]="timerDuration"
+      [active]="true"
+      (timerUrgent)="onTimerUrgent()"
+      (timerExpired)="onTimerExpired()"
+    ></app-countdown-timer>
+  </div>
 
   <!-- Quick ranking -->
   <ion-card>

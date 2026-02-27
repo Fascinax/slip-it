@@ -8,6 +8,18 @@ ion-content {
   --background: var(--pam-bg, #1a1a2e);
 }
 
+.timer-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px 16px 0;
+  gap: 8px;
+
+  app-countdown-timer {
+    display: inline-block;
+  }
+}
+
 .ranking-card {
   margin: 12px;
   border-radius: 16px;

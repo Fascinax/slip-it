@@ -57,14 +57,28 @@ export class WordService {
     return [...new Set(all)].sort((a, b) => a.localeCompare(b, 'fr'));
   }
 
-  /** Pick N random words, optionally filtered by difficulty and/or categories */
-  pickRandom(count: number, difficulty?: WordDifficulty | 'MIXED', categories?: string[]): WordEntry[] {
+  /** Pick N random words, optionally filtered by difficulty and/or categories.
+   *  `customWords` (Phase 2) are always included in the pool regardless of filters. */
+  pickRandom(
+    count: number,
+    difficulty?: WordDifficulty | 'MIXED',
+    categories?: string[],
+    customWords?: string[],
+  ): WordEntry[] {
     let pool = difficulty && difficulty !== 'MIXED'
       ? this._words$.value.filter(w => w.difficulty === difficulty)
       : this._words$.value;
 
     if (categories && categories.length > 0) {
       pool = pool.filter(w => categories.includes(w.category));
+    }
+
+    // Inject custom words at HEAD of the pool with MIXED/custom metadata
+    if (customWords && customWords.length > 0) {
+      const custom: WordEntry[] = customWords
+        .filter(w => w.trim().length > 0)
+        .map(w => ({ word: w.trim(), category: 'Personnalisé', difficulty: 'EASY' as WordDifficulty }));
+      pool = [...custom, ...pool];
     }
 
     if (pool.length === 0) { return []; }

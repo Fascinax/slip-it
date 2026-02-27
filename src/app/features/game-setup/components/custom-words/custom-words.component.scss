@@ -1,0 +1,51 @@
+.custom-words {
+  padding: 12px 0;
+}
+
+.cw-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  ion-input.cw-input {
+    flex: 1;
+    --background: var(--pam-surface);
+    --border-radius: var(--pam-radius-md);
+    --padding-start: 12px;
+    --padding-end: 8px;
+    border: 1px solid var(--pam-border);
+    border-radius: var(--pam-radius-md);
+    transition: border-color var(--pam-anim-fast) ease;
+
+    &.has-focus {
+      border-color: var(--ion-color-primary);
+    }
+  }
+
+  ion-button {
+    --border-radius: var(--pam-radius-md);
+    flex-shrink: 0;
+  }
+}
+
+.cw-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.cw-chip {
+  --background: var(--ion-color-primary);
+  --color: #fff;
+  border-radius: var(--pam-radius-pill);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.cw-hint {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 8px;
+  padding: 0;
+}

@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Historique 📜</ion-title>
+    <ion-buttons slot="end" *ngIf="history.length > 0">
+      <ion-button (click)="onClearAll()" data-testid="btn-clear-history">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding history-content">
+
+  <!-- État vide -->
+  <div class="empty-state" *ngIf="history.length === 0">
+    <div class="empty-icon pam-anim-float">🎲</div>
+    <h2 class="empty-title">Aucune partie enregistrée</h2>
+    <p class="empty-sub">Terminez une partie pour la voir apparaître ici.</p>
+  </div>
+
+  <!-- Liste des parties -->
+  <div class="history-list" *ngIf="history.length > 0">
+    <ion-card
+      class="history-card pam-anim-slide-up"
+      *ngFor="let entry of history; trackBy: trackById"
+      data-testid="history-card"
+    >
+      <ion-card-header>
+        <ion-card-title class="hc-title">
+          <span class="hc-mode-badge" [class]="'hc-mode-badge--' + entry.modeName.toLowerCase()">
+            {{ entry.modeName }}
+            <span *ngIf="entry.chainMode"> 🔗</span>
+          </span>
+          <span class="hc-date">{{ entry.playedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Statistiques clés -->
+        <div class="hc-stats">
+          <div class="hc-stat">
+            <span class="hc-stat__value">{{ entry.playerCount }}</span>
+            <span class="hc-stat__label">joueurs</span>
+          </div>
+          <div class="hc-stat">
+            <span class="hc-stat__value">{{ entry.totalRounds }}</span>
+            <span class="hc-stat__label">manches</span>
+          </div>
+          <div class="hc-stat">
+            <span class="hc-stat__value">{{ entry.totalTraps }}</span>
+            <span class="hc-stat__label">pièges</span>
+          </div>
+        </div>
+
+        <!-- Gagnant -->
+        <div class="hc-winner" *ngIf="entry.winnerName">
+          <ion-icon name="trophy" color="warning"></ion-icon>
+          <span>{{ entry.winnerName }}</span>
+          <app-score-badge [score]="entry.winnerScore"></app-score-badge>
+        </div>
+
+        <!-- Joueurs -->
+        <div class="hc-players">
+          <ion-chip *ngFor="let name of entry.playerNames" size="small" color="medium">
+            <ion-label>{{ name }}</ion-label>
+          </ion-chip>
+        </div>
+      </ion-card-content>
+
+      <!-- Actions -->
+      <div class="hc-actions">
+        <ion-button fill="clear" size="small" color="danger"
+                    (click)="onDeleteEntry(entry.id)"
+                    data-testid="btn-delete-history-entry">
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
+          Supprimer
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+
+</ion-content>

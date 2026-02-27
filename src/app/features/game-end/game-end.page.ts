@@ -5,6 +5,7 @@ import { Game, Player, Trap } from '../../core/models';
 import { GameService } from '../../core/services/game.service';
 import { PlayerService } from '../../core/services/player.service';
 import { ScoreService, ScoreEntry } from '../../core/services/score.service';
+import { HistoryService } from '../../core/services/history.service';
 
 @Component({
   selector: 'app-game-end',
@@ -21,18 +22,25 @@ export class GameEndPage implements OnInit, OnDestroy {
   readonly canShare = typeof navigator !== 'undefined' && !!navigator.share;
 
   private destroy$ = new Subject<void>();
+  private historySaved = false;
 
   constructor(
     private router: Router,
     private gameService: GameService,
     private playerService: PlayerService,
     private scoreService: ScoreService,
+    private historyService: HistoryService,
     private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
     this.gameService.game$.pipe(takeUntil(this.destroy$)).subscribe(g => {
       this.game = g;
+      // Sauvegarde unique dans l'historique quand la partie est terminée
+      if (g && !this.historySaved) {
+        this.historySaved = true;
+        void this.historyService.saveGame(g);
+      }
       this.cdr.markForCheck();
     });
     this.playerService.players$.pipe(takeUntil(this.destroy$)).subscribe(players => {

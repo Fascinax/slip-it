@@ -1,6 +1,8 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   OnChanges,
   OnDestroy,
   SimpleChanges,
@@ -20,9 +22,17 @@ export class CountdownTimerComponent implements OnChanges, OnDestroy {
   /** Si false, le chronomètre ne démarre pas */
   @Input() active = true;
 
+  /** Émis une seule fois quand il reste ≤ 60 s */
+  @Output() timerUrgent = new EventEmitter<void>();
+  /** Émis quand le compte à rebours atteint 0 */
+  @Output() timerExpired = new EventEmitter<void>();
+
   remainingSeconds = 0;
   totalSeconds = 0;
+
   private intervalId: ReturnType<typeof setInterval> | null = null;
+  private urgentEmitted = false;
+  private expiredEmitted = false;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -51,13 +61,22 @@ export class CountdownTimerComponent implements OnChanges, OnDestroy {
   }
 
   get isExpired(): boolean {
-    return this.remainingSeconds === 0;
+    return this.remainingSeconds === 0 && this.totalSeconds > 0;
+  }
+
+  /** stroke-dashoffset pour l'arc SVG circulaire (circumférence ≈ 113.10) */
+  get ringDashoffset(): number {
+    const circumference = 2 * Math.PI * 18; // r=18
+    if (this.totalSeconds === 0) { return 0; }
+    return circumference * (1 - this.remainingSeconds / this.totalSeconds);
   }
 
   private reset(): void {
     this.stop();
     this.totalSeconds = this.durationMinutes * 60;
     this.remainingSeconds = this.totalSeconds;
+    this.urgentEmitted = false;
+    this.expiredEmitted = false;
   }
 
   private start(): void {
@@ -65,8 +84,17 @@ export class CountdownTimerComponent implements OnChanges, OnDestroy {
       if (this.remainingSeconds > 0) {
         this.remainingSeconds--;
         this.cdr.markForCheck();
+        if (this.isUrgent && !this.urgentEmitted) {
+          this.urgentEmitted = true;
+          this.timerUrgent.emit();
+        }
       } else {
         this.stop();
+        if (!this.expiredEmitted) {
+          this.expiredEmitted = true;
+          this.timerExpired.emit();
+          this.cdr.markForCheck();
+        }
       }
     }, 1000);
   }

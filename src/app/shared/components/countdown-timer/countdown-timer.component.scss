@@ -1,56 +1,76 @@
-.timer-card {
-  margin: 0 0 12px 0;
-  transition: all 0.3s ease;
+:host { display: inline-block; }
 
-  &.timer-urgent {
-    --background: rgba(var(--ion-color-warning-rgb), 0.1);
-    border: 1px solid var(--ion-color-warning);
-  }
+$ring-r: 18;
+$ring-circ: 2 * 3.14159 * $ring-r; // ≈ 113.10
 
-  &.timer-expired {
-    --background: rgba(var(--ion-color-danger-rgb), 0.1);
-    border: 1px solid var(--ion-color-danger);
-  }
-}
-
-.timer-content {
-  display: flex;
+.timer-wrapper {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px 6px;
+  justify-content: center;
+  transition: filter var(--pam-anim-normal) ease;
+
+  &.timer--urgent {
+    filter: drop-shadow(0 0 8px var(--ion-color-warning));
+
+    .timer-ring__fill { stroke: var(--ion-color-warning); }
+    .timer-value      { color: var(--ion-color-warning); animation: pam-pulse 0.8s ease-in-out infinite; }
+  }
+
+  &.timer--expired {
+    filter: drop-shadow(0 0 8px var(--ion-color-danger));
+
+    .timer-ring__fill { stroke: var(--ion-color-danger); }
+    .timer-value      { color: var(--ion-color-danger); animation: pam-shake var(--pam-anim-normal) ease; }
+  }
 }
 
-.timer-icon {
-  font-size: 1.6rem;
-  line-height: 1;
+.timer-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+
+  &__track {
+    fill: none;
+    stroke: var(--pam-border);
+    stroke-width: 3;
+  }
+
+  &__fill {
+    fill: none;
+    stroke: var(--ion-color-primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: #{$ring-circ};
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear, stroke var(--pam-anim-normal) ease;
+  }
 }
 
-.timer-display {
-  flex: 1;
+.timer-center {
   display: flex;
   flex-direction: column;
-}
-
-.timer-label {
-  font-size: 0.75rem;
-  color: var(--ion-color-medium);
-  margin-bottom: 2px;
+  align-items: center;
+  z-index: 1;
 }
 
 .timer-value {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
-  color: var(--ion-color-dark);
-
-  &.timer-expired-text {
-    color: var(--ion-color-danger);
-    font-size: 1rem;
-  }
+  line-height: 1;
+  color: var(--ion-text-color);
+  transition: color var(--pam-anim-fast) ease;
 }
 
-ion-progress-bar {
-  margin-top: 6px;
-  border-radius: 4px;
-  height: 6px;
+.timer-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ion-color-medium);
+  margin-top: 2px;
 }

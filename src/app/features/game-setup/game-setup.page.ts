@@ -56,6 +56,10 @@ export class GameSetupPage implements OnInit, OnDestroy {
     this.settings = settings;
   }
 
+  onCustomWordsChanged(words: string[]): void {
+    this.settings = { ...this.settings, customWords: words };
+  }
+
   get canStartGame(): boolean {
     return this.players.length >= 3;
   }

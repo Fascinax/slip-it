@@ -42,6 +42,20 @@
     (settingsChanged)="onSettingsChanged($event)"
   ></app-game-settings>
 
+  <!-- Phase 2 — Mots personnalisés -->
+  <ion-item-divider class="ion-margin-top">
+    <ion-label>Mots personnalisés 🎯</ion-label>
+  </ion-item-divider>
+
+  <ion-card class="custom-words-card">
+    <ion-card-content>
+      <app-custom-words
+        [words]="settings.customWords"
+        (wordsChanged)="onCustomWordsChanged($event)"
+      ></app-custom-words>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
 
 <ion-footer class="ion-padding">

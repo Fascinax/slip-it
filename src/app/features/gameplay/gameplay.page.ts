@@ -84,10 +84,10 @@ export class GameplayPage implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  revealCard(): void {
+  async revealCard(): Promise<void> {
     this.viewingCard = true;
     this.cdr.markForCheck();
-    this.soundService.tapFeedback();
+    await this.soundService.tapFeedback();
   }
 
   closeCard(): void {
@@ -97,6 +97,28 @@ export class GameplayPage implements OnInit, OnDestroy {
     this.showCardFor = null;
     this.viewingCard = false;
     this.cdr.markForCheck();
+  }
+
+  async onTimerUrgent(): Promise<void> {
+    await this.soundService.warningFeedback();
+    const toast = await this.toastCtrl.create({
+      message: '⏰ Plus qu\'une minute !',
+      duration: 2000,
+      color: 'warning',
+      position: 'top',
+    });
+    await toast.present();
+  }
+
+  async onTimerExpired(): Promise<void> {
+    await this.soundService.errorFeedback();
+    const toast = await this.toastCtrl.create({
+      message: '⏱ Temps écoulé pour cette manche !',
+      duration: 3000,
+      color: 'danger',
+      position: 'top',
+    });
+    await toast.present();
   }
 
   async declareTrap(trapper: Player): Promise<void> {
@@ -135,7 +157,7 @@ export class GameplayPage implements OnInit, OnDestroy {
     };
     this.playerService.addScore(trapper.id, 1);
     await this.gameService.addTrap(trap);
-    this.soundService.successFeedback();
+    await this.soundService.successFeedback();
 
     const toast = await this.toastCtrl.create({
       message: `🎉 Piège validé ! +1 point pour ${trapper.name}`,

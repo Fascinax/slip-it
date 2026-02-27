@@ -42,6 +42,11 @@ const routes: Routes = [
       import('./features/game-end/game-end.module').then(m => m.GameEndModule),
   },
   {
+    path: 'history',
+    loadChildren: () =>
+      import('./features/history/history.module').then(m => m.HistoryModule),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

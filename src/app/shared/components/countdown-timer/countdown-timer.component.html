@@ -1,15 +1,19 @@
-<ion-card class="timer-card" [class.timer-urgent]="isUrgent" [class.timer-expired]="isExpired">
-  <ion-card-content class="timer-content">
-    <div class="timer-icon">⏱</div>
-    <div class="timer-display">
-      <span class="timer-label">Temps restant</span>
-      <span class="timer-value" [class.timer-expired-text]="isExpired">
-        {{ isExpired ? 'Temps écoulé !' : displayTime }}
-      </span>
-    </div>
-    <ion-progress-bar
-      [value]="progressPercent / 100"
-      [color]="isExpired ? 'danger' : isUrgent ? 'warning' : 'primary'"
-    ></ion-progress-bar>
-  </ion-card-content>
-</ion-card>
+<div class="timer-wrapper"
+     [class.timer--urgent]="isUrgent"
+     [class.timer--expired]="isExpired">
+
+  <!-- Arc SVG circulaire -->
+  <svg class="timer-ring" viewBox="0 0 44 44" aria-hidden="true">
+    <circle class="timer-ring__track" cx="22" cy="22" r="18" />
+    <circle class="timer-ring__fill"
+            cx="22" cy="22" r="18"
+            [style.stroke-dashoffset]="ringDashoffset" />
+  </svg>
+
+  <!-- Valeur centrale -->
+  <div class="timer-center">
+    <span class="timer-value">{{ isExpired ? '0:00' : displayTime }}</span>
+    <span class="timer-label">{{ isExpired ? '⏰ Temps !' : 'restant' }}</span>
+  </div>
+
+</div>
