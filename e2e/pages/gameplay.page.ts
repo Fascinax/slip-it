@@ -49,7 +49,8 @@ export class GameplayPage extends BasePage {
     await this.myCardButtonFor(playerName).click();
     // Intermediate screen: pass phone
     await this.page.locator('[data-testid="btn-reveal-card"]').click();
-    await this.page.waitForTimeout(400);
+    // Wait for the card to be fully rendered (no fragile fixed delay)
+    await this.page.locator('.card-word').last().waitFor({ state: 'visible', timeout: 5_000 });
 
     const target = await this.page.locator('.card-target').last().innerText().catch(() => '');
     const word   = await this.page.locator('.card-word').last().innerText().catch(() => '');

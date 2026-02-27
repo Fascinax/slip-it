@@ -13,12 +13,14 @@ export default defineConfig({
   // Use the dedicated e2e tsconfig (CommonJS/node resolution, no Angular compiler)
   tsconfig: './tsconfig.e2e.json',
 
-  // Party game is stateful — run tests sequentially to avoid state conflicts
-  fullyParallel: false,
-  workers: 1,
+  // Each test gets an isolated browser context (Playwright ≥ 1.35 default),
+  // so localStorage is never shared between tests — safe to run in parallel.
+  // The dev server is stateless (pure client-side PWA) → no shared server state.
+  fullyParallel: true,
+  workers: process.env['CI'] ? 2 : 4,
 
   forbidOnly: !!process.env['CI'],
-  retries: process.env['CI'] ? 2 : 0,
+  retries: process.env['CI'] ? 2 : 1,  // 1 retry locally handles rare Ionic animation flakiness
 
   reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
