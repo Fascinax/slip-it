@@ -7,6 +7,13 @@ ion-content {
   --background: var(--pam-bg, #1a1a2e);
 }
 
+ion-footer {
+  background: #0f3460;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+  border-top: 2px solid var(--ion-color-primary);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
 .setup-header {
   text-align: center;
   padding: 20px 16px 8px;
