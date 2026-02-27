@@ -72,3 +72,6 @@ Thumbs.db
 # Playwright test results
 test-results/
 playwright-report/
+
+# Playwright MCP screenshots
+.playwright-mcp/
