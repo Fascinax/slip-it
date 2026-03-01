@@ -67,9 +67,12 @@ export class GameplayPage implements OnInit, OnDestroy {
 
   get myAssignment(): Assignment | null {
     if (!this.showCardFor || !this.game) { return null; }
-    return this.game.assignments.find(
+    // findLast() returns the most recent assignment — important in continuous mode
+    // where a player can receive a new card after validating a trap.
+    const matches = this.game.assignments.filter(
       a => a.playerId === this.showCardFor!.id && a.round === this.game!.currentRound
-    ) ?? null;
+    );
+    return matches[matches.length - 1] ?? null;
   }
 
   get myTarget(): Player | null {
@@ -196,7 +199,8 @@ export class GameplayPage implements OnInit, OnDestroy {
     const [newWord] = this.wordService.pickRandom(
       1,
       (settings?.wordDifficulty ?? 'MIXED') as 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED',
-      settings?.selectedCategories?.length ? settings.selectedCategories : undefined
+      settings?.selectedCategories?.length ? settings.selectedCategories : undefined,
+      settings?.customWords?.length ? settings.customWords : undefined,
     );
     if (!newWord) { return; }
 
