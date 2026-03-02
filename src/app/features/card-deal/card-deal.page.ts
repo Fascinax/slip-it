@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { ViewWillEnter } from '@ionic/angular';
 import { Player, Assignment, Game } from '../../core/models';
 import { GameStatus } from '../../core/models/enums';
 import { GameService } from '../../core/services/game.service';
@@ -17,7 +18,7 @@ type DealState = 'WAITING' | 'SHOWING_CARD' | 'DONE';
   styleUrls: ['./card-deal.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardDealPage implements OnInit, OnDestroy {
+export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
   players: Player[] = [];
   assignments: Assignment[] = [];
   currentIndex = 0;
@@ -46,7 +47,20 @@ export class CardDealPage implements OnInit, OnDestroy {
       this.players = p;
       this.cdr.markForCheck();
     });
+  }
+
+  /**
+   * ionViewWillEnter fires each time the page becomes active — both on first
+   * creation (round 1) and when IonicRouteStrategy re-activates the cached
+   * component (round 2+). We reset the local UI state here so the page is
+   * always in WAITING state with fresh assignments for the current round.
+   */
+  ionViewWillEnter(): void {
+    this.currentIndex = 0;
+    this.state = 'WAITING';
+    this.flipped = false;
     this.generateAssignments();
+    this.cdr.markForCheck();
   }
 
   get currentPlayer(): Player | null {
