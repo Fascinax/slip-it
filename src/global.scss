@@ -282,6 +282,38 @@ ion-app ion-router-outlet > * {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+//  ICON UTILITIES — shadcn-style clean icons (replacing emojis)
+// ─────────────────────────────────────────────────────────────────────────────
+.label-icon {
+  font-size: 1em;
+  vertical-align: middle;
+  margin-left: 4px;
+  color: var(--ion-color-primary);
+  opacity: 0.8;
+}
+
+.hint-icon {
+  font-size: 1.1em;
+  vertical-align: middle;
+  margin-right: 4px;
+  color: var(--ion-color-primary);
+}
+
+.title-icon {
+  font-size: 1.1em;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.rank-icon {
+  font-size: 1.6rem;
+
+  &--gold   { color: #ffd700; filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.45)); }
+  &--silver { color: #c0c0c0; filter: drop-shadow(0 0 4px rgba(192, 192, 192, 0.35)); }
+  &--bronze { color: #cd7f32; filter: drop-shadow(0 0 4px rgba(205, 127, 50, 0.35)); }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 //  COMPOSANTS PARTAGÉS (hérités de Phase 1 → raffinés Phase 2)
 // ─────────────────────────────────────────────────────────────────────────────
 .ranking-row {
@@ -315,10 +347,14 @@ ion-app ion-router-outlet > * {
   position: relative;
 
   .winner-crown {
-    font-size: 56px;
     margin-bottom: 8px;
     animation: pam-float 2s ease-in-out infinite;
     filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.35));
+
+    &__icon {
+      font-size: 56px;
+      color: #ffd700;
+    }
   }
 
   .winner-name {

@@ -19,7 +19,7 @@ export class GameEndPage extends BasePage {
     this.winnerName       = page.locator('.winner-name');
     this.winnerSubtitle   = page.locator('.winner-subtitle');
     this.btnNewGame       = page.locator('[data-testid="btn-new-game-end"]');
-    this.statsCard        = page.locator('.stats-card');
+    this.statsCard        = page.locator('.stats-card-premium');
     this.btnReplay        = page.locator('[data-testid="btn-replay"]');
     this.btnSharePodium   = page.locator('[data-testid="btn-share-podium"]');
     this.trapHistoryHeader = page.getByText(/Historique des pièges/);
@@ -50,9 +50,8 @@ export class GameEndPage extends BasePage {
   /** Returns all player names from the final podium list. */
   async getPodiumNames(): Promise<string[]> {
     return this.page
-      .locator('ion-item')
-      .filter({ has: this.page.locator('app-score-badge') })
-      .locator('ion-label')
+      .locator('.podium-entry')
+      .locator('.podium-entry__name')
       .allInnerTexts();
   }
 }

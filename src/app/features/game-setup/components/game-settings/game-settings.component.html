@@ -3,9 +3,9 @@
     <ion-item>
       <ion-label>Mode de jeu</ion-label>
       <ion-select formControlName="mode" slot="end" interface="popover">
-        <ion-select-option [value]="GameMode.POINTS">🏆 Points</ion-select-option>
-        <ion-select-option [value]="GameMode.DRINK">🍺 Boisson</ion-select-option>
-        <ion-select-option [value]="GameMode.CUSTOM">✏️ Personnalisé</ion-select-option>
+        <ion-select-option [value]="GameMode.POINTS">Points</ion-select-option>
+        <ion-select-option [value]="GameMode.DRINK">Boisson</ion-select-option>
+        <ion-select-option [value]="GameMode.CUSTOM">Personnalisé</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -31,10 +31,10 @@
     <ion-item>
       <ion-label>Difficulté des mots</ion-label>
       <ion-select formControlName="wordDifficulty" slot="end" interface="popover">
-        <ion-select-option value="EASY">😊 Facile</ion-select-option>
-        <ion-select-option value="MEDIUM">😐 Moyen</ion-select-option>
-        <ion-select-option value="HARD">😈 Difficile</ion-select-option>
-        <ion-select-option value="MIXED">🎲 Mixte</ion-select-option>
+        <ion-select-option value="EASY">Facile</ion-select-option>
+        <ion-select-option value="MEDIUM">Moyen</ion-select-option>
+        <ion-select-option value="HARD">Difficile</ion-select-option>
+        <ion-select-option value="MIXED">Mixte</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -68,7 +68,7 @@
     <!-- Phase 2 — Mode chaîne -->
     <ion-item>
       <ion-label>
-        <h3>Mode chaîne 🔗</h3>
+        <h3>Mode chaîne <ion-icon name="link-outline" class="label-icon"></ion-icon></h3>
         <p>A piège B, B piège C ... N piège A (ordre d'inscription)</p>
       </ion-label>
       <ion-toggle slot="end" formControlName="chainMode" data-testid="toggle-chain-mode"></ion-toggle>

@@ -14,8 +14,13 @@ ion-content { --background: var(--pam-bg, #0f1117); }
 }
 
 .empty-icon {
-  font-size: 4rem;
   margin-bottom: 16px;
+
+  &__icon {
+    font-size: 4rem;
+    color: var(--ion-color-primary);
+    opacity: 0.6;
+  }
 }
 
 .empty-title {

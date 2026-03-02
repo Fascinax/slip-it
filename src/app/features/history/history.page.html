@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Historique 📜</ion-title>
+    <ion-title><ion-icon name="time-outline" class="title-icon"></ion-icon> Historique</ion-title>
     <ion-buttons slot="end" *ngIf="history.length > 0">
       <ion-button (click)="onClearAll()" data-testid="btn-clear-history">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
@@ -16,7 +16,7 @@
 
   <!-- État vide -->
   <div class="empty-state" *ngIf="history.length === 0">
-    <div class="empty-icon pam-anim-float">🎲</div>
+    <div class="empty-icon pam-anim-float"><ion-icon name="dice-outline" class="empty-icon__icon"></ion-icon></div>
     <h2 class="empty-title">Aucune partie enregistrée</h2>
     <p class="empty-sub">Terminez une partie pour la voir apparaître ici.</p>
   </div>
@@ -32,7 +32,7 @@
         <ion-card-title class="hc-title">
           <span class="hc-mode-badge" [class]="'hc-mode-badge--' + entry.modeName.toLowerCase()">
             {{ entry.modeName }}
-            <span *ngIf="entry.chainMode"> 🔗</span>
+            <span *ngIf="entry.chainMode"> <ion-icon name="link-outline" class="label-icon"></ion-icon></span>
           </span>
           <span class="hc-date">{{ entry.playedAt | date:'dd/MM/yyyy HH:mm' }}</span>
         </ion-card-title>

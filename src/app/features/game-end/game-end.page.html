@@ -16,7 +16,7 @@
 
   <!-- Winner spotlight premium -->
   <div class="podium-winner" *ngIf="winner">
-    <div class="winner-crown">🏆</div>
+    <div class="winner-crown"><ion-icon name="trophy-outline" class="winner-crown__icon"></ion-icon></div>
     <app-player-avatar [name]="winner.name" [color]="winner.avatarColor" size="lg"></app-player-avatar>
     <h1 class="winner-name">
       {{ winner.name }}<sup class="winner-score-sup">{{ winner.score * 100 }}</sup>
@@ -58,7 +58,12 @@
       [class.podium-entry--third]="entry.rank === 3"
     >
       <span class="podium-entry__rank">
-        {{ entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : '#' + entry.rank }}
+        <ng-container [ngSwitch]="entry.rank">
+          <ion-icon *ngSwitchCase="1" name="medal-outline" class="rank-icon rank-icon--gold"></ion-icon>
+          <ion-icon *ngSwitchCase="2" name="medal-outline" class="rank-icon rank-icon--silver"></ion-icon>
+          <ion-icon *ngSwitchCase="3" name="medal-outline" class="rank-icon rank-icon--bronze"></ion-icon>
+          <span *ngSwitchDefault>#{{ entry.rank }}</span>
+        </ng-container>
       </span>
       <app-player-avatar [name]="entry.player.name" [color]="entry.player.avatarColor" size="sm"></app-player-avatar>
       <span class="podium-entry__name">{{ entry.player.name }}</span>

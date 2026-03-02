@@ -17,9 +17,9 @@ test.describe('Page fin de partie (/game-end) — podium — happy paths', () =>
   });
 
   test('le nom du vainqueur est l\'un des joueurs enregistrés', async ({ page }) => {
-    const winnerName = (await page.locator('.winner-name').innerText()).trim();
+    const rawText = (await page.locator('.winner-name').innerText()).trim();
     const playerNames = DEFAULT_PLAYERS.map(p => p.name);
-    expect(playerNames).toContain(winnerName);
+    expect(playerNames.some(name => rawText.startsWith(name))).toBeTruthy();
   });
 
   test('le sous-titre du vainqueur est visible', async ({ gameEndPage }) => {
@@ -28,9 +28,8 @@ test.describe('Page fin de partie (/game-end) — podium — happy paths', () =>
 
   test('tous les joueurs apparaissent dans le podium', async ({ page }) => {
     const names = await page
-      .locator('ion-item')
-      .filter({ has: page.locator('app-score-badge') })
-      .locator('ion-label')
+      .locator('.podium-entry')
+      .locator('.podium-entry__name')
       .allInnerTexts();
     for (const player of DEFAULT_PLAYERS) {
       expect(names.some(n => n.includes(player.name))).toBeTruthy();

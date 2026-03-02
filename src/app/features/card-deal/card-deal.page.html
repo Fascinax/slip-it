@@ -32,7 +32,7 @@
     ></app-player-avatar>
     <h2 class="deal-invite__name">{{ currentPlayer?.name }}</h2>
     <p class="deal-invite__hint">
-      📲 Passe le téléphone à <strong>{{ currentPlayer?.name }}</strong>.<br>
+      <ion-icon name="phone-portrait-outline" class="hint-icon"></ion-icon> Passe le téléphone à <strong>{{ currentPlayer?.name }}</strong>.<br>
       Il peut voir sa carte une seule fois.
     </p>
     <ion-button
@@ -59,10 +59,10 @@
       <!-- Back (after flip) -->
       <div slot="back" class="card-face card-face--back">
         <div *ngIf="currentAssignment && targetPlayer" class="card-reveal-content">
-          <p class="card-reveal-content__label">Ta cible 🎯</p>
+          <p class="card-reveal-content__label">Ta cible <ion-icon name="locate-outline" class="label-icon"></ion-icon></p>
           <h2 class="card-reveal-content__target" data-testid="card-target">{{ targetPlayer.name }}</h2>
           <div class="card-reveal-content__divider"></div>
-          <p class="card-reveal-content__label">Ton mot secret 🔑</p>
+          <p class="card-reveal-content__label">Ton mot secret <ion-icon name="key-outline" class="label-icon"></ion-icon></p>
           <h1 class="card-reveal-content__word" data-testid="card-word">{{ currentAssignment.secretWord }}</h1>
           <p class="card-reveal-content__hint">Fais-lui prononcer ce mot naturellement !</p>
         </div>

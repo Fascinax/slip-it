@@ -13,7 +13,11 @@
   <!-- Valeur centrale -->
   <div class="timer-center">
     <span class="timer-value">{{ isExpired ? '0:00' : displayTime }}</span>
-    <span class="timer-label">{{ isExpired ? '⏰ Temps !' : isUrgent ? 'URGENT' : 'restant' }}</span>
+    <span class="timer-label">
+      <ng-container *ngIf="isExpired"><ion-icon name="alarm-outline" class="timer-label__icon"></ion-icon> Temps !</ng-container>
+      <ng-container *ngIf="!isExpired && isUrgent">URGENT</ng-container>
+      <ng-container *ngIf="!isExpired && !isUrgent">restant</ng-container>
+    </span>
   </div>
 
 </div>

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/gameplay"></ion-back-button>
     </ion-buttons>
-    <ion-title>📊 Classement — Manche {{ game?.currentRound }}</ion-title>
+    <ion-title><ion-icon name="stats-chart-outline" class="title-icon"></ion-icon> Classement — Manche {{ game?.currentRound }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,7 +17,12 @@
       [class.scoreboard-entry--third]="entry.rank === 3"
     >
       <span class="scoreboard-entry__rank">
-        {{ entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : entry.rank }}
+        <ng-container [ngSwitch]="entry.rank">
+          <ion-icon *ngSwitchCase="1" name="medal-outline" class="rank-icon rank-icon--gold"></ion-icon>
+          <ion-icon *ngSwitchCase="2" name="medal-outline" class="rank-icon rank-icon--silver"></ion-icon>
+          <ion-icon *ngSwitchCase="3" name="medal-outline" class="rank-icon rank-icon--bronze"></ion-icon>
+          <span *ngSwitchDefault>{{ entry.rank }}</span>
+        </ng-container>
       </span>
       <app-player-avatar
         [name]="entry.player.name"

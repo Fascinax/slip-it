@@ -87,9 +87,9 @@
   <!-- Revealed card -->
   <ion-card *ngIf="showCardFor && viewingCard && myAssignment" class="ion-margin-top card-reveal">
     <ion-card-content>
-      <p class="card-label">Ta cible 🎯</p>
+      <p class="card-label">Ta cible <ion-icon name="locate-outline" class="label-icon"></ion-icon></p>
       <h2 class="card-target">{{ myTarget?.name }}</h2>
-      <p class="card-label">Ton mot secret 🔑</p>
+      <p class="card-label">Ton mot secret <ion-icon name="key-outline" class="label-icon"></ion-icon></p>
       <h1 class="card-word">{{ myAssignment.secretWord }}</h1>
       <ion-button expand="block" fill="outline" color="primary" data-testid="btn-close-card" (click)="closeCard()">
         Fermer
