@@ -22,8 +22,8 @@ ion-content {
 
 .ranking-card {
   margin: 12px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--pam-radius-md);
+  background: var(--pam-glass-bg);
 
   ion-card-header {
     ion-card-title {
@@ -77,8 +77,8 @@ ion-content {
 
 .player-actions {
   margin: 8px 12px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--pam-radius-md);
+  background: var(--pam-surface);
   padding: 12px;
 
   .action-row {
@@ -99,7 +99,7 @@ ion-content {
 
 .revealed-card {
   margin: 12px;
-  border-radius: 16px;
+  border-radius: var(--pam-radius-md);
   background: rgba(var(--ion-color-primary-rgb), 0.15);
   padding: 16px;
   text-align: center;

@@ -62,8 +62,6 @@ ion-header ion-toolbar:first-of-type {
 ion-card {
   background: var(--pam-glass-bg);
   border: 1px solid var(--pam-glass-border);
-  backdrop-filter: blur(var(--pam-glass-blur));
-  -webkit-backdrop-filter: blur(var(--pam-glass-blur));
   border-radius: var(--pam-radius-md);
   box-shadow: var(--pam-shadow-md);
   transition: transform var(--pam-anim-normal) ease,
@@ -288,7 +286,7 @@ ion-app ion-router-outlet > * {
   .winner-crown {
     font-size: 56px;
     margin-bottom: 8px;
-    animation: pam-float 2s ease-in-out infinite;
+    animation: pam-float 2s ease-in-out 5;
   }
 
   .winner-name {

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      <ion-icon name="fish"></ion-icon> Slip It
+      <ion-icon name="chatbubbles"></ion-icon> Slip It
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,6 +13,7 @@
     </div>
     <h1 class="home-hero__title">Slip It</h1>
     <p class="home-hero__subtitle">Fais prononcer le mot secret à ta cible… si tu oses !</p>
+    <p class="home-hero__audience">Le jeu de soirée · 3–10 joueurs</p>
   </div>
 
   <div class="home-actions">
@@ -20,7 +21,8 @@
       <ion-button
         *ngIf="game && game.status !== 'FINISHED' && game.status !== 'SETUP'"
         expand="block"
-        color="success"
+        fill="outline"
+        color="primary"
         class="home-actions__btn"
         data-testid="btn-resume-game"
         (click)="resumeGame()"
