@@ -8,20 +8,55 @@
   font-weight: 600;
 }
 
+// ── WAITING state — clearer card design ──
 .deal-invite {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 32px;
 
+  &__status {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ion-color-medium);
+    padding: 4px 14px;
+    border: 1px solid var(--pam-border);
+    border-radius: var(--pam-radius-pill);
+    margin-bottom: 20px;
+  }
+
   &__avatar { margin-bottom: 16px; }
+
   &__name {
     font-size: 1.8rem;
     font-weight: 800;
-    margin: 0 0 8px;
+    margin: 0 0 12px;
+    color: var(--ion-text-color);
+  }
+
+  &__hint {
+    text-align: center;
+    color: var(--ion-color-medium);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+
+    strong { color: var(--ion-text-color); }
+  }
+
+  &__btn {
+    --border-radius: var(--pam-radius-md);
+    width: 100%;
+    max-width: 300px;
+    height: 52px;
+    font-weight: 700;
+    font-size: 1rem;
   }
 }
 
+// ── Card faces ──
 .card-face {
   display: flex;
   flex-direction: column;
@@ -29,39 +64,88 @@
   justify-content: center;
   text-align: center;
   width: 100%;
-  min-height: 240px;
-  padding: 24px;
+  min-height: 280px;
+  padding: 28px;
 
   &--front {
-    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
-    border-radius: 16px;
+    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-tertiary));
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  &__icon {
+    font-size: 52px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__hint {
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 16px;
+    font-size: 0.95rem;
   }
 }
 
-.card-content {
-  .card-label {
-    font-size: 0.85rem;
+// ── Card reveal content — premium word display ──
+.card-reveal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+
+  &__label {
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     color: var(--ion-color-medium);
     margin-bottom: 4px;
   }
-  .card-target {
+
+  &__target {
     font-size: 2rem;
     font-weight: 800;
     color: var(--ion-color-primary);
-    margin: 0 0 24px;
+    margin: 0 0 12px;
+    text-shadow: 0 0 16px rgba(var(--ion-color-primary-rgb), 0.30);
+    animation: pam-slide-up var(--pam-anim-normal) ease both;
   }
-  .card-word {
+
+  &__divider {
+    width: 60px;
+    height: 2px;
+    background: var(--pam-border);
+    border-radius: 1px;
+    margin: 8px 0 16px;
+  }
+
+  &__word {
     font-size: 2.8rem;
     font-weight: 900;
-    color: var(--ion-color-dark);
     margin: 0 0 16px;
     letter-spacing: -1px;
+    background: var(--pam-gold-gradient, linear-gradient(135deg, #f5a623, #ffd700, #f5a623));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 8px rgba(245, 166, 35, 0.40));
+    animation: pam-pop var(--pam-anim-slow) cubic-bezier(0.175, 0.885, 0.32, 1.275) both 0.15s;
   }
-  .card-hint {
+
+  &__hint {
     font-size: 0.9rem;
     color: var(--ion-color-medium);
     font-style: italic;
+    max-width: 240px;
+    line-height: 1.4;
+  }
+}
+
+// ── Confirm button — solid success green (prominent) ──
+.deal-card {
+  &__confirm {
+    margin-top: 20px;
+    --border-radius: var(--pam-radius-md);
+    height: 54px;
+    font-size: 1rem;
+    font-weight: 700;
   }
 }

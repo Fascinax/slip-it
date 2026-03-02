@@ -2,61 +2,134 @@ ion-content.home-content {
   --background: var(--pam-bg-gradient);
 }
 
+// ── Hero Section avec logo animé ──
 .home-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 24px 24px;
+  padding: 48px 24px 28px;
 
-  &__logo {
-    .logo-icon {
-      font-size: 80px;
-      color: var(--ion-color-primary);
-      filter: drop-shadow(0 4px 12px rgba(var(--ion-color-primary-rgb), 0.4));
-    }
+  &__logo-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  &__logo-glow {
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(233, 69, 96, 0.25) 0%, transparent 70%);
+    animation: pam-logo-breathe 3s ease-in-out infinite;
+  }
+
+  &__logo-icon {
+    font-size: 72px;
+    color: var(--ion-color-primary);
+    filter: drop-shadow(0 4px 16px rgba(var(--ion-color-primary-rgb), 0.35));
+    z-index: 1;
+    animation: pam-float 3.5s ease-in-out infinite;
   }
 
   &__title {
-    font-size: 2.4rem;
-    font-weight: 800;
+    font-size: 2.8rem;
+    font-weight: 900;
     margin: 12px 0 8px;
     color: var(--ion-text-color);
     letter-spacing: -0.5px;
   }
 
+  &__title-sup {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--ion-color-medium);
+    vertical-align: super;
+    letter-spacing: 0;
+    margin-left: 2px;
+  }
+
   &__subtitle {
     text-align: center;
-    color: var(--ion-color-medium);
-    font-size: 1rem;
-    max-width: 280px;
+    color: var(--ion-color-primary-tint);
+    font-size: 1.05rem;
+    font-weight: 600;
+    max-width: 300px;
+    line-height: 1.5;
+    margin: 0;
   }
 
   &__audience {
-    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--ion-color-secondary);
-    opacity: 0.85;
+    opacity: 0.9;
+  }
+
+  &__audience-icon {
+    font-size: 1rem;
   }
 }
 
+@keyframes pam-logo-breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.08); }
+}
+
+// ── Actions principales ──
 .home-actions {
   padding: 0 24px;
 
   &__btn {
     margin-bottom: 12px;
-    --border-radius: 12px;
+    --border-radius: var(--pam-radius-md);
     height: 54px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
+
+    &--main {
+      height: 58px;
+      font-size: 1.05rem;
+    }
   }
 }
 
+// ── Règles du jeu ──
 .home-rules {
+  &__card {
+    background: var(--pam-glass-bg);
+    border: 1px solid var(--pam-glass-border);
+    backdrop-filter: blur(var(--pam-glass-blur));
+    -webkit-backdrop-filter: blur(var(--pam-glass-blur));
+  }
+
   ol {
     padding-left: 16px;
-    li { margin-bottom: 8px; line-height: 1.5; }
+    li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+      color: var(--ion-text-color);
+      font-size: 0.95rem;
+    }
+  }
+}
+
+// ── Footer avec lien secondaire ──
+.home-footer {
+  padding: 0 24px 24px;
+
+  &__btn {
+    --border-radius: var(--pam-radius-md);
+    height: 48px;
+    font-weight: 600;
   }
 }

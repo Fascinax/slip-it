@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>🏆 Résultats finaux</ion-title>
-    <!-- v1.2 — Bouton partage Web Share -->
+    <ion-title>
+      <ion-icon name="trophy"></ion-icon>
+      Résultats finaux
+    </ion-title>
     <ion-buttons slot="end" *ngIf="canShare">
       <ion-button data-testid="btn-share-podium" (click)="sharePodium()">
         <ion-icon slot="icon-only" name="share-social"></ion-icon>
@@ -12,72 +14,86 @@
 
 <ion-content class="game-end-content ion-padding">
 
-  <!-- Winner spotlight -->
+  <!-- Winner spotlight premium -->
   <div class="podium-winner" *ngIf="winner">
-    <div class="winner-crown">👑</div>
+    <div class="winner-crown">🏆</div>
     <app-player-avatar [name]="winner.name" [color]="winner.avatarColor" size="lg"></app-player-avatar>
-    <h1 class="winner-name">{{ winner.name }}</h1>
+    <h1 class="winner-name">
+      {{ winner.name }}<sup class="winner-score-sup">{{ winner.score * 100 }}</sup>
+    </h1>
     <p class="winner-subtitle">VAINQUEUR — {{ winner.score }} point(s)</p>
   </div>
 
-  <!-- Stats -->
-  <ion-card class="stats-card">
+  <!-- Stats row premium -->
+  <ion-card class="stats-card-premium">
     <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <h3>{{ game?.totalRounds }}</h3>
-            <p>Manches</p>
-          </ion-col>
-          <ion-col class="ion-text-center">
-            <h3>{{ totalTraps }}</h3>
-            <p>Pièges réussis</p>
-          </ion-col>
-          <ion-col class="ion-text-center">
-            <h3>{{ game?.players?.length }}</h3>
-            <p>Joueurs</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <div class="stats-row">
+        <div class="stats-row__item">
+          <span class="stats-row__value">{{ game?.totalRounds }}</span>
+          <span class="stats-row__label">Manches</span>
+        </div>
+        <div class="stats-row__divider"></div>
+        <div class="stats-row__item">
+          <span class="stats-row__value stats-row__value--warning">{{ totalTraps }}</span>
+          <span class="stats-row__label">Pièges</span>
+        </div>
+        <div class="stats-row__divider"></div>
+        <div class="stats-row__item">
+          <span class="stats-row__value">{{ game?.players?.length }}</span>
+          <span class="stats-row__label">Joueurs</span>
+        </div>
+      </div>
     </ion-card-content>
   </ion-card>
 
-  <!-- Podium list -->
-  <ion-list-header><ion-label>Podium complet</ion-label></ion-list-header>
-  <ion-item *ngFor="let entry of ranking; trackBy: trackByRank">
-    <span slot="start" class="podium-rank">
-      {{ entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : '#' + entry.rank }}
-    </span>
-    <app-player-avatar slot="start" [name]="entry.player.name" [color]="entry.player.avatarColor" size="sm"></app-player-avatar>
-    <ion-label>{{ entry.player.name }}</ion-label>
-    <app-score-badge slot="end" [score]="entry.player.score"></app-score-badge>
-  </ion-item>
+  <!-- Podium list premium -->
+  <ion-list-header><ion-label>Podium</ion-label></ion-list-header>
 
-  <!-- v1.2 — Historique complet des pièges -->
+  <div class="podium-list">
+    <div
+      *ngFor="let entry of ranking; trackBy: trackByRank"
+      class="podium-entry"
+      [class.podium-entry--first]="entry.rank === 1"
+      [class.podium-entry--second]="entry.rank === 2"
+      [class.podium-entry--third]="entry.rank === 3"
+    >
+      <span class="podium-entry__rank">
+        {{ entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : '#' + entry.rank }}
+      </span>
+      <app-player-avatar [name]="entry.player.name" [color]="entry.player.avatarColor" size="sm"></app-player-avatar>
+      <span class="podium-entry__name">{{ entry.player.name }}</span>
+      <app-score-badge [score]="entry.player.score"></app-score-badge>
+    </div>
+  </div>
+
+  <!-- Historique des pièges -->
   <ng-container *ngIf="validatedTraps.length > 0">
     <ion-list-header>
       <ion-label>Historique des pièges ({{ validatedTraps.length }})</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let trap of validatedTraps; let i = index; trackBy: trackByTrapId">
-      <ion-icon slot="start" name="flash" color="warning"></ion-icon>
-      <ion-label>
-        <h3>{{ trapperName(trap) }} a piégé {{ targetName(trap) }}</h3>
-        <p>« {{ trap.secretWord }} » — Manche {{ trap.round }}</p>
-      </ion-label>
-      <ion-badge slot="end" color="success">+1</ion-badge>
-    </ion-item>
+    <div class="trap-history">
+      <div *ngFor="let trap of validatedTraps; let i = index; trackBy: trackByTrapId" class="trap-entry">
+        <ion-icon name="flash" color="warning" class="trap-entry__icon"></ion-icon>
+        <div class="trap-entry__info">
+          <span class="trap-entry__title">{{ trapperName(trap) }} a piégé {{ targetName(trap) }}</span>
+          <span class="trap-entry__detail">« {{ trap.secretWord }} »</span>
+        </div>
+        <ion-badge color="success" class="trap-entry__badge">+1</ion-badge>
+      </div>
+    </div>
   </ng-container>
 
 </ion-content>
 
-<ion-footer class="ion-padding">
-  <!-- v1.2 — Rejouer avec les mêmes joueurs -->
-  <ion-button expand="block" color="secondary" data-testid="btn-replay" (click)="replayGame()">
-    <ion-icon slot="start" name="people"></ion-icon>
-    Rejouer (même équipe)
-  </ion-button>
-  <ion-button expand="block" fill="outline" data-testid="btn-new-game-end" (click)="newGame()" class="ion-margin-top">
-    <ion-icon slot="start" name="refresh"></ion-icon>
-    Nouvelle partie
-  </ion-button>
+<ion-footer class="game-end-footer">
+  <div class="game-end-footer__inner">
+    <ion-button expand="block" color="secondary" data-testid="btn-replay" (click)="replayGame()" class="game-end-footer__btn">
+      <ion-icon slot="start" name="people"></ion-icon>
+      Rejouer (même équipe)
+    </ion-button>
+    <ion-button expand="block" fill="outline" color="primary" data-testid="btn-new-game-end" (click)="newGame()" class="game-end-footer__btn">
+      <ion-icon slot="start" name="refresh"></ion-icon>
+      Nouvelle partie
+    </ion-button>
+  </div>
 </ion-footer>

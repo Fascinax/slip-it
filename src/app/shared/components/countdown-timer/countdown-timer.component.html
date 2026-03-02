@@ -13,7 +13,7 @@
   <!-- Valeur centrale -->
   <div class="timer-center">
     <span class="timer-value">{{ isExpired ? '0:00' : displayTime }}</span>
-    <span class="timer-label">{{ isExpired ? '⏰ Temps !' : 'restant' }}</span>
+    <span class="timer-label">{{ isExpired ? '⏰ Temps !' : isUrgent ? 'URGENT' : 'restant' }}</span>
   </div>
 
 </div>

@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title>Distribution des cartes</ion-title>
     <ion-buttons slot="end">
-      <ion-chip>Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</ion-chip>
+      <ion-chip color="secondary">Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</ion-chip>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,6 +22,7 @@
 
   <!-- WAITING — invite the player to take the phone -->
   <div *ngIf="state === 'WAITING'" class="deal-invite ion-padding">
+    <div class="deal-invite__status">WAITING</div>
     <app-player-avatar
       *ngIf="currentPlayer"
       [name]="currentPlayer.name"
@@ -30,8 +31,18 @@
       class="deal-invite__avatar"
     ></app-player-avatar>
     <h2 class="deal-invite__name">{{ currentPlayer?.name }}</h2>
-    <p>📲 Passe le téléphone à <strong>{{ currentPlayer?.name }}</strong>.<br>Il peut voir sa carte une seule fois.</p>
-    <ion-button expand="block" data-testid="btn-im-ready" (click)="showCard()" class="ion-margin-top">
+    <p class="deal-invite__hint">
+      📲 Passe le téléphone à <strong>{{ currentPlayer?.name }}</strong>.<br>
+      Il peut voir sa carte une seule fois.
+    </p>
+    <ion-button
+      expand="block"
+      fill="outline"
+      color="primary"
+      data-testid="btn-im-ready"
+      (click)="showCard()"
+      class="deal-invite__btn"
+    >
       <ion-icon slot="start" name="eye"></ion-icon>
       Voir ma carte
     </ion-button>
@@ -42,24 +53,25 @@
     <app-card-flip [flipped]="flipped">
       <!-- Front (before flip) -->
       <div slot="front" class="card-face card-face--front">
-        <ion-icon name="eye-off" style="font-size:48px; color:white"></ion-icon>
-        <p style="color:white; margin-top:16px">Retourne pour voir ta carte…</p>
+        <ion-icon name="eye-off" class="card-face__icon"></ion-icon>
+        <p class="card-face__hint">Retourne pour voir ta carte…</p>
       </div>
       <!-- Back (after flip) -->
       <div slot="back" class="card-face card-face--back">
-        <div *ngIf="currentAssignment && targetPlayer" class="card-content">
-          <p class="card-label">Ta cible 🎯</p>
-          <h2 class="card-target" data-testid="card-target">{{ targetPlayer.name }}</h2>
-          <p class="card-label">Ton mot secret 🔑</p>
-          <h1 class="card-word" data-testid="card-word">{{ currentAssignment.secretWord }}</h1>
-          <p class="card-hint">Fais-lui prononcer ce mot naturellement !</p>
+        <div *ngIf="currentAssignment && targetPlayer" class="card-reveal-content">
+          <p class="card-reveal-content__label">Ta cible 🎯</p>
+          <h2 class="card-reveal-content__target" data-testid="card-target">{{ targetPlayer.name }}</h2>
+          <div class="card-reveal-content__divider"></div>
+          <p class="card-reveal-content__label">Ton mot secret 🔑</p>
+          <h1 class="card-reveal-content__word" data-testid="card-word">{{ currentAssignment.secretWord }}</h1>
+          <p class="card-reveal-content__hint">Fais-lui prononcer ce mot naturellement !</p>
         </div>
       </div>
     </app-card-flip>
 
     <ion-button
       expand="block"
-      class="ion-margin-top"
+      class="deal-card__confirm"
       color="success"
       data-testid="btn-confirm-card"
       (click)="confirmCard()"

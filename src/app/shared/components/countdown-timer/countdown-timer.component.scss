@@ -5,45 +5,56 @@ $ring-circ: 2 * 3.14159 * $ring-r; // ≈ 113.10
 
 .timer-wrapper {
   position: relative;
-  width: 88px;
-  height: 88px;
+  width: 110px;
+  height: 110px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: filter var(--pam-anim-normal) ease;
+  border-radius: 50%;
+  background: var(--pam-glass-bg, rgba(255, 255, 255, 0.07));
+  border: 1px solid var(--pam-glass-border, rgba(255, 255, 255, 0.12));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   &.timer--urgent {
-    filter: drop-shadow(0 0 8px var(--ion-color-warning));
+    filter: drop-shadow(0 0 12px var(--ion-color-warning));
+    border-color: rgba(255, 196, 9, 0.40);
+    background: rgba(255, 196, 9, 0.08);
 
     .timer-ring__fill { stroke: var(--ion-color-warning); }
     .timer-value      { color: var(--ion-color-warning); animation: pam-pulse 0.8s ease-in-out infinite; }
+    .timer-label      { color: var(--ion-color-warning); }
   }
 
   &.timer--expired {
-    filter: drop-shadow(0 0 8px var(--ion-color-danger));
+    filter: drop-shadow(0 0 12px var(--ion-color-danger));
+    border-color: rgba(235, 68, 90, 0.40);
+    background: rgba(235, 68, 90, 0.08);
 
     .timer-ring__fill { stroke: var(--ion-color-danger); }
     .timer-value      { color: var(--ion-color-danger); animation: pam-shake var(--pam-anim-normal) ease; }
+    .timer-label      { color: var(--ion-color-danger); }
   }
 }
 
 .timer-ring {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: 4px;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
   transform: rotate(-90deg);
 
   &__track {
     fill: none;
     stroke: var(--pam-border);
-    stroke-width: 3;
+    stroke-width: 2.5;
   }
 
   &__fill {
     fill: none;
     stroke: var(--ion-color-primary);
-    stroke-width: 3;
+    stroke-width: 2.5;
     stroke-linecap: round;
     stroke-dasharray: #{$ring-circ};
     stroke-dashoffset: 0;
@@ -59,7 +70,7 @@ $ring-circ: 2 * 3.14159 * $ring-r; // ≈ 113.10
 }
 
 .timer-value {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   line-height: 1;
@@ -70,7 +81,8 @@ $ring-circ: 2 * 3.14159 * $ring-r; // ≈ 113.10
 .timer-label {
   font-size: 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--ion-color-medium);
-  margin-top: 2px;
+  margin-top: 3px;
+  font-weight: 700;
 }

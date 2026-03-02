@@ -6,7 +6,7 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button data-testid="btn-end-game" (click)="endGame()">
-        <ion-icon slot="icon-only" name="stop-circle"></ion-icon>
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -14,8 +14,8 @@
 
 <ion-content class="ion-padding gameplay-content">
 
-  <!-- v1.2 — Chronomètre indicatif -->
-  <div class="timer-bar" *ngIf="timerEnabled">
+  <!-- Timer circulaire stylisé -->
+  <div class="timer-section" *ngIf="timerEnabled">
     <app-countdown-timer
       [durationMinutes]="timerDuration"
       [active]="true"
@@ -24,10 +24,15 @@
     ></app-countdown-timer>
   </div>
 
-  <!-- Quick ranking -->
-  <ion-card>
+  <!-- Quick ranking — card premium -->
+  <ion-card class="ranking-card">
     <ion-card-header>
-      <ion-card-subtitle>Classement rapide</ion-card-subtitle>
+      <ion-card-subtitle>
+        Classement rapide
+        <ion-chip color="primary" class="ranking-card__chip">
+          <ion-label>Pti Primary</ion-label>
+        </ion-chip>
+      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <div class="ranking-row" *ngFor="let entry of ranking; let i = index; trackBy: trackByRank">
@@ -42,10 +47,10 @@
   <!-- Actions per player -->
   <ion-list-header><ion-label>Actions joueurs</ion-label></ion-list-header>
 
-  <ion-item *ngFor="let player of players; trackBy: trackById">
+  <ion-item *ngFor="let player of players; trackBy: trackById" class="player-action-item">
     <app-player-avatar slot="start" [name]="player.name" [color]="player.avatarColor" size="sm"></app-player-avatar>
     <ion-label>{{ player.name }}</ion-label>
-    <ion-button slot="end" fill="outline" size="small" data-testid="btn-my-card"
+    <ion-button slot="end" fill="outline" color="primary" size="small" data-testid="btn-my-card"
       [disabled]="viewedPlayerIds.has(player.id)"
       (click)="openCard(player)">
       <ion-icon slot="start" name="eye"></ion-icon>
@@ -58,31 +63,35 @@
     </ion-button>
   </ion-item>
 
-  <!-- Pass phone — intermediate screen before revealing the card -->
-  <ion-card *ngIf="showCardFor && !viewingCard" class="ion-margin-top">
-    <ion-card-header>
-      <ion-card-title>
-        <app-player-avatar [name]="showCardFor.name" [color]="showCardFor.avatarColor" size="sm"></app-player-avatar>
-        📲 Passe le téléphone à {{ showCardFor.name }}
-      </ion-card-title>
-      <ion-card-subtitle>Cette carte ne peut être vue qu'une seule fois.</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button expand="block" data-testid="btn-reveal-card" (click)="revealCard()">
-        <ion-icon slot="start" name="eye"></ion-icon>
-        Voir ma carte
-      </ion-button>
-      <ion-button expand="block" fill="clear" (click)="showCardFor = null">Annuler</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <!-- Pass phone section — passage de téléphone -->
+  <div *ngIf="showCardFor && !viewingCard" class="pass-phone-section ion-margin-top">
+    <ion-card class="pass-phone-card">
+      <ion-card-header>
+        <ion-card-subtitle>Passage de téléphone</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="pass-phone-card__content">
+        <div class="pass-phone-card__actions">
+          <ion-button fill="outline" color="primary" data-testid="btn-reveal-card" (click)="revealCard()">
+            <ion-icon slot="start" name="eye"></ion-icon>
+            Voir ma carte
+          </ion-button>
+          <span class="pass-phone-card__separator">&</span>
+          <ion-button fill="clear" color="medium" (click)="showCardFor = null">
+            Annuler
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
+  <!-- Revealed card -->
   <ion-card *ngIf="showCardFor && viewingCard && myAssignment" class="ion-margin-top card-reveal">
     <ion-card-content>
       <p class="card-label">Ta cible 🎯</p>
       <h2 class="card-target">{{ myTarget?.name }}</h2>
       <p class="card-label">Ton mot secret 🔑</p>
       <h1 class="card-word">{{ myAssignment.secretWord }}</h1>
-      <ion-button expand="block" fill="outline" data-testid="btn-close-card" (click)="closeCard()">
+      <ion-button expand="block" fill="outline" color="primary" data-testid="btn-close-card" (click)="closeCard()">
         Fermer
       </ion-button>
     </ion-card-content>
@@ -90,15 +99,20 @@
 
 </ion-content>
 
-<ion-footer class="ion-padding">
-  <!-- Mode normal : bouton manche suivante -->
-  <ion-button *ngIf="!continuousMode" expand="block" color="secondary" data-testid="btn-next-round" (click)="nextRound()">
-    <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
-    Manche suivante
-  </ion-button>
-  <!-- Mode continu : info, pas de manche suivante -->
-  <p *ngIf="continuousMode" class="ion-text-center continuous-hint">
-    <ion-icon name="infinite"></ion-icon>
-    Mode continu — appuyez sur <ion-icon name="stop-circle"></ion-icon> pour terminer la partie
-  </p>
+<ion-footer class="gameplay-footer">
+  <div class="gameplay-footer__inner">
+    <!-- Mode normal : bouton manche suivante premium -->
+    <ng-container *ngIf="!continuousMode">
+      <span class="gameplay-footer__label">Mode classique</span>
+      <ion-button expand="block" color="secondary" data-testid="btn-next-round" (click)="nextRound()" class="gameplay-footer__btn">
+        Manche suivante
+        <ion-icon slot="end" name="arrow-forward-circle"></ion-icon>
+      </ion-button>
+    </ng-container>
+    <!-- Mode continu -->
+    <p *ngIf="continuousMode" class="continuous-hint">
+      <ion-icon name="infinite"></ion-icon>
+      Mode continu — appuyez sur <ion-icon name="close-circle"></ion-icon> pour terminer
+    </p>
+  </div>
 </ion-footer>

@@ -8,15 +8,32 @@
 
 <ion-content class="home-content">
   <div class="home-hero">
-    <div class="home-hero__logo">
-      <ion-icon name="chatbubbles" class="logo-icon"></ion-icon>
+    <div class="home-hero__logo-wrap">
+      <div class="home-hero__logo-glow"></div>
+      <ion-icon name="chatbubbles" class="home-hero__logo-icon"></ion-icon>
     </div>
-    <h1 class="home-hero__title">Slip It</h1>
-    <p class="home-hero__subtitle">Fais prononcer le mot secret à ta cible… si tu oses !</p>
-    <p class="home-hero__audience">Le jeu de soirée · 3–10 joueurs</p>
+    <h1 class="home-hero__title">
+      Slip It<sup class="home-hero__title-sup">800</sup>
+    </h1>
+    <p class="home-hero__subtitle">Fais prononcer le mot secret<br>à ta cible… si tu oses !</p>
+    <p class="home-hero__audience">
+      <ion-icon name="people-circle" class="home-hero__audience-icon"></ion-icon>
+      Le jeu de soirée · 3–10 joueurs
+    </p>
   </div>
 
   <div class="home-actions">
+    <ion-button
+      expand="block"
+      color="primary"
+      class="home-actions__btn home-actions__btn--main"
+      data-testid="btn-new-game"
+      (click)="newGame()"
+    >
+      Nouvelle partie
+      <ion-icon slot="end" name="arrow-forward-circle"></ion-icon>
+    </ion-button>
+
     <ng-container *ngIf="game$ | async as game">
       <ion-button
         *ngIf="game && game.status !== 'FINISHED' && game.status !== 'SETUP'"
@@ -27,31 +44,14 @@
         data-testid="btn-resume-game"
         (click)="resumeGame()"
       >
-        <ion-icon slot="start" name="play"></ion-icon>
         Reprendre la partie
+        <ion-icon slot="end" name="play-circle"></ion-icon>
       </ion-button>
     </ng-container>
-
-    <ion-button expand="block" class="home-actions__btn" data-testid="btn-new-game" (click)="newGame()">
-      <ion-icon slot="start" name="add-circle"></ion-icon>
-      Nouvelle partie
-    </ion-button>
-
-    <ion-button
-      expand="block"
-      fill="outline"
-      color="medium"
-      class="home-actions__btn"
-      data-testid="btn-history"
-      routerLink="/history"
-    >
-      <ion-icon slot="start" name="time"></ion-icon>
-      Historique
-    </ion-button>
   </div>
 
   <div class="home-rules ion-padding">
-    <ion-card>
+    <ion-card class="home-rules__card">
       <ion-card-header>
         <ion-card-title>Comment jouer ?</ion-card-title>
       </ion-card-header>
@@ -64,5 +64,19 @@
         </ol>
       </ion-card-content>
     </ion-card>
+  </div>
+
+  <div class="home-footer">
+    <ion-button
+      expand="block"
+      fill="outline"
+      color="medium"
+      class="home-footer__btn"
+      data-testid="btn-history"
+      routerLink="/history"
+    >
+      <ion-icon slot="start" name="time"></ion-icon>
+      Historique
+    </ion-button>
   </div>
 </ion-content>
