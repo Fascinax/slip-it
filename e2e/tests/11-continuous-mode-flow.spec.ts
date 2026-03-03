@@ -19,6 +19,11 @@ async function activateIonToggle(
   await page.waitForTimeout(150);
 }
 
+async function expandAdvancedSettings(page: import('@playwright/test').Page): Promise<void> {
+  await page.locator('.advanced-toggle').click();
+  await page.waitForTimeout(300);
+}
+
 // --------------------------------------------------------------------------
 // Helper: validate a trap for a given player name and wait for alert
 // --------------------------------------------------------------------------
@@ -43,6 +48,7 @@ async function validateTrapFor(
 test.describe('Mode continu — flux comportemental (v1.2)', () => {
   test.beforeEach(async ({ page }) => {
     await runToGameplay(page, DEFAULT_PLAYERS, async p => {
+      await expandAdvancedSettings(p);
       await activateIonToggle(p, 'toggle-continuous-mode');
     });
     await expect(page).toHaveURL(/gameplay/, { timeout: 15_000 });

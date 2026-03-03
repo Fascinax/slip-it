@@ -38,6 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'game-end',
+    canActivate: [GameActiveGuard],
     loadChildren: () =>
       import('./features/game-end/game-end.module').then(m => m.GameEndModule),
   },

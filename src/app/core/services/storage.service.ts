@@ -5,15 +5,15 @@ import { Storage } from '@ionic/storage-angular';
  *  Provides type-safe async get/set/remove operations. */
 @Injectable({ providedIn: 'root' })
 export class StorageService {
-  private _initialized = false;
+  private _initPromise: Promise<void> | null = null;
 
   constructor(private storage: Storage) {}
 
   async init(): Promise<void> {
-    if (!this._initialized) {
-      await this.storage.create();
-      this._initialized = true;
+    if (!this._initPromise) {
+      this._initPromise = this.storage.create().then(() => {});
     }
+    await this._initPromise;
   }
 
   async get<T>(key: string): Promise<T | null> {

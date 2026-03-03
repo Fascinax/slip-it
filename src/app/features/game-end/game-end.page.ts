@@ -97,8 +97,13 @@ export class GameEndPage implements OnInit, OnDestroy {
 
   /** v1.2 — Rejouer avec les mêmes joueurs (scores remis à zéro) */
   async replayGame(): Promise<void> {
+    const settings = this.game?.settings;
     this.playerService.resetScores();
-    await this.gameService.resetGame();
+    if (settings) {
+      await this.gameService.replayWithSamePlayers(settings);
+    } else {
+      await this.gameService.resetGame();
+    }
     this.router.navigate(['/game-setup']);
   }
 
@@ -110,7 +115,7 @@ export class GameEndPage implements OnInit, OnDestroy {
     this.router.navigate(['/home']);
   }
 
-  trackByRank(_i: number, e: ScoreEntry): number { return e.rank; }
+  trackByRank(_i: number, e: ScoreEntry): string { return e.player.id; }
   trackByTrapId(_i: number, t: Trap): string { return t.id; }
 
   ngOnDestroy(): void {

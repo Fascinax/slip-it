@@ -32,6 +32,10 @@ export class HistoryPage implements OnInit, OnDestroy {
     return item.id;
   }
 
+  trackByName(_: number, name: string): string {
+    return name;
+  }
+
   async onDeleteEntry(gameId: string): Promise<void> {
     await this.historyService.removeEntry(gameId);
   }

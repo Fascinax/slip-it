@@ -2,7 +2,8 @@
   <ion-toolbar color="primary">
     <ion-title>Distribution des cartes</ion-title>
     <ion-buttons slot="end">
-      <ion-chip color="secondary">Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</ion-chip>
+      <ion-chip color="secondary" *ngIf="!game?.settings?.continuousMode">Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</ion-chip>
+      <ion-chip color="secondary" *ngIf="game?.settings?.continuousMode">Manche {{ game?.currentRound }}</ion-chip>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +12,7 @@
 
   <!-- Progress -->
   <ion-progress-bar
-    [value]="currentIndex / players.length"
+    [value]="players.length ? currentIndex / players.length : 0"
     color="success"
   ></ion-progress-bar>
 

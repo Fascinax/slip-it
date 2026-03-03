@@ -19,7 +19,7 @@
     <div class="winner-crown"><ion-icon name="trophy-outline" class="winner-crown__icon"></ion-icon></div>
     <app-player-avatar [name]="winner.name" [color]="winner.avatarColor" size="lg"></app-player-avatar>
     <h1 class="winner-name">
-      {{ winner.name }}<sup class="winner-score-sup">{{ winner.score * 100 }}</sup>
+      {{ winner.name }}
     </h1>
     <p class="winner-subtitle">VAINQUEUR — {{ winner.score }} point(s)</p>
   </div>
@@ -29,7 +29,7 @@
     <ion-card-content>
       <div class="stats-row">
         <div class="stats-row__item">
-          <span class="stats-row__value">{{ game?.totalRounds }}</span>
+          <span class="stats-row__value">{{ game?.currentRound }}</span>
           <span class="stats-row__label">Manches</span>
         </div>
         <div class="stats-row__divider"></div>

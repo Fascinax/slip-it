@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Player } from '../models';
 
 export interface ScoreEntry {
@@ -13,10 +11,13 @@ export class ScoreService {
 
   getRanking(players: Player[]): ScoreEntry[] {
     const sorted = [...players].sort((a, b) => b.score - a.score);
-    return sorted.map((player, index) => ({
-      player,
-      rank: index + 1,
-    }));
+    let currentRank = 1;
+    return sorted.map((player, index) => {
+      if (index > 0 && player.score < sorted[index - 1].score) {
+        currentRank = index + 1;
+      }
+      return { player, rank: currentRank };
+    });
   }
 
   getTopPlayer(players: Player[]): Player | null {

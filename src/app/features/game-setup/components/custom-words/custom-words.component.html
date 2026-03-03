@@ -25,7 +25,7 @@
   <!-- Liste des mots ajoutés -->
   <div class="cw-chips" *ngIf="words.length > 0">
     <ion-chip
-      *ngFor="let word of words"
+      *ngFor="let word of words; trackBy: trackByWord"
       color="primary"
       class="cw-chip pam-anim-pop"
       data-testid="chip-custom-word"

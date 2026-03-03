@@ -64,7 +64,7 @@
 
         <!-- Joueurs -->
         <div class="hc-players">
-          <ion-chip *ngFor="let name of entry.playerNames" size="small" color="medium">
+          <ion-chip *ngFor="let name of entry.playerNames; trackBy: trackByName" size="small" color="medium">
             <ion-label>{{ name }}</ion-label>
           </ion-chip>
         </div>

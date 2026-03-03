@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { GameSettings } from '../../../../core/models/game-settings.model';
 import { GameMode } from '../../../../core/models/enums';
@@ -23,7 +24,7 @@ import { WordService } from '../../../../core/services/word.service';
     ]),
   ],
 })
-export class GameSettingsComponent implements OnInit {
+export class GameSettingsComponent implements OnInit, OnDestroy {
   @Input() settings: GameSettings = { ...DEFAULT_GAME_SETTINGS };
   @Output() settingsChanged = new EventEmitter<GameSettings>();
 
@@ -33,6 +34,8 @@ export class GameSettingsComponent implements OnInit {
 
   /** v1.2 — liste dynamique des catégories disponibles */
   availableCategories: string[] = [];
+
+  private destroy$ = new Subject<void>();
 
   constructor(private wordService: WordService) {}
 
@@ -52,12 +55,17 @@ export class GameSettingsComponent implements OnInit {
       chainMode: new FormControl<boolean>(this.settings.chainMode ?? false, { nonNullable: true }),
     });
 
-    this.form.valueChanges.subscribe(() => {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.settingsChanged.emit({ ...this.settings, ...this.form.getRawValue() });
     });
   }
 
   get isContinuousMode(): boolean {
     return this.form?.get('continuousMode')?.value === true;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

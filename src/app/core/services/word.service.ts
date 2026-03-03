@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, forkJoin } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { WordEntry, WordDifficulty } from '../models';
 
@@ -23,26 +23,10 @@ export class WordService {
       )
     );
 
-    // Sequential merge for simplicity (HttpClient is safe)
-    return new Observable<WordEntry[]>(observer => {
-      let allWords: WordEntry[] = [];
-      let completed = 0;
-
-      requests.forEach(req$ => {
-        req$.subscribe({
-          next: words => {
-            allWords = allWords.concat(words);
-            completed++;
-            if (completed === requests.length) {
-              this._words$.next(allWords);
-              observer.next(allWords);
-              observer.complete();
-            }
-          },
-          error: err => observer.error(err),
-        });
-      });
-    });
+    return forkJoin(requests).pipe(
+      map(results => results.reduce((all, batch) => all.concat(batch), [] as WordEntry[])),
+      tap(allWords => this._words$.next(allWords)),
+    );
   }
 
   getByDifficulty(difficulty: WordDifficulty): Observable<WordEntry[]> {
@@ -64,6 +48,7 @@ export class WordService {
     difficulty?: WordDifficulty | 'MIXED',
     categories?: string[],
     customWords?: string[],
+    excludeWords?: string[],
   ): WordEntry[] {
     let pool = difficulty && difficulty !== 'MIXED'
       ? this._words$.value.filter(w => w.difficulty === difficulty)
@@ -83,7 +68,24 @@ export class WordService {
 
     if (pool.length === 0) { return []; }
 
-    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    if (excludeWords && excludeWords.length > 0) {
+      const excluded = new Set(excludeWords.map(w => w.toLowerCase()));
+      const filtered = pool.filter(w => !excluded.has(w.word.toLowerCase()));
+      if (filtered.length >= count) {
+        pool = filtered;
+      }
+    }
+
+    const shuffled = this.fisherYatesShuffle(pool);
     return shuffled.slice(0, count);
+  }
+
+  private fisherYatesShuffle(arr: WordEntry[]): WordEntry[] {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   }
 }

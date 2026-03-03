@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController, ViewWillEnter } from '@ionic/angular';
 import { v4 as uuidv4 } from 'uuid';
 import { Game, Player, Assignment, Trap } from '../../core/models';
 import { GameStatus } from '../../core/models/enums';
@@ -18,7 +18,7 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/c
   styleUrls: ['./gameplay.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameplayPage implements OnInit, OnDestroy {
+export class GameplayPage implements OnInit, OnDestroy, ViewWillEnter {
   game: Game | null = null;
   players: Player[] = [];
   ranking: ScoreEntry[] = [];
@@ -40,6 +40,13 @@ export class GameplayPage implements OnInit, OnDestroy {
     private toastCtrl: ToastController,
     private cdr: ChangeDetectorRef,
   ) {}
+
+  ionViewWillEnter(): void {
+    this.viewedPlayerIds.clear();
+    this.showCardFor = null;
+    this.viewingCard = false;
+    this.cdr.markForCheck();
+  }
 
   ngOnInit(): void {
     this.gameService.game$.pipe(takeUntil(this.destroy$)).subscribe(game => {
@@ -183,6 +190,7 @@ export class GameplayPage implements OnInit, OnDestroy {
     };
     this.playerService.addScore(trapper.id, 1);
     await this.gameService.addTrap(trap);
+    await this.gameService.syncPlayers(this.players);
     await this.soundService.successFeedback();
 
     const toast = await this.toastCtrl.create({
@@ -218,12 +226,16 @@ export class GameplayPage implements OnInit, OnDestroy {
     const settings = this.game?.settings;
     const round = this.game?.currentRound ?? 1;
 
-    // Choisir un mot différent du précédent
+    const usedWords = (this.game?.assignments ?? [])
+      .filter(a => a.round === round)
+      .map(a => a.secretWord);
+
     const [newWord] = this.wordService.pickRandom(
       1,
       (settings?.wordDifficulty ?? 'MIXED') as 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED',
       settings?.selectedCategories?.length ? settings.selectedCategories : undefined,
       settings?.customWords?.length ? settings.customWords : undefined,
+      usedWords,
     );
     if (!newWord) { return; }
 
@@ -258,25 +270,28 @@ export class GameplayPage implements OnInit, OnDestroy {
   }
 
   async nextRound(): Promise<void> {
+    if (!this.game || this.game.status === GameStatus.FINISHED) { return; }
+
     const alert = await this.alertCtrl.create({
       header: 'Manche suivante',
       message: `Passer à la manche ${(this.game?.currentRound ?? 0) + 1} ?`,
       buttons: [
         { text: 'Annuler', role: 'cancel' },
-        {
-          text: 'Suivant',
-          handler: async () => {
-            await this.gameService.nextRound();
-            if (this.game?.status === GameStatus.FINISHED) {
-              this.router.navigate(['/game-end']);
-            } else {
-              this.router.navigate(['/scoreboard']);
-            }
-          },
-        },
+        { text: 'Suivant', role: 'confirm' },
       ],
     });
     await alert.present();
+    const { role } = await alert.onDidDismiss();
+    if (role !== 'confirm') { return; }
+
+    await this.gameService.syncPlayers(this.players);
+    await this.gameService.nextRound();
+    const current = this.gameService.currentGame;
+    if (current?.status === GameStatus.FINISHED) {
+      this.router.navigate(['/game-end']);
+    } else {
+      this.router.navigate(['/scoreboard']);
+    }
   }
 
   async endGame(): Promise<void> {
@@ -292,6 +307,7 @@ export class GameplayPage implements OnInit, OnDestroy {
     await modal.present();
     const { data } = await modal.onDidDismiss<boolean>();
     if (data) {
+      await this.gameService.syncPlayers(this.players);
       await this.gameService.setStatus(GameStatus.FINISHED);
       this.router.navigate(['/game-end']);
     }
@@ -303,5 +319,5 @@ export class GameplayPage implements OnInit, OnDestroy {
   }
 
   trackById(_i: number, p: Player): string { return p.id; }
-  trackByRank(_i: number, e: ScoreEntry): number { return e.rank; }
+  trackByRank(_i: number, e: ScoreEntry): string { return e.player.id; }
 }

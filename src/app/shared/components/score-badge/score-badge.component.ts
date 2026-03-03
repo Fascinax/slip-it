@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges, OnDestroy, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-score-badge',
@@ -41,11 +41,12 @@ import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges, Ch
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScoreBadgeComponent implements OnChanges {
+export class ScoreBadgeComponent implements OnChanges, OnDestroy {
   @Input() score = 0;
   popping = false;
 
   private popTimer: ReturnType<typeof setTimeout> | null = null;
+  private destroyed = false;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -55,15 +56,22 @@ export class ScoreBadgeComponent implements OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.destroyed = true;
+    if (this.popTimer) { clearTimeout(this.popTimer); }
+  }
+
   private triggerPop(): void {
     if (this.popTimer) { clearTimeout(this.popTimer); }
     this.popping = false;
     this.cdr.markForCheck();
 
     requestAnimationFrame(() => {
+      if (this.destroyed) { return; }
       this.popping = true;
       this.cdr.markForCheck();
       this.popTimer = setTimeout(() => {
+        if (this.destroyed) { return; }
         this.popping = false;
         this.cdr.markForCheck();
       }, 500);

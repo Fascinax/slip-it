@@ -9,11 +9,22 @@ const AVATAR_COLORS = [
   '#FF6B6B', '#A8DADC', '#FFB703', '#8338EC', '#FB5607',
 ];
 
+const MAX_PLAYERS = 10;
+
 @Injectable({ providedIn: 'root' })
 export class PlayerService {
   private _players$ = new BehaviorSubject<Player[]>([]);
 
   readonly players$: Observable<Player[]> = this._players$.asObservable();
+
+  constructor() {}
+
+  /** Called by GameService at startup to restore players from persisted game */
+  syncFromGame(players: Player[]): void {
+    if (this._players$.value.length === 0 && players.length > 0) {
+      this._players$.next([...players]);
+    }
+  }
 
   get players(): Player[] {
     return this._players$.value;
@@ -25,6 +36,12 @@ export class PlayerService {
 
   addPlayer(name: string): Player {
     const trimmedName = name.trim();
+    if (trimmedName.length < 2) {
+      throw new Error('Le nom doit contenir au moins 2 caractères.');
+    }
+    if (this._players$.value.length >= MAX_PLAYERS) {
+      throw new Error(`Maximum ${MAX_PLAYERS} joueurs autorisés.`);
+    }
     const existing = this._players$.value.find(
       p => p.name.toLowerCase() === trimmedName.toLowerCase()
     );

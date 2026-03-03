@@ -12,6 +12,11 @@ async function activateIonToggle(page: import('@playwright/test').Page, testId: 
   await page.waitForTimeout(150);
 }
 
+async function expandAdvancedSettings(page: import('@playwright/test').Page): Promise<void> {
+  await page.locator('.advanced-toggle').click();
+  await page.waitForTimeout(300);
+}
+
 // ─── 1. Configuration : nouveaux contrôles v1.2 ───────────────────────────────
 test.describe('Configuration de partie — nouveaux paramètres v1.2', () => {
   test.beforeEach(async ({ gameSetupPage }) => {
@@ -21,18 +26,22 @@ test.describe('Configuration de partie — nouveaux paramètres v1.2', () => {
   });
 
   test('le toggle "Mode continu" est visible dans les paramètres', async ({ page }) => {
+    await expandAdvancedSettings(page);
     await expect(page.locator('[data-testid="toggle-continuous-mode"]')).toBeVisible();
   });
 
   test('le toggle "Chronomètre" est visible dans les paramètres', async ({ page }) => {
+    await expandAdvancedSettings(page);
     await expect(page.locator('[data-testid="toggle-timer-enabled"]')).toBeVisible();
   });
 
   test('le sélecteur "Catégories" est visible (mots chargés au bootstrap)', async ({ page }) => {
+    await expandAdvancedSettings(page);
     await expect(page.locator('[data-testid="item-categories"]')).toBeVisible();
   });
 
   test('activer le mode continu masque le sélecteur "Nombre de manches"', async ({ page }) => {
+    await expandAdvancedSettings(page);
     await activateIonToggle(page, 'toggle-continuous-mode');
     // The rounds item has class ion-hide when continuousMode is true
     const roundsItem = page.locator('ion-item').filter({ hasText: 'Nombre de manches' });
@@ -44,6 +53,7 @@ test.describe('Configuration de partie — nouveaux paramètres v1.2', () => {
 test.describe('Gameplay — chronomètre indicatif (v1.2)', () => {
   test.beforeEach(async ({ page }) => {
     await runToGameplay(page, DEFAULT_PLAYERS, async (p) => {
+      await expandAdvancedSettings(p);
       await activateIonToggle(p, 'toggle-timer-enabled');
     });
   });
@@ -65,6 +75,7 @@ test.describe('Gameplay — chronomètre indicatif (v1.2)', () => {
 test.describe('Gameplay — mode continu (v1.2)', () => {
   test.beforeEach(async ({ page }) => {
     await runToGameplay(page, DEFAULT_PLAYERS, async (p) => {
+      await expandAdvancedSettings(p);
       await activateIonToggle(p, 'toggle-continuous-mode');
     });
   });

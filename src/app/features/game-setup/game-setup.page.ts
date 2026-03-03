@@ -68,6 +68,7 @@ export class GameSetupPage implements OnInit, OnDestroy {
     if (!this.canStartGame) { return; }
 
     await this.gameService.createGame(this.settings.mode, this.settings);
+    await this.gameService.syncPlayers(this.playerService.players);
     await this.gameService.setStatus(GameStatus.DEALING);
 
     this.router.navigate(['/card-deal']);

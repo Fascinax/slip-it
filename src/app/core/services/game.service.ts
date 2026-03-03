@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { Game, Player, Assignment, Trap, GameSettings } from '../models';
 import { GameStatus, GameMode } from '../models/enums';
@@ -12,8 +12,19 @@ const STORAGE_KEY = 'current_game';
 export class GameService {
   private _game$ = new BehaviorSubject<Game | null>(null);
 
+  /** Emits once when storage loading is complete */
+  private _ready$ = new ReplaySubject<void>(1);
+  readonly ready$: Observable<void> = this._ready$.asObservable();
+
   /** Read-only stream of the current game state */
   readonly game$: Observable<Game | null> = this._game$.asObservable();
+
+  /** Callback to sync players after loading from storage */
+  private _onPlayersLoaded: ((players: Player[]) => void) | null = null;
+
+  registerPlayerSync(fn: (players: Player[]) => void): void {
+    this._onPlayersLoaded = fn;
+  }
 
   constructor(private storage: StorageService) {
     this.loadFromStorage();
@@ -100,6 +111,10 @@ export class GameService {
     await this.updateGame({ traps: [...game.traps, trap] });
   }
 
+  async syncPlayers(players: Player[]): Promise<void> {
+    await this.updateGame({ players: [...players] });
+  }
+
   async resetGame(): Promise<void> {
     this._game$.next(null);
     await this.storage.remove(STORAGE_KEY);
@@ -110,14 +125,24 @@ export class GameService {
   }
 
   private async loadFromStorage(): Promise<void> {
-    const saved = await this.storage.get<Game>(STORAGE_KEY);
-    if (saved) {
-      // Rehydrate Date objects
-      this._game$.next({
-        ...saved,
-        createdAt: new Date(saved.createdAt),
-        traps: saved.traps.map(t => ({ ...t, timestamp: new Date(t.timestamp) })),
-      });
+    try {
+      const saved = await this.storage.get<Game>(STORAGE_KEY);
+      if (saved) {
+        const rehydrated: Game = {
+          ...saved,
+          createdAt: new Date(saved.createdAt),
+          traps: saved.traps.map(t => ({ ...t, timestamp: new Date(t.timestamp) })),
+          settings: { ...DEFAULT_GAME_SETTINGS, ...saved.settings },
+        };
+        this._game$.next(rehydrated);
+        // Bug #1 fix: sync PlayerService with persisted players
+        if (this._onPlayersLoaded && rehydrated.players?.length) {
+          this._onPlayersLoaded(rehydrated.players);
+        }
+      }
+    } finally {
+      this._ready$.next();
+      this._ready$.complete();
     }
   }
 }

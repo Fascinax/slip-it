@@ -75,16 +75,8 @@ test.describe('Page fin de partie (/game-end) — avec piège — happy paths', 
 // Sad paths — page fin sans partie
 // --------------------------------------------------------------------------
 test.describe('Page fin de partie (/game-end) — sad paths', () => {
-  test('accès direct sans partie — le bouton "Nouvelle partie" est quand même visible', async ({ page, gameEndPage }) => {
-    await gameEndPage.goto();
-    // App must not crash; btn-new-game-end should still be rendered
-    await expect(gameEndPage.btnNewGame).toBeVisible({ timeout: 5_000 });
-  });
-
-  test('accès direct sans partie — aucun joueur dans le podium', async ({ page }) => {
+  test('accès direct sans partie — redirige vers /home', async ({ page }) => {
     await page.goto('/game-end');
-    await page.waitForLoadState('networkidle');
-    const podiumItems = page.locator('ion-item').filter({ has: page.locator('app-score-badge') });
-    await expect(podiumItems).toHaveCount(0);
+    await expect(page).toHaveURL(/home/, { timeout: 10_000 });
   });
 });

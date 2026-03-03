@@ -43,6 +43,10 @@ export class CustomWordsComponent {
     this.cdr.markForCheck();
   }
 
+  trackByWord(_i: number, word: string): string {
+    return word;
+  }
+
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       event.preventDefault();

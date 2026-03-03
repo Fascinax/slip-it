@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { ViewWillEnter } from '@ionic/angular';
+import { ToastController, ViewWillEnter } from '@ionic/angular';
 import { Player, Assignment, Game } from '../../core/models';
 import { GameStatus } from '../../core/models/enums';
 import { GameService } from '../../core/services/game.service';
@@ -35,6 +35,7 @@ export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
     private wordService: WordService,
     private assignmentService: AssignmentService,
     private soundService: SoundService,
+    private toastCtrl: ToastController,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -79,19 +80,32 @@ export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
 
   private generateAssignments(): void {
     const settings = this.game?.settings;
+    const usedWords = (this.game?.assignments ?? [])
+      .map(a => a.secretWord);
     const words = this.wordService.pickRandom(
       this.players.length,
       (settings?.wordDifficulty ?? 'MIXED') as 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED',
       settings?.selectedCategories?.length ? settings.selectedCategories : undefined,
       settings?.customWords?.length ? settings.customWords : undefined,
+      usedWords,
     );
     if (this.players.length >= 2) {
-      this.assignments = this.assignmentService.generate(
-        this.players,
-        words,
-        this.game?.currentRound ?? 1,
-        settings?.chainMode ?? false,
-      );
+      try {
+        this.assignments = this.assignmentService.generate(
+          this.players,
+          words,
+          this.game?.currentRound ?? 1,
+          settings?.chainMode ?? false,
+        );
+      } catch (err) {
+        this.toastCtrl.create({
+          message: err instanceof Error ? err.message : 'Erreur lors de la distribution des cartes.',
+          duration: 4000,
+          color: 'danger',
+          position: 'top',
+        }).then(toast => toast.present());
+        this.router.navigate(['/game-setup']);
+      }
     }
   }
 
@@ -111,7 +125,16 @@ export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
 
   confirmCard(): void {
     const assign = this.currentAssignment;
-    if (assign) { assign.revealed = true; }
+    if (assign) {
+      const idx = this.assignments.indexOf(assign);
+      if (idx >= 0) {
+        this.assignments = [
+          ...this.assignments.slice(0, idx),
+          { ...assign, revealed: true },
+          ...this.assignments.slice(idx + 1),
+        ];
+      }
+    }
     this.flipped = false;
     this.cdr.markForCheck();
     setTimeout(() => {
@@ -126,8 +149,11 @@ export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
   }
 
   private async finishDeal(): Promise<void> {
+    const existing = this.game?.assignments?.filter(
+      a => a.round !== (this.game?.currentRound ?? 1)
+    ) ?? [];
     await this.gameService.updateGame({
-      assignments: this.assignments,
+      assignments: [...existing, ...this.assignments],
       status: GameStatus.IN_PROGRESS,
     });
     await this.soundService.successFeedback();

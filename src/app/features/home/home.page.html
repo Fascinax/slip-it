@@ -36,7 +36,7 @@
 
     <ng-container *ngIf="game$ | async as game">
       <ion-button
-        *ngIf="game && game.status !== 'FINISHED' && game.status !== 'SETUP'"
+        *ngIf="game && game.status !== GameStatus.FINISHED && game.status !== GameStatus.SETUP"
         expand="block"
         fill="outline"
         color="primary"

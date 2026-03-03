@@ -47,9 +47,10 @@ test.describe('Classement inter-manche (/scoreboard) — happy paths', () => {
   });
 
   test('le premier joueur porte la classe scoreboard-entry--first', async ({ page }) => {
-    // At start of game all scores are 0 so rank 1 goes to the first entry
-    const firstEntry = page.locator('.scoreboard-entry--first');
-    await expect(firstEntry).toHaveCount(1);
+    // All scores start at 0 — with tied ranking, all share rank 1
+    const firstEntries = page.locator('.scoreboard-entry--first');
+    const count = await firstEntries.count();
+    expect(count).toBeGreaterThanOrEqual(1);
   });
 
   test('le bouton "Distribuer les cartes" est visible', async ({ page }) => {
