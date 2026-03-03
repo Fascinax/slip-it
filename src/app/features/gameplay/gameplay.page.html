@@ -57,6 +57,7 @@
       Ma carte
     </ion-button>
     <ion-button slot="end" fill="solid" color="warning" size="small" data-testid="btn-declare-trap"
+      [disabled]="hasTrapAlready(player)"
       (click)="declareTrap(player)">
       <ion-icon slot="start" name="flash"></ion-icon>
       Piégé !

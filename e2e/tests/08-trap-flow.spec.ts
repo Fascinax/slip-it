@@ -59,25 +59,69 @@ test.describe('Déclaration de piège — happy paths (piège validé)', () => {
     await expect(page.getByText(/Historique des pièges/)).toBeVisible({ timeout: 5_000 });
   });
 
-  test('deux pièges validés cumulent les scores correctement', async ({ page }) => {
-    // Piège 1 — Alice (player 0)
+  test('le bouton "Piégé !" est désactivé après validation', async ({ page }) => {
+    await clickTrapButton(page);
+    const modal = page.locator('ion-modal');
+    await modal.waitFor({ state: 'visible', timeout: 5_000 });
+    await modal.getByRole('button', { name: 'Oui, valider' }).dispatchEvent('click');
+    await modal.waitFor({ state: 'hidden', timeout: 5_000 });
+    await page.waitForTimeout(400);
+
+    const trapBtn = page
+      .locator('ion-item')
+      .filter({ hasText: DEFAULT_PLAYERS[0].name })
+      .locator('[data-testid="btn-declare-trap"]');
+    // ion-button (web component) adds "button-disabled" class when [disabled]=true
+    await expect(trapBtn).toHaveClass(/button-disabled/, { timeout: 5_000 });
+  });
+
+  test('impossible de scorer deux fois avec le même mot — le score reste à 1', async ({ page }) => {
+    // Premier piège — validé
     await clickTrapButton(page);
     let modal = page.locator('ion-modal');
     await modal.waitFor({ state: 'visible', timeout: 5_000 });
     await modal.getByRole('button', { name: 'Oui, valider' }).dispatchEvent('click');
-    await page.waitForTimeout(500);
+    await modal.waitFor({ state: 'hidden', timeout: 5_000 });
+    await page.waitForTimeout(400);
 
-    // Piège 2 — Alice encore
-    await clickTrapButton(page);
-    modal = page.locator('ion-modal');
-    await modal.waitFor({ state: 'visible', timeout: 5_000 });
-    await modal.getByRole('button', { name: 'Oui, valider' }).dispatchEvent('click');
-    await page.waitForTimeout(600);
+    // Le bouton est désactivé (ion-button web-component)
+    const trapBtn = page
+      .locator('ion-item')
+      .filter({ hasText: DEFAULT_PLAYERS[0].name })
+      .locator('[data-testid="btn-declare-trap"]');
+    await expect(trapBtn).toHaveClass(/button-disabled/, { timeout: 5_000 });
 
+    // Score doit rester à 1
     const rankingRow = page
       .locator('.ranking-row')
       .filter({ hasText: DEFAULT_PLAYERS[0].name });
-    await expect(rankingRow.locator('app-score-badge')).toContainText('2', { timeout: 5_000 });
+    await expect(rankingRow.locator('app-score-badge')).toContainText('1');
+  });
+
+  test('deux joueurs différents peuvent chacun piéger — scores cumulés', async ({ page }) => {
+    // Alice piège
+    await clickTrapButton(page);
+    let modal = page.locator('ion-modal');
+    await modal.waitFor({ state: 'visible', timeout: 5_000 });
+    await modal.getByRole('button', { name: 'Oui, valider' }).dispatchEvent('click');
+    await modal.waitFor({ state: 'hidden', timeout: 5_000 });
+    await page.waitForTimeout(400);
+
+    // Bob piège
+    await page
+      .locator('ion-item')
+      .filter({ hasText: DEFAULT_PLAYERS[1].name })
+      .locator('[data-testid="btn-declare-trap"]')
+      .click();
+    modal = page.locator('ion-modal');
+    await modal.waitFor({ state: 'visible', timeout: 5_000 });
+    await modal.getByRole('button', { name: 'Oui, valider' }).dispatchEvent('click');
+    await page.waitForTimeout(500);
+
+    const aliceRow = page.locator('.ranking-row').filter({ hasText: DEFAULT_PLAYERS[0].name });
+    const bobRow   = page.locator('.ranking-row').filter({ hasText: DEFAULT_PLAYERS[1].name });
+    await expect(aliceRow.locator('app-score-badge')).toContainText('1', { timeout: 5_000 });
+    await expect(bobRow.locator('app-score-badge')).toContainText('1',   { timeout: 5_000 });
   });
 });
 

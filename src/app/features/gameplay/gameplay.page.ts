@@ -67,10 +67,25 @@ export class GameplayPage implements OnInit, OnDestroy {
 
   get myAssignment(): Assignment | null {
     if (!this.showCardFor || !this.game) { return null; }
-    // findLast() returns the most recent assignment — important in continuous mode
-    // where a player can receive a new card after validating a trap.
+    return this.latestAssignmentFor(this.showCardFor.id);
+  }
+
+  hasTrapAlready(player: Player): boolean {
+    if (!this.game) { return false; }
+    const assign = this.latestAssignmentFor(player.id);
+    if (!assign) { return false; }
+    return this.game.traps.some(
+      t => t.assignmentPlayerId === player.id
+        && t.round === this.game!.currentRound
+        && t.secretWord === assign.secretWord
+        && t.validated,
+    );
+  }
+
+  private latestAssignmentFor(playerId: string): Assignment | null {
+    if (!this.game) { return null; }
     const matches = this.game.assignments.filter(
-      a => a.playerId === this.showCardFor!.id && a.round === this.game!.currentRound
+      a => a.playerId === playerId && a.round === this.game!.currentRound
     );
     return matches[matches.length - 1] ?? null;
   }
@@ -125,9 +140,17 @@ export class GameplayPage implements OnInit, OnDestroy {
   }
 
   async declareTrap(trapper: Player): Promise<void> {
-    const assign = this.game?.assignments.find(
-      a => a.playerId === trapper.id && a.round === this.game!.currentRound
-    );
+    if (this.hasTrapAlready(trapper)) {
+      const toast = await this.toastCtrl.create({
+        message: `⚠️ ${trapper.name} a déjà validé un piège avec ce mot`,
+        duration: 2500,
+        color: 'warning',
+      });
+      await toast.present();
+      return;
+    }
+
+    const assign = this.latestAssignmentFor(trapper.id);
     if (!assign) { return; }
 
     const target = this.players.find(p => p.id === assign.targetPlayerId);
