@@ -14,6 +14,17 @@
   // ── Typographie ───────────────────────────────────────────────────
   --ion-font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 
+  // ── Échelle typographique (V1) ────────────────────────────────────
+  --pam-font-2xs:   0.65rem;  // 10.4px — tiny labels, superscripts
+  --pam-font-xs:    0.75rem;  // 12px  — captions, badges, legal
+  --pam-font-sm:    0.85rem;  // 13.6px — hints, sub-labels
+  --pam-font-base:  1rem;     // 16px  — body text
+  --pam-font-lg:    1.1rem;   // 17.6px — emphasis, large body
+  --pam-font-xl:    1.4rem;   // 22.4px — section titles, stat values
+  --pam-font-2xl:   1.8rem;   // 28.8px — page subtitles
+  --pam-font-3xl:   2rem;     // 32px  — feature numbers, card targets
+  --pam-font-4xl:   2.8rem;   // 44.8px — hero headlines, secret words
+
   // ── Couleurs Ionic ────────────────────────────────────────────────
   --ion-color-primary:              #e94560;
   --ion-color-primary-rgb:          233, 69, 96;
@@ -100,15 +111,15 @@
   --pam-glass-border:    rgba(255, 255, 255, 0.14);
   --pam-glass-blur:      14px;
 
-  // Éclats cohérents : solid buttons = glow, outline = subtle glow
-  --pam-glow-primary:        0 0 24px rgba(233, 69, 96, 0.40), 0 0 6px rgba(233, 69, 96, 0.20);
-  --pam-glow-primary-subtle: 0 0 12px rgba(233, 69, 96, 0.20);
-  --pam-glow-gold:           0 0 24px rgba(245, 166, 35, 0.45), 0 0 6px rgba(245, 166, 35, 0.22);
-  --pam-glow-gold-subtle:    0 0 12px rgba(245, 166, 35, 0.22);
-  --pam-glow-violet:         0 0 24px rgba(106, 13, 173, 0.40), 0 0 6px rgba(106, 13, 173, 0.20);
-  --pam-glow-violet-subtle:  0 0 12px rgba(106, 13, 173, 0.20);
-  --pam-glow-success:        0 0 24px rgba(45, 211, 111, 0.40), 0 0 6px rgba(45, 211, 111, 0.20);
-  --pam-glow-success-subtle: 0 0 12px rgba(45, 211, 111, 0.20);
+  // Éclats cohérents — intensité modérée (V3)
+  --pam-glow-primary:        0 0 16px rgba(233, 69, 96, 0.28), 0 0 4px rgba(233, 69, 96, 0.14);
+  --pam-glow-primary-subtle: 0 0 8px rgba(233, 69, 96, 0.14);
+  --pam-glow-gold:           0 0 16px rgba(245, 166, 35, 0.30), 0 0 4px rgba(245, 166, 35, 0.15);
+  --pam-glow-gold-subtle:    0 0 8px rgba(245, 166, 35, 0.15);
+  --pam-glow-violet:         0 0 16px rgba(106, 13, 173, 0.28), 0 0 4px rgba(106, 13, 173, 0.14);
+  --pam-glow-violet-subtle:  0 0 8px rgba(106, 13, 173, 0.14);
+  --pam-glow-success:        0 0 16px rgba(45, 211, 111, 0.28), 0 0 4px rgba(45, 211, 111, 0.14);
+  --pam-glow-success-subtle: 0 0 8px rgba(45, 211, 111, 0.14);
 
   // Rayons d'arrondi
   --pam-radius-sm:   8px;
@@ -117,10 +128,10 @@
   --pam-radius-xl:  32px;
   --pam-radius-pill: 999px;
 
-  // Ombres portées — plus riches
-  --pam-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.20);
-  --pam-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.32);
-  --pam-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.35);
+  // Ombres portées — 3 niveaux d'élévation (V3)
+  --pam-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.15);
+  --pam-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.22);
+  --pam-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.28);
 
   // Durées d'animation
   --pam-anim-fast:   150ms;
@@ -159,14 +170,14 @@
     --pam-glass-border:    rgba(255, 255, 255, 0.80);
     --pam-glass-blur:      16px;
 
-    --pam-glow-primary:        0 0 18px rgba(233, 69, 96, 0.22);
-    --pam-glow-primary-subtle: 0 0 10px rgba(233, 69, 96, 0.12);
-    --pam-glow-gold:           0 0 18px rgba(245, 166, 35, 0.28);
-    --pam-glow-gold-subtle:    0 0 10px rgba(245, 166, 35, 0.14);
-    --pam-glow-violet:         0 0 18px rgba(106, 13, 173, 0.22);
-    --pam-glow-violet-subtle:  0 0 10px rgba(106, 13, 173, 0.12);
-    --pam-glow-success:        0 0 14px rgba(45, 211, 111, 0.22);
-    --pam-glow-success-subtle: 0 0 8px rgba(45, 211, 111, 0.12);
+    --pam-glow-primary:        0 0 12px rgba(233, 69, 96, 0.16);
+    --pam-glow-primary-subtle: 0 0 6px rgba(233, 69, 96, 0.08);
+    --pam-glow-gold:           0 0 12px rgba(245, 166, 35, 0.20);
+    --pam-glow-gold-subtle:    0 0 6px rgba(245, 166, 35, 0.10);
+    --pam-glow-violet:         0 0 12px rgba(106, 13, 173, 0.16);
+    --pam-glow-violet-subtle:  0 0 6px rgba(106, 13, 173, 0.08);
+    --pam-glow-success:        0 0 8px rgba(45, 211, 111, 0.16);
+    --pam-glow-success-subtle: 0 0 4px rgba(45, 211, 111, 0.08);
 
     --pam-shadow-sm: 0 2px 8px rgba(26, 18, 40, 0.08);
     --pam-shadow-md: 0 4px 16px rgba(26, 18, 40, 0.12);

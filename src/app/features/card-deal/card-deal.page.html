@@ -50,11 +50,11 @@
 
   <!-- SHOWING_CARD -->
   <div *ngIf="state === 'SHOWING_CARD'" class="deal-card ion-padding">
-    <app-card-flip [flipped]="flipped">
+    <app-card-flip [flipped]="flipped" (click)="flipCard()" (keydown.enter)="flipCard()" (keydown.space)="flipCard()" tabindex="0" role="button" aria-label="Retourner la carte" class="deal-card__flip">
       <!-- Front (before flip) -->
       <div slot="front" class="card-face card-face--front">
         <ion-icon name="eye-off" class="card-face__icon"></ion-icon>
-        <p class="card-face__hint">Retourne pour voir ta carte…</p>
+        <p class="card-face__hint">Appuie pour révéler ta carte</p>
       </div>
       <!-- Back (after flip) -->
       <div slot="back" class="card-face card-face--back">

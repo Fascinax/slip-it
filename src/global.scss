@@ -393,7 +393,7 @@ ion-app ion-router-outlet > * {
   &--first  {
     border-color: rgba(255, 215, 0, 0.55);
     background: rgba(255, 215, 0, 0.10);
-    box-shadow: 0 0 18px rgba(255, 215, 0, 0.20);
+    box-shadow: var(--pam-glow-gold-subtle);
   }
   &--second { border-color: rgba(192, 192, 192, 0.45); }
   &--third  { border-color: rgba(205, 127, 50, 0.45); }
@@ -426,7 +426,7 @@ ion-app ion-router-outlet > * {
 // Card reveal
 .card-reveal {
   .card-label  {
-    font-size: 0.78rem;
+    font-size: var(--pam-font-xs);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--ion-color-medium);

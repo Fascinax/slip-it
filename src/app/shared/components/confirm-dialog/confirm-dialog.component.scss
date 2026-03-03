@@ -31,6 +31,6 @@
 
   ion-button {
     flex: 1;
-    --border-radius: 10px;
+    --border-radius: var(--pam-radius-sm);
   }
 }

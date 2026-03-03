@@ -10,13 +10,13 @@
   font-weight: 800;
   color: #fff;
   text-shadow: 0 1px 3px rgba(0,0,0,.45);
-  box-shadow: 0 3px 12px rgba(0,0,0,.30);
+  box-shadow: var(--pam-shadow-sm);
   transition: transform var(--pam-anim-fast) ease,
               box-shadow var(--pam-anim-fast) ease;
 
   &:hover {
     transform: scale(1.08);
-    box-shadow: 0 6px 20px rgba(0,0,0,.40);
+    box-shadow: var(--pam-shadow-md);
   }
 
   &--sm  { width: 36px;  height: 36px;  font-size: 0.8rem; }
@@ -25,7 +25,7 @@
 
   // Anneau lumineux autour de l'avatar (utilisé pour podium winner)
   &--glow {
-    box-shadow: 0 0 0 3px var(--pam-gold), 0 0 20px var(--pam-gold);
+    box-shadow: 0 0 0 3px var(--pam-gold), 0 0 14px var(--pam-gold);
   }
 
   &__score {

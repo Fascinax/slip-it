@@ -31,7 +31,7 @@ ion-content {
     display: flex;
     align-items: center;
     padding: 14px 16px;
-    border-radius: 14px;
+    border-radius: var(--pam-radius-md);
     margin-bottom: 10px;
     backdrop-filter: blur(8px);
 
@@ -86,7 +86,7 @@ ion-content {
   padding: 16px;
 
   ion-button {
-    --border-radius: 12px;
+    --border-radius: var(--pam-radius-md);
     height: 52px;
     font-weight: 700;
   }

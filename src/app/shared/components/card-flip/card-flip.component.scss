@@ -21,7 +21,7 @@
     inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border-radius: 20px;
+    border-radius: var(--pam-radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +31,7 @@
 
   &__face--front {
     background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    box-shadow: var(--pam-shadow-lg);
 
     // Subtle shimmer overlay
     &::after {
@@ -46,7 +46,7 @@
   &__face--back {
     background: var(--ion-color-light);
     transform: rotateY(180deg);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+    box-shadow: var(--pam-shadow-md);
   }
 }
 

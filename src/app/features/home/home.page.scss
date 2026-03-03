@@ -55,7 +55,7 @@ ion-content.home-content {
   &__subtitle {
     text-align: center;
     color: var(--ion-color-primary-tint);
-    font-size: 1.05rem;
+    font-size: var(--pam-font-base);
     font-weight: 600;
     max-width: 300px;
     line-height: 1.5;
@@ -98,7 +98,7 @@ ion-content.home-content {
 
     &--main {
       height: 58px;
-      font-size: 1.05rem;
+      font-size: var(--pam-font-base);
     }
   }
 }
@@ -118,7 +118,7 @@ ion-content.home-content {
       margin-bottom: 10px;
       line-height: 1.5;
       color: var(--ion-text-color);
-      font-size: 0.95rem;
+      font-size: var(--pam-font-base);
     }
   }
 }

@@ -39,7 +39,7 @@
   &__hint {
     text-align: center;
     color: var(--ion-color-medium);
-    font-size: 0.95rem;
+    font-size: var(--pam-font-base);
     line-height: 1.5;
     margin-bottom: 24px;
 
@@ -68,8 +68,8 @@
   padding: 28px;
 
   &--front {
-    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-tertiary));
-    border-radius: 20px;
+    background: var(--ion-color-primary);
+    border-radius: var(--pam-radius-lg);
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
@@ -81,7 +81,7 @@
   &__hint {
     color: rgba(255, 255, 255, 0.85);
     margin-top: 16px;
-    font-size: 0.95rem;
+    font-size: var(--pam-font-base);
   }
 }
 
@@ -93,7 +93,7 @@
   padding: 8px 0;
 
   &__label {
-    font-size: 0.78rem;
+    font-size: var(--pam-font-xs);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--ion-color-medium);
@@ -136,6 +136,17 @@
     font-style: italic;
     max-width: 240px;
     line-height: 1.4;
+  }
+}
+
+// ── Card flip wrapper ──
+.deal-card__flip {
+  cursor: pointer;
+  display: block;
+  transition: transform var(--pam-anim-fast) ease;
+
+  &:active {
+    transform: scale(0.97);
   }
 }
 

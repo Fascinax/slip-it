@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   padding: 10px 16px;
-  border-radius: 12px;
+  border-radius: var(--pam-radius-sm);
   margin: 4px 16px;
   background: rgba(255, 255, 255, 0.05);
   gap: 12px;
@@ -28,7 +28,7 @@
   .player-name {
     flex: 1;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--pam-font-base);
   }
 
   .remove-btn {

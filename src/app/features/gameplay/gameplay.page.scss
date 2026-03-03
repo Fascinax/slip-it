@@ -61,7 +61,7 @@ ion-content {
   .player-name {
     flex: 1;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--pam-font-base);
   }
 }
 
@@ -71,9 +71,9 @@ ion-content {
   --border-color: var(--pam-border);
 
   ion-button[size="small"] {
-    --border-radius: 10px;
+    --border-radius: var(--pam-radius-sm);
     font-weight: 700;
-    font-size: 0.78rem;
+    font-size: var(--pam-font-xs);
   }
 }
 

@@ -70,7 +70,7 @@ $ring-circ: 2 * 3.14159 * $ring-r; // ≈ 113.10
 }
 
 .timer-value {
-  font-size: 1.35rem;
+  font-size: var(--pam-font-xl);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   line-height: 1;

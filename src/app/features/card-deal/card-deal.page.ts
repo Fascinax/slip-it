@@ -97,6 +97,13 @@ export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
 
   async showCard(): Promise<void> {
     this.state = 'SHOWING_CARD';
+    this.flipped = false;
+    this.cdr.markForCheck();
+    await this.soundService.tapFeedback();
+  }
+
+  async flipCard(): Promise<void> {
+    if (this.flipped) { return; }
     this.flipped = true;
     this.cdr.markForCheck();
     await this.soundService.tapFeedback();
