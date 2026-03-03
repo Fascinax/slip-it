@@ -47,8 +47,10 @@ test.describe('Flux complet — partie de bout en bout', () => {
       await page.locator('[data-testid="btn-im-ready"]').waitFor({ state: 'visible' });
       await page.locator('[data-testid="btn-im-ready"]').click();
 
-      // SHOWING_CARD state — card flips automatically
+      // SHOWING_CARD state — card appears face-down, click to flip
       await page.locator('app-card-flip').waitFor({ state: 'visible', timeout: 8_000 });
+      await page.locator('.card-scene').click();
+      await page.waitForTimeout(400);
 
       // Confirm the card
       const confirmBtn = page.locator('[data-testid="btn-confirm-card"]');

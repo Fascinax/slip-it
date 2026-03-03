@@ -165,6 +165,9 @@ test.describe('Mode continu — invariant cible nouvelle carte', () => {
   test('la cible de la nouvelle carte distribuée n\'est jamais le piégeur lui-même', async ({ page }) => {
     // Set up a continuous-mode game
     await runToGameplay(page, DEFAULT_PLAYERS, async (p) => {
+      // Expand "Paramètres avancés" so the toggle is visible
+      await p.locator('.advanced-toggle').click();
+      await p.waitForTimeout(300);
       await activateIonToggle(p, 'toggle-continuous-mode');
     });
 
