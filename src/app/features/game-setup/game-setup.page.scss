@@ -5,13 +5,13 @@
 }
 
 ion-content {
-  --background: var(--pam-bg, #1a1a2e);
+  --background: var(--pam-bg-gradient);
 }
 
 ion-footer {
-  background: #0f3460;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
-  border-top: 2px solid var(--ion-color-primary);
+  background: var(--pam-toolbar-bg, var(--ion-toolbar-background));
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  border-top: 1px solid var(--pam-border);
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { GameSettings } from '../../../../core/models/game-settings.model';
 import { GameMode } from '../../../../core/models/enums';
 import { DEFAULT_GAME_SETTINGS } from '../../../../core/models/game-settings.model';
@@ -9,6 +10,18 @@ import { WordService } from '../../../../core/services/word.service';
   selector: 'app-game-settings',
   templateUrl: './game-settings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slideDown', [
+      transition(':enter', [
+        style({ height: 0, opacity: 0, overflow: 'hidden' }),
+        animate('250ms ease-out', style({ height: '*', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ height: '*', opacity: 1, overflow: 'hidden' }),
+        animate('200ms ease-in', style({ height: 0, opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class GameSettingsComponent implements OnInit {
   @Input() settings: GameSettings = { ...DEFAULT_GAME_SETTINGS };
@@ -16,6 +29,7 @@ export class GameSettingsComponent implements OnInit {
 
   readonly GameMode = GameMode;
   form!: FormGroup;
+  showAdvanced = false;
 
   /** v1.2 — liste dynamique des catégories disponibles */
   availableCategories: string[] = [];

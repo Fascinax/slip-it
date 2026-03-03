@@ -1,20 +1,45 @@
-// Add Player Component Styles
 :host {
   display: block;
 }
 
-.add-player-form {
-  padding: 16px;
+.add-player-card {
+  background: var(--pam-glass-bg);
+  backdrop-filter: blur(var(--pam-glass-blur));
+  -webkit-backdrop-filter: blur(var(--pam-glass-blur));
+  border: 1px solid var(--pam-glass-border);
+  border-radius: var(--pam-radius-lg);
+  box-shadow: var(--pam-shadow-md);
+  margin: 12px 16px;
 
-  ion-input,
-  ion-item {
-    --border-radius: 10px;
-    --background: rgba(255, 255, 255, 0.07);
-    margin-bottom: 8px;
+  ion-card-header {
+    padding-bottom: 4px;
+
+    ion-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      ion-icon {
+        color: var(--ion-color-primary);
+        font-size: 1.2rem;
+      }
+    }
   }
 
-  ion-button {
-    --border-radius: 12px;
-    margin-top: 8px;
+  ion-card-content {
+    padding-top: 0;
+
+    ion-item {
+      --border-radius: var(--pam-radius-md);
+      --background: var(--pam-glass-bg);
+      margin-bottom: 8px;
+    }
+
+    ion-button {
+      --border-radius: var(--pam-radius-md);
+      margin-top: 8px;
+    }
   }
 }

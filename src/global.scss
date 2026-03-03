@@ -89,41 +89,25 @@ ion-button {
     transform: scale(0.97);
   }
 
-  // ── Solid buttons = glow fort (actions principales) ──
-  &[color="primary"]:not([fill="clear"]):not([fill="outline"]) {
+  // ── Glow réservé aux CTA principaux (expand="block") ──
+  &[expand="block"][color="primary"]:not([fill="clear"]):not([fill="outline"]) {
     box-shadow: var(--pam-glow-primary);
   }
 
-  &[color="secondary"]:not([fill="clear"]):not([fill="outline"]) {
+  &[expand="block"][color="secondary"]:not([fill="clear"]):not([fill="outline"]) {
     box-shadow: var(--pam-glow-gold);
   }
 
-  &[color="tertiary"]:not([fill="clear"]):not([fill="outline"]) {
+  &[expand="block"][color="tertiary"]:not([fill="clear"]):not([fill="outline"]) {
     box-shadow: var(--pam-glow-violet);
   }
 
-  &[color="success"]:not([fill="clear"]):not([fill="outline"]) {
+  &[expand="block"][color="success"]:not([fill="clear"]):not([fill="outline"]) {
     box-shadow: var(--pam-glow-success);
   }
 
-  // ── Outline buttons = glow subtil (actions secondaires) ──
-  &[fill="outline"][color="primary"] {
-    box-shadow: var(--pam-glow-primary-subtle);
-    --border-width: 1.5px;
-  }
-
-  &[fill="outline"][color="secondary"] {
-    box-shadow: var(--pam-glow-gold-subtle);
-    --border-width: 1.5px;
-  }
-
-  &[fill="outline"][color="tertiary"] {
-    box-shadow: var(--pam-glow-violet-subtle);
-    --border-width: 1.5px;
-  }
-
-  &[fill="outline"][color="success"] {
-    box-shadow: var(--pam-glow-success-subtle);
+  // ── Outline buttons = bordure légère, pas de glow ──
+  &[fill="outline"] {
     --border-width: 1.5px;
   }
 }

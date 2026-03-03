@@ -1,5 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -10,6 +11,8 @@ import {
   arrowForwardCircle,
   chatbubbles,
   checkmarkCircle,
+  chevronDown,
+  chevronUp,
   closeCircle,
   diceOutline,
   eye,
@@ -46,6 +49,8 @@ addIcons({
   'arrow-forward-circle': arrowForwardCircle,
   chatbubbles,
   'checkmark-circle': checkmarkCircle,
+  'chevron-down': chevronDown,
+  'chevron-up': chevronUp,
   'close-circle': closeCircle,
   'dice-outline': diceOutline,
   eye,
@@ -77,6 +82,7 @@ addIcons({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot({
       mode: 'md',  // Material Design mode for consistent cross-platform look
     }),

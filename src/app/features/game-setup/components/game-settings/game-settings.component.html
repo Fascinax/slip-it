@@ -9,15 +9,6 @@
       </ion-select>
     </ion-item>
 
-    <!-- Mode continu — cache le sélecteur de manches -->
-    <ion-item>
-      <ion-label>
-        <h3>Mode continu</h3>
-        <p>Pas de limite de manches, le jeu continue jusqu'à l'arrêt</p>
-      </ion-label>
-      <ion-toggle slot="end" formControlName="continuousMode" data-testid="toggle-continuous-mode"></ion-toggle>
-    </ion-item>
-
     <ion-item [class.ion-hide]="isContinuousMode">
       <ion-label>Nombre de manches</ion-label>
       <ion-select formControlName="totalRounds" slot="end" interface="popover">
@@ -36,6 +27,23 @@
         <ion-select-option value="HARD">Difficile</ion-select-option>
         <ion-select-option value="MIXED">Mixte</ion-select-option>
       </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <!-- Paramètres avancés — collapsible -->
+  <ion-item button (click)="showAdvanced = !showAdvanced" detail="false" lines="none" class="advanced-toggle">
+    <ion-icon [name]="showAdvanced ? 'chevron-up' : 'chevron-down'" slot="start" color="medium"></ion-icon>
+    <ion-label color="medium">Paramètres avancés</ion-label>
+  </ion-item>
+
+  <ion-list *ngIf="showAdvanced" class="advanced-settings" @slideDown>
+    <!-- Mode continu — cache le sélecteur de manches -->
+    <ion-item>
+      <ion-label>
+        <h3>Mode continu</h3>
+        <p>Pas de limite de manches, le jeu continue jusqu'à l'arrêt</p>
+      </ion-label>
+      <ion-toggle slot="end" formControlName="continuousMode" data-testid="toggle-continuous-mode"></ion-toggle>
     </ion-item>
 
     <!-- v1.2 — Catégories sélectionnables -->
