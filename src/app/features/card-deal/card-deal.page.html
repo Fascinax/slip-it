@@ -66,6 +66,21 @@
           <p class="card-reveal-content__label">Ton mot secret <ion-icon name="key-outline" class="label-icon"></ion-icon></p>
           <h1 class="card-reveal-content__word" data-testid="card-word">{{ currentAssignment.secretWord }}</h1>
           <p class="card-reveal-content__hint">Fais-lui prononcer ce mot naturellement !</p>
+
+          <!-- Reroll button -->
+          <ion-button
+            *ngIf="rerollsLeft > 0"
+            size="small"
+            fill="clear"
+            color="warning"
+            class="card-reveal-content__reroll"
+            data-testid="btn-reroll-word"
+            (click)="rerollWord(); $event.stopPropagation()"
+          >
+            <ion-icon slot="start" name="refresh-outline"></ion-icon>
+            Changer le mot ({{ rerollsLeft }})
+          </ion-button>
+          <p *ngIf="rerollsLeft === 0" class="card-reveal-content__no-reroll">Plus de changements disponibles</p>
         </div>
       </div>
     </app-card-flip>

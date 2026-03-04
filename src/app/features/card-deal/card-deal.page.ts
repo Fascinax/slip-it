@@ -12,6 +12,8 @@ import { SoundService } from '../../core/services/sound.service';
 
 type DealState = 'WAITING' | 'SHOWING_CARD' | 'DONE';
 
+const MAX_REROLLS = 3;
+
 @Component({
   selector: 'app-card-deal',
   templateUrl: './card-deal.page.html',
@@ -25,6 +27,7 @@ export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
   state: DealState = 'WAITING';
   flipped = false;
   game: Game | null = null;
+  rerollsLeft = MAX_REROLLS;
 
   private destroy$ = new Subject<void>();
 
@@ -112,6 +115,34 @@ export class CardDealPage implements OnInit, ViewWillEnter, OnDestroy {
   async showCard(): Promise<void> {
     this.state = 'SHOWING_CARD';
     this.flipped = false;
+    this.rerollsLeft = MAX_REROLLS;
+    this.cdr.markForCheck();
+    await this.soundService.tapFeedback();
+  }
+
+  async rerollWord(): Promise<void> {
+    if (this.rerollsLeft <= 0 || !this.currentAssignment) { return; }
+
+    const settings = this.game?.settings;
+    const usedWords = this.assignments.map(a => a.secretWord);
+    const newWords = this.wordService.pickRandom(
+      1,
+      (settings?.wordDifficulty ?? 'MIXED') as 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED',
+      settings?.selectedCategories?.length ? settings.selectedCategories : undefined,
+      undefined,
+      usedWords,
+    );
+    if (newWords.length === 0) { return; }
+
+    const idx = this.assignments.findIndex(a => a.playerId === this.currentPlayer?.id);
+    if (idx < 0) { return; }
+
+    this.assignments = [
+      ...this.assignments.slice(0, idx),
+      { ...this.assignments[idx], secretWord: newWords[0].word },
+      ...this.assignments.slice(idx + 1),
+    ];
+    this.rerollsLeft--;
     this.cdr.markForCheck();
     await this.soundService.tapFeedback();
   }
