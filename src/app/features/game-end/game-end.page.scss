@@ -33,7 +33,7 @@ ion-content {
   }
 
   &__value {
-    font-size: 2rem;
+    font-size: var(--pam-font-3xl);
     font-weight: 900;
     color: var(--ion-color-primary);
     line-height: 1.2;
@@ -72,33 +72,33 @@ ion-content {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
+  padding: 12px var(--pam-space-md);
   border-radius: var(--pam-radius-md);
   background: var(--pam-glass-bg);
   border: 1px solid var(--pam-glass-border);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(var(--pam-glass-blur));
+  -webkit-backdrop-filter: blur(var(--pam-glass-blur));
   transition: transform var(--pam-anim-fast) ease;
   animation: pam-slide-up var(--pam-anim-normal) ease both;
 
   &--first {
-    border-color: rgba(255, 215, 0, 0.50);
-    background: rgba(255, 215, 0, 0.08);
+    border-color: rgba(var(--pam-gold-rgb), 0.50);
+    background: rgba(var(--pam-gold-rgb), 0.08);
     box-shadow: var(--pam-glow-gold-subtle);
   }
 
   &--second {
-    border-color: rgba(192, 192, 192, 0.40);
-    background: rgba(192, 192, 192, 0.06);
+    border-color: rgba(var(--pam-silver-rgb), 0.40);
+    background: rgba(var(--pam-silver-rgb), 0.06);
   }
 
   &--third {
-    border-color: rgba(205, 127, 50, 0.40);
-    background: rgba(205, 127, 50, 0.06);
+    border-color: rgba(var(--pam-bronze-rgb), 0.40);
+    background: rgba(var(--pam-bronze-rgb), 0.06);
   }
 
   &__rank {
-    font-size: 1.4rem;
+    font-size: var(--pam-font-xl);
     min-width: 36px;
     text-align: center;
   }
@@ -106,7 +106,7 @@ ion-content {
   &__name {
     flex: 1;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: var(--pam-font-base);
   }
 }
 
@@ -141,11 +141,11 @@ ion-content {
 
   &__title {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: var(--pam-font-sm);
   }
 
   &__detail {
-    font-size: 0.8rem;
+    font-size: var(--pam-font-sm);
     color: var(--ion-color-medium);
     font-style: italic;
   }
@@ -158,21 +158,21 @@ ion-content {
 // ── Footer premium — solid secondary gold + outline primary ──
 .game-end-footer {
   background: var(--pam-toolbar-bg);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(var(--pam-glass-blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--pam-glass-blur));
   border-top: 1px solid var(--pam-border);
 
   &__inner {
-    padding: 12px 16px;
+    padding: 12px var(--pam-space-md);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--pam-space-sm);
   }
 
   &__btn {
     --border-radius: var(--pam-radius-md);
     height: 52px;
-    font-size: 1rem;
+    font-size: var(--pam-font-base);
     font-weight: 700;
     margin: 0;
   }

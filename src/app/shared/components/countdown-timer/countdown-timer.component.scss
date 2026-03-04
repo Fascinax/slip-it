@@ -12,10 +12,10 @@ $ring-circ: 2 * 3.14159 * $ring-r; // ≈ 113.10
   justify-content: center;
   transition: filter var(--pam-anim-normal) ease;
   border-radius: 50%;
-  background: var(--pam-glass-bg, rgba(255, 255, 255, 0.07));
-  border: 1px solid var(--pam-glass-border, rgba(255, 255, 255, 0.12));
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--pam-glass-bg);
+  border: 1px solid var(--pam-glass-border);
+  backdrop-filter: blur(var(--pam-glass-blur));
+  -webkit-backdrop-filter: blur(var(--pam-glass-blur));
 
   &.timer--urgent {
     filter: drop-shadow(0 0 12px var(--ion-color-warning));

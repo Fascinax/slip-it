@@ -37,15 +37,15 @@
 
 .cw-chip {
   --background: var(--ion-color-primary);
-  --color: #fff;
+  --color: var(--ion-color-primary-contrast);
   border-radius: var(--pam-radius-pill);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: var(--pam-font-sm);
 }
 
 .cw-hint {
-  font-size: 0.8rem;
+  font-size: var(--pam-font-sm);
   color: var(--ion-color-medium);
-  margin-top: 8px;
+  margin-top: var(--pam-space-sm);
   padding: 0;
 }

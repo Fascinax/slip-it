@@ -24,14 +24,14 @@ ion-content { --background: var(--pam-bg-gradient); }
 }
 
 .empty-title {
-  font-size: 1.4rem;
+  font-size: var(--pam-font-xl);
   font-weight: 800;
-  margin: 0 0 8px;
+  margin: 0 0 var(--pam-space-sm);
 }
 
 .empty-sub {
   color: var(--ion-color-medium);
-  font-size: 0.9rem;
+  font-size: var(--pam-font-sm);
   margin: 0;
 }
 
@@ -59,17 +59,17 @@ ion-content { --background: var(--pam-bg-gradient); }
   display: inline-block;
   padding: 2px 10px;
   border-radius: var(--pam-radius-pill);
-  font-size: 0.8rem;
+  font-size: var(--pam-font-sm);
   font-weight: 700;
   background: var(--ion-color-primary);
-  color: #fff;
+  color: var(--ion-color-primary-contrast);
 
   &--boisson { background: var(--ion-color-tertiary); }
-  &--personnalisé { background: var(--ion-color-secondary); color: #1a1a2e; }
+  &--personnalisé { background: var(--ion-color-secondary); color: var(--ion-color-secondary-contrast); }
 }
 
 .hc-date {
-  font-size: 0.75rem;
+  font-size: var(--pam-font-xs);
   color: var(--ion-color-medium);
   font-weight: 400;
 }
@@ -92,14 +92,14 @@ ion-content { --background: var(--pam-bg-gradient); }
   border: 1px solid var(--pam-border);
 
   &__value {
-    font-size: 1.4rem;
+    font-size: var(--pam-font-xl);
     font-weight: 800;
     color: var(--ion-color-primary);
     line-height: 1;
   }
 
   &__label {
-    font-size: 0.7rem;
+    font-size: var(--pam-font-xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--ion-color-medium);

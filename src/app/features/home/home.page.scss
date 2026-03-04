@@ -7,7 +7,7 @@ ion-content.home-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 48px 24px 28px;
+  padding: var(--pam-space-2xl) var(--pam-space-lg) 28px;
 
   &__logo-wrap {
     position: relative;
@@ -16,14 +16,14 @@ ion-content.home-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
+    margin-bottom: var(--pam-space-sm);
   }
 
   &__logo-glow {
     position: absolute;
     inset: -12px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(233, 69, 96, 0.25) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(var(--ion-color-primary-rgb), 0.25) 0%, transparent 70%);
     animation: pam-logo-breathe 3s ease-in-out infinite;
   }
 
@@ -36,15 +36,15 @@ ion-content.home-content {
   }
 
   &__title {
-    font-size: 2.8rem;
+    font-size: var(--pam-font-4xl);
     font-weight: 900;
-    margin: 12px 0 8px;
+    margin: 12px 0 var(--pam-space-sm);
     color: var(--ion-text-color);
     letter-spacing: -0.5px;
   }
 
   &__title-sup {
-    font-size: 0.65rem;
+    font-size: var(--pam-font-2xs);
     font-weight: 800;
     color: var(--ion-color-medium);
     vertical-align: super;
@@ -67,7 +67,7 @@ ion-content.home-content {
     align-items: center;
     gap: 6px;
     margin-top: 12px;
-    font-size: 0.8rem;
+    font-size: var(--pam-font-sm);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -76,7 +76,7 @@ ion-content.home-content {
   }
 
   &__audience-icon {
-    font-size: 1rem;
+    font-size: var(--pam-font-base);
   }
 }
 
@@ -87,13 +87,13 @@ ion-content.home-content {
 
 // ── Actions principales ──
 .home-actions {
-  padding: 0 24px;
+  padding: 0 var(--pam-space-lg);
 
   &__btn {
     margin-bottom: 12px;
     --border-radius: var(--pam-radius-md);
     height: 54px;
-    font-size: 1rem;
+    font-size: var(--pam-font-base);
     font-weight: 700;
 
     &--main {
@@ -125,7 +125,7 @@ ion-content.home-content {
 
 // ── Footer avec lien secondaire ──
 .home-footer {
-  padding: 0 24px 24px;
+  padding: 0 var(--pam-space-lg) var(--pam-space-lg);
 
   &__btn {
     --border-radius: var(--pam-radius-md);

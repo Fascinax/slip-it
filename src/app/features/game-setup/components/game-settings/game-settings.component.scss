@@ -3,12 +3,12 @@
 }
 
 .settings-section {
-  padding: 8px 16px;
+  padding: var(--pam-space-sm) var(--pam-space-md);
 
   ion-item {
-    --background: rgba(255, 255, 255, 0.05);
+    --background: var(--pam-surface);
     --border-radius: var(--pam-radius-sm);
-    margin-bottom: 8px;
+    margin-bottom: var(--pam-space-sm);
 
     ion-label {
       font-weight: 600;
@@ -23,14 +23,14 @@
 .advanced-toggle {
   --background: transparent;
   --inner-padding-end: 0;
-  --padding-start: 16px;
-  margin-top: 4px;
+  --padding-start: var(--pam-space-md);
+  margin-top: var(--pam-space-xs);
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: var(--pam-font-sm);
 
   ion-icon {
-    font-size: 1rem;
-    margin-inline-end: 8px;
+    font-size: var(--pam-font-base);
+    margin-inline-end: var(--pam-space-sm);
   }
 }
 

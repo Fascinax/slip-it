@@ -258,11 +258,11 @@ ion-app ion-router-outlet > * {
 }
 
 .pam-gold-text {
-  background: var(--pam-gold-gradient, linear-gradient(135deg, #f5a623, #ffd700, #f5a623));
+  background: var(--pam-gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 6px rgba(245, 166, 35, 0.35));
+  filter: drop-shadow(0 2px 6px rgba(var(--ion-color-secondary-rgb), 0.35));
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -292,9 +292,9 @@ ion-app ion-router-outlet > * {
 .rank-icon {
   font-size: 1.6rem;
 
-  &--gold   { color: #ffd700; filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.45)); }
-  &--silver { color: #c0c0c0; filter: drop-shadow(0 0 4px rgba(192, 192, 192, 0.35)); }
-  &--bronze { color: #cd7f32; filter: drop-shadow(0 0 4px rgba(205, 127, 50, 0.35)); }
+  &--gold   { color: var(--pam-gold);   filter: drop-shadow(0 0 6px rgba(var(--pam-gold-rgb), 0.45)); }
+  &--silver { color: var(--pam-silver); filter: drop-shadow(0 0 4px rgba(var(--pam-silver-rgb), 0.35)); }
+  &--bronze { color: var(--pam-bronze); filter: drop-shadow(0 0 4px rgba(var(--pam-bronze-rgb), 0.35)); }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -310,7 +310,7 @@ ion-app ion-router-outlet > * {
   &:last-child { border-bottom: none; }
 
   .rank {
-    font-size: 1.2rem;
+    font-size: var(--pam-font-lg);
     font-weight: 800;
     min-width: 30px;
     text-align: center;
@@ -331,41 +331,41 @@ ion-app ion-router-outlet > * {
   position: relative;
 
   .winner-crown {
-    margin-bottom: 8px;
+    margin-bottom: var(--pam-space-sm);
     animation: pam-float 2s ease-in-out infinite;
-    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.35));
+    filter: drop-shadow(0 4px 12px rgba(var(--pam-gold-rgb), 0.35));
 
     &__icon {
       font-size: 56px;
-      color: #ffd700;
+      color: var(--pam-gold);
     }
   }
 
   .winner-name {
-    font-size: 2.4rem;
+    font-size: var(--pam-font-3xl);
     font-weight: 900;
     margin: 12px 0 4px;
-    background: var(--pam-gold-gradient, linear-gradient(135deg, #f5a623, #ffd700, #f5a623));
+    background: var(--pam-gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.30));
+    filter: drop-shadow(0 2px 8px rgba(var(--pam-gold-rgb), 0.30));
   }
 
   .winner-score-sup {
-    font-size: 0.9rem;
+    font-size: var(--pam-font-sm);
     font-weight: 800;
     color: var(--ion-color-medium);
     vertical-align: super;
-    margin-left: 4px;
+    margin-left: var(--pam-space-xs);
   }
 
   .winner-subtitle {
-    font-size: 0.9rem;
+    font-size: var(--pam-font-sm);
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--ion-color-medium);
-    margin-top: 4px;
+    margin-top: var(--pam-space-xs);
   }
 }
 
@@ -377,8 +377,8 @@ ion-app ion-router-outlet > * {
 .scoreboard-entry {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
+  gap: var(--pam-space-md);
+  padding: 14px var(--pam-space-md);
   background: var(--pam-glass-bg);
   border-radius: var(--pam-radius-md);
   backdrop-filter: blur(var(--pam-glass-blur));
@@ -391,28 +391,28 @@ ion-app ion-router-outlet > * {
   &:hover { transform: translateX(4px); }
 
   &--first  {
-    border-color: rgba(255, 215, 0, 0.55);
-    background: rgba(255, 215, 0, 0.10);
+    border-color: rgba(var(--pam-gold-rgb), 0.55);
+    background: rgba(var(--pam-gold-rgb), 0.10);
     box-shadow: var(--pam-glow-gold-subtle);
   }
-  &--second { border-color: rgba(192, 192, 192, 0.45); }
-  &--third  { border-color: rgba(205, 127, 50, 0.45); }
+  &--second { border-color: rgba(var(--pam-silver-rgb), 0.45); }
+  &--third  { border-color: rgba(var(--pam-bronze-rgb), 0.45); }
 
-  &__rank  { font-size: 1.8rem; min-width: 40px; text-align: center; }
-  &__name  { flex: 1; font-weight: 700; font-size: 1rem; }
+  &__rank  { font-size: var(--pam-font-2xl); min-width: 40px; text-align: center; }
+  &__name  { flex: 1; font-weight: 700; font-size: var(--pam-font-base); }
   &__score { margin-left: auto; }
 }
 
 // Cards (game-end stats)
 .stats-card {
   h3 {
-    font-size: 2rem;
+    font-size: var(--pam-font-3xl);
     font-weight: 900;
     color: var(--ion-color-primary);
-    margin: 0 0 4px;
+    margin: 0 0 var(--pam-space-xs);
   }
   p {
-    font-size: 0.75rem;
+    font-size: var(--pam-font-xs);
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--ion-color-medium);
@@ -420,8 +420,8 @@ ion-app ion-router-outlet > * {
 }
 
 // Textes d'aide
-.setup-hint     { font-size: 0.85rem; color: var(--ion-color-medium); margin-top: 4px; }
-.warning-text   { color: var(--ion-color-danger) !important; font-size: 0.8rem; }
+.setup-hint     { font-size: var(--pam-font-sm); color: var(--ion-color-medium); margin-top: var(--pam-space-xs); }
+.warning-text   { color: var(--ion-color-danger) !important; font-size: var(--pam-font-sm); }
 
 // Card reveal
 .card-reveal {
@@ -430,26 +430,26 @@ ion-app ion-router-outlet > * {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--ion-color-medium);
-    margin-bottom: 4px;
+    margin-bottom: var(--pam-space-xs);
   }
   .card-target {
-    font-size: 2rem;
+    font-size: var(--pam-font-3xl);
     font-weight: 800;
     color: var(--ion-color-primary);
-    margin: 0 0 16px;
+    margin: 0 0 var(--pam-space-md);
     text-shadow: 0 0 20px rgba(var(--ion-color-primary-rgb), 0.35);
     animation: pam-slide-up var(--pam-anim-normal) ease both;
   }
   .card-word {
-    font-size: 2.8rem;
+    font-size: var(--pam-font-4xl);
     font-weight: 900;
-    margin: 0 0 16px;
+    margin: 0 0 var(--pam-space-md);
     animation: pam-pop var(--pam-anim-slow) cubic-bezier(0.175, 0.885, 0.32, 1.275) both 0.15s;
-    background: var(--pam-gold-gradient, linear-gradient(135deg, #f5a623, #ffd700, #f5a623));
+    background: var(--pam-gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 6px rgba(245, 166, 35, 0.40));
+    filter: drop-shadow(0 2px 6px rgba(var(--ion-color-secondary-rgb), 0.40));
   }
 }
 

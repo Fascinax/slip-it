@@ -31,11 +31,11 @@ ion-content {
 
   &__chip {
     --background: var(--ion-color-primary);
-    --color: #fff;
-    font-size: 0.7rem;
+    --color: var(--ion-color-primary-contrast);
+    font-size: var(--pam-font-xs);
     font-weight: 700;
     height: 22px;
-    margin-left: 8px;
+    margin-left: var(--pam-space-sm);
   }
 }
 
@@ -51,7 +51,7 @@ ion-content {
   }
 
   .rank {
-    font-size: 1.1rem;
+    font-size: var(--pam-font-lg);
     font-weight: 700;
     min-width: 28px;
     text-align: center;
@@ -99,47 +99,47 @@ ion-content {
   &__separator {
     color: var(--ion-color-medium);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: var(--pam-font-sm);
   }
 }
 
 // ── Footer premium — solid secondary gold ──
 .gameplay-footer {
   background: var(--pam-toolbar-bg);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(var(--pam-glass-blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--pam-glass-blur));
   border-top: 1px solid var(--pam-border);
 
   &__inner {
-    padding: 12px 16px;
+    padding: 12px var(--pam-space-md);
   }
 
   &__label {
     display: block;
     text-align: center;
-    font-size: 0.75rem;
+    font-size: var(--pam-font-xs);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--ion-color-medium);
-    margin-bottom: 8px;
+    margin-bottom: var(--pam-space-sm);
   }
 
   &__btn {
     --border-radius: var(--pam-radius-md);
     height: 52px;
-    font-size: 1rem;
+    font-size: var(--pam-font-base);
     font-weight: 700;
   }
 }
 
 .continuous-hint {
   color: var(--ion-color-medium);
-  font-size: 0.85rem;
+  font-size: var(--pam-font-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px 0;
+  padding: var(--pam-space-sm) 0;
   margin: 0;
 }

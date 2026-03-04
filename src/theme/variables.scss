@@ -1,6 +1,7 @@
 // =====================================================================
-// Slip It — Design System v3.0 (Premium Polish)
-// Thème "soirée premium" : mode sombre nuit profonde + contraste amélioré
+// Slip It — Design System v4.0 ("Nuit de Soirée" Theme)
+// Dark party theme: navy cosmos background + crimson/gold accents
+// See src/theme/THEME.md for full documentation
 // =====================================================================
 
 // ── Palette de référence ──────────────────────────────────────────────
@@ -14,16 +15,25 @@
   // ── Typographie ───────────────────────────────────────────────────
   --ion-font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 
-  // ── Échelle typographique (V1) ────────────────────────────────────
-  --pam-font-2xs:   0.65rem;  // 10.4px — tiny labels, superscripts
-  --pam-font-xs:    0.75rem;  // 12px  — captions, badges, legal
-  --pam-font-sm:    0.85rem;  // 13.6px — hints, sub-labels
-  --pam-font-base:  1rem;     // 16px  — body text
-  --pam-font-lg:    1.1rem;   // 17.6px — emphasis, large body
-  --pam-font-xl:    1.4rem;   // 22.4px — section titles, stat values
-  --pam-font-2xl:   1.8rem;   // 28.8px — page subtitles
-  --pam-font-3xl:   2rem;     // 32px  — feature numbers, card targets
-  --pam-font-4xl:   2.8rem;   // 44.8px — hero headlines, secret words
+  // ── Échelle typographique harmonisée ──────────────────────────────
+  // Progression ~×1.25 (Major Third) — chaque taille a un usage précis
+  --pam-font-2xs:   0.65rem;   // 10.4px — tiny labels, superscripts
+  --pam-font-xs:    0.75rem;   // 12px  — captions, badges, date labels
+  --pam-font-sm:    0.875rem;  // 14px  — hints, sub-labels, secondary text
+  --pam-font-base:  1rem;      // 16px  — body text, buttons, default
+  --pam-font-lg:    1.125rem;  // 18px  — emphasis, list names, large body
+  --pam-font-xl:    1.5rem;    // 24px  — section titles, stat values
+  --pam-font-2xl:   1.875rem;  // 30px  — page subtitles, card targets
+  --pam-font-3xl:   2.25rem;   // 36px  — feature numbers, hero sub
+  --pam-font-4xl:   2.75rem;   // 44px  — hero headline, secret words
+
+  // ── Espacement (échelle 4-8-16-24-32-48) ──────────────────────────
+  --pam-space-xs:    4px;
+  --pam-space-sm:    8px;
+  --pam-space-md:   16px;
+  --pam-space-lg:   24px;
+  --pam-space-xl:   32px;
+  --pam-space-2xl:  48px;
 
   // ── Couleurs Ionic ────────────────────────────────────────────────
   --ion-color-primary:              #e94560;
@@ -138,12 +148,15 @@
   --pam-anim-normal: 280ms;
   --pam-anim-slow:   500ms;
 
-  // Podium
-  --pam-gold:   #ffd700;
-  --pam-silver: #c0c0c0;
-  --pam-bronze: #cd7f32;
+  // Podium — with RGB for alpha usage
+  --pam-gold:        #ffd700;
+  --pam-gold-rgb:    255, 215, 0;
+  --pam-silver:      #c0c0c0;
+  --pam-silver-rgb:  192, 192, 192;
+  --pam-bronze:      #cd7f32;
+  --pam-bronze-rgb:  205, 127, 50;
 
-  // Gold gradient pour mots secrets et accents premium
+  // Gold gradient for secret words and premium accents
   --pam-gold-gradient: linear-gradient(135deg, #f5a623, #ffd700, #f5a623);
 
   // Toolbar

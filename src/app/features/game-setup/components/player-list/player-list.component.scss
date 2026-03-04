@@ -4,8 +4,8 @@
 }
 
 .player-count {
-  padding: 8px 16px;
-  font-size: 0.8rem;
+  padding: var(--pam-space-sm) var(--pam-space-md);
+  font-size: var(--pam-font-sm);
   color: var(--ion-color-medium);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -14,10 +14,10 @@
 .player-item {
   display: flex;
   align-items: center;
-  padding: 10px 16px;
+  padding: 10px var(--pam-space-md);
   border-radius: var(--pam-radius-sm);
-  margin: 4px 16px;
-  background: rgba(255, 255, 255, 0.05);
+  margin: var(--pam-space-xs) var(--pam-space-md);
+  background: var(--pam-surface);
   gap: 12px;
   transition: opacity 0.2s;
 
@@ -32,8 +32,8 @@
   }
 
   .remove-btn {
-    --padding-start: 4px;
-    --padding-end: 4px;
+    --padding-start: var(--pam-space-xs);
+    --padding-end: var(--pam-space-xs);
     height: 32px;
     color: var(--ion-color-danger);
   }
@@ -41,7 +41,7 @@
 
 .empty-state {
   text-align: center;
-  padding: 24px 16px;
+  padding: var(--pam-space-lg) var(--pam-space-md);
   color: var(--ion-color-medium);
-  font-size: 0.9rem;
+  font-size: var(--pam-font-sm);
 }
