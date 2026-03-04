@@ -56,7 +56,7 @@
       <ion-icon slot="start" name="eye"></ion-icon>
       Ma carte
     </ion-button>
-    <ion-button slot="end" fill="solid" color="warning" size="small" data-testid="btn-declare-trap"
+    <ion-button slot="end" fill="solid" color="primary" size="small" data-testid="btn-declare-trap"
       [disabled]="hasTrapAlready(player)"
       (click)="declareTrap(player)">
       <ion-icon slot="start" name="flash"></ion-icon>
@@ -105,7 +105,7 @@
     <!-- Mode normal : bouton manche suivante premium -->
     <ng-container *ngIf="!continuousMode">
       <span class="gameplay-footer__label">Mode classique</span>
-      <ion-button expand="block" color="secondary" data-testid="btn-next-round" (click)="nextRound()" class="gameplay-footer__btn">
+      <ion-button expand="block" color="primary" data-testid="btn-next-round" (click)="nextRound()" class="gameplay-footer__btn">
         Manche suivante
         <ion-icon slot="end" name="arrow-forward-circle"></ion-icon>
       </ion-button>

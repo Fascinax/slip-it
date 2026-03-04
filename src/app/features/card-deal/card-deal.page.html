@@ -2,8 +2,8 @@
   <ion-toolbar color="primary">
     <ion-title>Distribution des cartes</ion-title>
     <ion-buttons slot="end">
-      <ion-chip color="secondary" *ngIf="!game?.settings?.continuousMode">Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</ion-chip>
-      <ion-chip color="secondary" *ngIf="game?.settings?.continuousMode">Manche {{ game?.currentRound }}</ion-chip>
+      <ion-chip color="primary" *ngIf="!game?.settings?.continuousMode">Manche {{ game?.currentRound }}/{{ game?.totalRounds }}</ion-chip>
+      <ion-chip color="primary" *ngIf="game?.settings?.continuousMode">Manche {{ game?.currentRound }}</ion-chip>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -72,7 +72,7 @@
             *ngIf="rerollsLeft > 0"
             size="small"
             fill="clear"
-            color="warning"
+            color="primary"
             class="card-reveal-content__reroll"
             data-testid="btn-reroll-word"
             (click)="rerollWord(); $event.stopPropagation()"

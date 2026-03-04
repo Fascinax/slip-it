@@ -255,7 +255,7 @@ ion-app ion-router-outlet > * {
 }
 
 .pam-gold-text {
-  color: var(--pam-accent-warm);
+  color: var(--ion-color-primary);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -338,7 +338,7 @@ ion-app ion-router-outlet > * {
     font-size: var(--pam-font-3xl);
     font-weight: 900;
     margin: 12px 0 4px;
-    color: var(--pam-accent-warm);
+    color: var(--ion-color-primary);
   }
 
   .winner-score-sup {
@@ -434,7 +434,7 @@ ion-app ion-router-outlet > * {
     font-weight: 900;
     margin: 0 0 var(--pam-space-md);
     animation: pam-pop var(--pam-anim-slow) cubic-bezier(0.175, 0.885, 0.32, 1.275) both 0.15s;
-    color: var(--pam-accent-warm);
+    color: var(--ion-color-primary);
   }
 }
 

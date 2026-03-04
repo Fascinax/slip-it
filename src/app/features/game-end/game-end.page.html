@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar color="primary">
     <ion-title>
       <ion-icon name="trophy"></ion-icon>
       Résultats finaux
@@ -78,7 +78,7 @@
     </ion-list-header>
     <div class="trap-history">
       <div *ngFor="let trap of validatedTraps; let i = index; trackBy: trackByTrapId" class="trap-entry">
-        <ion-icon name="flash" color="warning" class="trap-entry__icon"></ion-icon>
+        <ion-icon name="flash" color="primary" class="trap-entry__icon"></ion-icon>
         <div class="trap-entry__info">
           <span class="trap-entry__title">{{ trapperName(trap) }} a piégé {{ targetName(trap) }}</span>
           <span class="trap-entry__detail">« {{ trap.secretWord }} »</span>
@@ -92,7 +92,7 @@
 
 <ion-footer class="game-end-footer">
   <div class="game-end-footer__inner">
-    <ion-button expand="block" color="secondary" data-testid="btn-replay" (click)="replayGame()" class="game-end-footer__btn">
+    <ion-button expand="block" color="primary" data-testid="btn-replay" (click)="replayGame()" class="game-end-footer__btn">
       <ion-icon slot="start" name="people"></ion-icon>
       Rejouer (même équipe)
     </ion-button>

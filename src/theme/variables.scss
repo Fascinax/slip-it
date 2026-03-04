@@ -1,15 +1,14 @@
 // =====================================================================
-// Slip It — Design System v5.0 ("Arctic Blue" Theme)
-// Dark polar-night background + arctic blue / warm orange accents
+// Slip It — Design System v6.0 ("Arctic Minimal" Theme)
+// Mono-accent: one blue, flat bg, minimal palette
 // See src/theme/THEME.md for full documentation
 // =====================================================================
 
-// ── Palette de référence ──────────────────────────────────────────────
-// Primaire  : Arctic Blue  #4DA8FF (bleu vif polaire)
-// Secondaire: Warm Orange  #FF8C42 (orange chaleureux)
-// Accent    : Vivid Indigo #7B61FF (indigo éclatant)
-// Nuit      : Polar Night  #0c1220 → #0e2a50
-// Clair     : Frost Light  #f0f4fa → #dce4f0
+// ── Palette de référence ──────────────────────────────────────────────────────
+// Accent    : #4DA8FF (un seul bleu)
+// Fond      : #0c1220 (nuit plate)
+// Texte     : #e8edf5 (blanc glacé)
+// Muted     : #6b7280 (gris neutre)
 
 :root {
   // ── Typographie ───────────────────────────────────────────────────
@@ -64,12 +63,12 @@
   --ion-color-success-shade:        #28ba62;
   --ion-color-success-tint:         #42d77d;
 
-  --ion-color-warning:              #ffc409;
-  --ion-color-warning-rgb:          255, 196, 9;
-  --ion-color-warning-contrast:     #000000;
-  --ion-color-warning-contrast-rgb: 0, 0, 0;
-  --ion-color-warning-shade:        #e0ac08;
-  --ion-color-warning-tint:         #ffca22;
+  --ion-color-warning:              #4DA8FF;
+  --ion-color-warning-rgb:          77, 168, 255;
+  --ion-color-warning-contrast:     #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade:        #4494E0;
+  --ion-color-warning-tint:         #5FB1FF;
 
   --ion-color-danger:              #eb445a;
   --ion-color-danger-rgb:          235, 68, 90;
@@ -78,12 +77,12 @@
   --ion-color-danger-shade:        #cf3c4f;
   --ion-color-danger-tint:         #ed576b;
 
-  --ion-color-medium:              #a8a9b4;
-  --ion-color-medium-rgb:          168, 169, 180;
+  --ion-color-medium:              #6b7280;
+  --ion-color-medium-rgb:          107, 114, 128;
   --ion-color-medium-contrast:     #ffffff;
   --ion-color-medium-contrast-rgb: 255, 255, 255;
-  --ion-color-medium-shade:        #93949e;
-  --ion-color-medium-tint:         #b1b2bc;
+  --ion-color-medium-shade:        #5e6470;
+  --ion-color-medium-tint:         #7a818d;
 
   --ion-color-light:              #f4f5f8;
   --ion-color-light-rgb:          244, 245, 248;
@@ -121,15 +120,15 @@
   --pam-glass-border:    rgba(255, 255, 255, 0.14);
   --pam-glass-blur:      14px;
 
-  // Éclats cohérents — intensité modérée (V5 Arctic)
-  --pam-glow-primary:        0 0 16px rgba(77, 168, 255, 0.28), 0 0 4px rgba(77, 168, 255, 0.14);
-  --pam-glow-primary-subtle: 0 0 8px rgba(77, 168, 255, 0.14);
-  --pam-glow-gold:           0 0 16px rgba(255, 140, 66, 0.30), 0 0 4px rgba(255, 140, 66, 0.15);
-  --pam-glow-gold-subtle:    0 0 8px rgba(255, 140, 66, 0.15);
-  --pam-glow-violet:         0 0 16px rgba(123, 97, 255, 0.28), 0 0 4px rgba(123, 97, 255, 0.14);
-  --pam-glow-violet-subtle:  0 0 8px rgba(123, 97, 255, 0.14);
-  --pam-glow-success:        0 0 16px rgba(45, 211, 111, 0.28), 0 0 4px rgba(45, 211, 111, 0.14);
-  --pam-glow-success-subtle: 0 0 8px rgba(45, 211, 111, 0.14);
+  // Éclats — un seul accent (V6 Minimal)
+  --pam-glow-primary:        0 0 16px rgba(77, 168, 255, 0.22), 0 0 4px rgba(77, 168, 255, 0.10);
+  --pam-glow-primary-subtle: 0 0 8px rgba(77, 168, 255, 0.10);
+  --pam-glow-gold:           var(--pam-glow-primary);
+  --pam-glow-gold-subtle:    var(--pam-glow-primary-subtle);
+  --pam-glow-violet:         var(--pam-glow-primary);
+  --pam-glow-violet-subtle:  var(--pam-glow-primary-subtle);
+  --pam-glow-success:        0 0 12px rgba(45, 211, 111, 0.22);
+  --pam-glow-success-subtle: 0 0 6px rgba(45, 211, 111, 0.10);
 
   // Rayons d'arrondi
   --pam-radius-sm:   8px;
@@ -156,8 +155,8 @@
   --pam-bronze:      #cd7f32;
   --pam-bronze-rgb:  205, 127, 50;
 
-  // Accent color for secret words and premium elements
-  --pam-accent-warm:   #FF8C42;
+  // Accent alias (mono-accent — même bleu partout)
+  --pam-accent-warm:   #4DA8FF;
 
   // Toolbar
   --pam-toolbar-bg: rgba(12, 18, 32, 0.92);
@@ -185,10 +184,10 @@
 
     --pam-glow-primary:        0 0 12px rgba(77, 168, 255, 0.16);
     --pam-glow-primary-subtle: 0 0 6px rgba(77, 168, 255, 0.08);
-    --pam-glow-gold:           0 0 12px rgba(255, 140, 66, 0.20);
-    --pam-glow-gold-subtle:    0 0 6px rgba(255, 140, 66, 0.10);
-    --pam-glow-violet:         0 0 12px rgba(123, 97, 255, 0.16);
-    --pam-glow-violet-subtle:  0 0 6px rgba(123, 97, 255, 0.08);
+    --pam-glow-gold:           var(--pam-glow-primary);
+    --pam-glow-gold-subtle:    var(--pam-glow-primary-subtle);
+    --pam-glow-violet:         var(--pam-glow-primary);
+    --pam-glow-violet-subtle:  var(--pam-glow-primary-subtle);
     --pam-glow-success:        0 0 8px rgba(45, 211, 111, 0.16);
     --pam-glow-success-subtle: 0 0 4px rgba(45, 211, 111, 0.08);
 

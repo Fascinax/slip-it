@@ -129,7 +129,7 @@ export class GameplayPage implements OnInit, OnDestroy, ViewWillEnter {
     const toast = await this.toastCtrl.create({
       message: '⏰ Plus qu\'une minute !',
       duration: 2000,
-      color: 'warning',
+      color: 'primary',
       position: 'top',
     });
     await toast.present();
@@ -151,7 +151,7 @@ export class GameplayPage implements OnInit, OnDestroy, ViewWillEnter {
       const toast = await this.toastCtrl.create({
         message: `⚠️ ${trapper.name} a déjà validé un piège avec ce mot`,
         duration: 2500,
-        color: 'warning',
+        color: 'primary',
       });
       await toast.present();
       return;
@@ -264,7 +264,7 @@ export class GameplayPage implements OnInit, OnDestroy, ViewWillEnter {
     const toast = await this.toastCtrl.create({
       message: `📲 Nouvelle carte prête pour ${trapper.name}`,
       duration: 2500,
-      color: 'tertiary',
+      color: 'primary',
     });
     await toast.present();
   }
