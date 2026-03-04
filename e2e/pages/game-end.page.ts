@@ -7,12 +7,18 @@ export class GameEndPage extends BasePage {
   readonly winnerSubtitle: Locator;
   readonly btnNewGame: Locator;
   readonly statsCard: Locator;
-  /** v1.2 — Rejouer avec la même équipe */
   readonly btnReplay: Locator;
-  /** v1.2 — Partager le podium (Web Share) */
   readonly btnSharePodium: Locator;
-  /** v1.2 — Section d’historique des pièges */
   readonly trapHistoryHeader: Locator;
+  readonly podiumEntries: Locator;
+  readonly podiumNames: Locator;
+  readonly podiumScoreBadges: Locator;
+  readonly allScoreBadges: Locator;
+  readonly statsValues: Locator;
+  readonly statsWarningValue: Locator;
+  readonly goldRankIcons: Locator;
+  readonly winnerHeader: Locator;
+  readonly podiumHeader: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -23,6 +29,15 @@ export class GameEndPage extends BasePage {
     this.btnReplay        = page.locator('[data-testid="btn-replay"]');
     this.btnSharePodium   = page.locator('[data-testid="btn-share-podium"]');
     this.trapHistoryHeader = page.getByText(/Historique des pièges/);
+    this.podiumEntries     = page.locator('.podium-entry');
+    this.podiumNames       = page.locator('.podium-entry .podium-entry__name');
+    this.podiumScoreBadges = page.locator('.podium-entry app-score-badge');
+    this.allScoreBadges    = page.locator('app-game-end app-score-badge');
+    this.statsValues       = page.locator('.stats-row__value');
+    this.statsWarningValue = page.locator('.stats-row__value--warning');
+    this.goldRankIcons     = page.locator('.podium-entry .rank-icon--gold');
+    this.winnerHeader      = page.getByText(/VAINQUEUR/);
+    this.podiumHeader      = page.getByText(/Podium/);
   }
 
   async goto(): Promise<void> {
@@ -47,11 +62,11 @@ export class GameEndPage extends BasePage {
     await this.waitForNavigation(/game-setup/);
   }
 
-  /** Returns all player names from the final podium list. */
   async getPodiumNames(): Promise<string[]> {
-    return this.page
-      .locator('.podium-entry')
-      .locator('.podium-entry__name')
-      .allInnerTexts();
+    return this.podiumNames.allInnerTexts();
+  }
+
+  async getStatsValues(): Promise<string[]> {
+    return this.statsValues.allInnerTexts();
   }
 }

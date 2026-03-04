@@ -5,8 +5,8 @@ test.describe('Configuration de la partie (/game-setup)', () => {
     await gameSetupPage.goto();
   });
 
-  test('affiche le titre "Nouvelle partie"', async ({ page }) => {
-    await expect(page.locator('ion-title').first()).toContainText('Nouvelle partie');
+  test('affiche le titre "Nouvelle partie"', async ({ gameSetupPage }) => {
+    await expect(gameSetupPage.title).toContainText('Nouvelle partie');
   });
 
   test('le bouton "Distribuer les cartes" est désactivé sans joueurs', async ({ gameSetupPage }) => {
@@ -60,11 +60,10 @@ test.describe('Configuration de la partie (/game-setup) — sad paths (noms dupl
     await gameSetupPage.goto();
   });
 
-  test('ajouter un nom dupliqué affiche un toast d\'erreur', async ({ page, gameSetupPage }) => {
+  test('ajouter un nom dupliqué affiche un toast d\'erreur', async ({ gameSetupPage }) => {
     await gameSetupPage.addPlayer('Alice');
-    // Try to add the same name again
     await gameSetupPage.addPlayer('Alice');
-    await expect(page.locator('ion-toast')).toBeVisible({ timeout: 5_000 });
+    await expect(gameSetupPage.ionToast).toBeVisible({ timeout: 5_000 });
   });
 
   test('ajouter un nom dupliqué ne l\'ajoute pas à la liste (compteur reste 1)', async ({ gameSetupPage }) => {
@@ -73,11 +72,10 @@ test.describe('Configuration de la partie (/game-setup) — sad paths (noms dupl
     await expect(gameSetupPage.playerCountBadge).toContainText('1');
   });
 
-  test('la vérification des doublons est insensible à la casse', async ({ page, gameSetupPage }) => {
+  test('la vérification des doublons est insensible à la casse', async ({ gameSetupPage }) => {
     await gameSetupPage.addPlayer('Alice');
-    // "alice" should still be rejected as duplicate
     await gameSetupPage.addPlayer('alice');
-    await expect(page.locator('ion-toast')).toBeVisible({ timeout: 5_000 });
+    await expect(gameSetupPage.ionToast).toBeVisible({ timeout: 5_000 });
     await expect(gameSetupPage.playerCountBadge).toContainText('1');
   });
 

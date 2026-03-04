@@ -15,6 +15,10 @@ export class CardDealPage extends BasePage {
   readonly cardFlip: Locator;
   /** The inner .card-scene element that gains the .card--flipped class */
   readonly cardScene: Locator;
+  /** Name of the player currently being invited to deal */
+  readonly inviteName: Locator;
+  /** Progress indicator (e.g. "1/3") */
+  readonly dealProgress: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -24,6 +28,8 @@ export class CardDealPage extends BasePage {
     this.cardWord      = page.locator('[data-testid="card-word"]');
     this.cardFlip      = page.locator('app-card-flip');
     this.cardScene     = page.locator('.card-scene');
+    this.inviteName    = page.locator('.deal-invite__name');
+    this.dealProgress  = page.locator('.deal-invite__progress, .deal-progress');
   }
 
   async goto(): Promise<void> {

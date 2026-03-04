@@ -1,25 +1,20 @@
 import { test, expect } from '../fixtures/base.fixture';
 import { DEFAULT_PLAYERS, setupGame } from '../helpers/game.helper';
 
-// ─── Distribution des cartes — cas limites ──────────────────────────────────
 test.describe('Distribution des cartes — edge cases', () => {
 
-  test('le compteur de progression affiche "1/3" au premier joueur', async ({ page }) => {
+  test('le compteur de progression affiche "1/3" au premier joueur', async ({ page, cardDealPage }) => {
     await setupGame(page, DEFAULT_PLAYERS);
-    // Look for the progress indicator showing player 1 of 3
-    const progressText = page.locator('.deal-invite__progress, .deal-progress');
-    if (await progressText.isVisible()) {
-      await expect(progressText).toContainText('1');
+    if (await cardDealPage.dealProgress.isVisible()) {
+      await expect(cardDealPage.dealProgress).toContainText('1');
     }
-    // At minimum, first player name is shown
-    await expect(page.locator('.deal-invite__name')).toContainText(DEFAULT_PLAYERS[0].name);
+    await expect(cardDealPage.inviteName).toContainText(DEFAULT_PLAYERS[0].name);
   });
 
   test('après le flip du 1er joueur, le 2e joueur est montré', async ({ cardDealPage, page }) => {
     await setupGame(page, DEFAULT_PLAYERS);
     await cardDealPage.dealCardForPlayer();
-    // After first deal, should show second player's name
-    await expect(page.locator('.deal-invite__name')).toContainText(DEFAULT_PLAYERS[1].name, { timeout: 5_000 });
+    await expect(cardDealPage.inviteName).toContainText(DEFAULT_PLAYERS[1].name, { timeout: 5_000 });
   });
 
   test('chaque joueur reçoit un mot secret unique', async ({ cardDealPage, page }) => {

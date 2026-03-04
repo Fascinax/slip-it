@@ -6,12 +6,12 @@ test.describe("Page d'accueil", () => {
     await homePage.goto();
   });
 
-  test('affiche le titre "Slip It"', async ({ page }) => {
-    await expect(page.locator('.home-hero__title')).toContainText('Slip It');
+  test('affiche le titre "Slip It"', async ({ homePage }) => {
+    await expect(homePage.heroTitle).toContainText('Slip It');
   });
 
-  test('affiche le sous-titre descriptif', async ({ page }) => {
-    await expect(page.locator('.home-hero__subtitle')).toBeVisible();
+  test('affiche le sous-titre descriptif', async ({ homePage }) => {
+    await expect(homePage.heroSubtitle).toBeVisible();
   });
 
   test('affiche le bouton "Nouvelle partie"', async ({ homePage }) => {

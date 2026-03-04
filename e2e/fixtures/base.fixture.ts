@@ -5,6 +5,7 @@ import { CardDealPage }  from '../pages/card-deal.page';
 import { GameplayPage }  from '../pages/gameplay.page';
 import { ScoreboardPage } from '../pages/scoreboard.page';
 import { GameEndPage }   from '../pages/game-end.page';
+import { HistoryPage }   from '../pages/history.page';
 
 /** Strongly-typed fixture map for all POM instances. */
 type AppFixtures = {
@@ -14,6 +15,7 @@ type AppFixtures = {
   gameplayPage:  GameplayPage;
   scoreboardPage: ScoreboardPage;
   gameEndPage:   GameEndPage;
+  historyPage:   HistoryPage;
 };
 
 /**
@@ -34,6 +36,7 @@ export const test = base.extend<AppFixtures>({
   gameplayPage:   async ({ page }, use) => { await use(new GameplayPage(page)); },
   scoreboardPage: async ({ page }, use) => { await use(new ScoreboardPage(page)); },
   gameEndPage:    async ({ page }, use) => { await use(new GameEndPage(page)); },
+  historyPage:    async ({ page }, use) => { await use(new HistoryPage(page)); },
 });
 
 export { expect } from '@playwright/test';

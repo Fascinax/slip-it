@@ -6,12 +6,16 @@ export class HomePage extends BasePage {
   readonly btnNewGame: Locator;
   readonly btnResumeGame: Locator;
   readonly heroTitle: Locator;
+  readonly heroSubtitle: Locator;
+  readonly btnHistory: Locator;
 
   constructor(page: Page) {
     super(page);
     this.btnNewGame    = page.locator('[data-testid="btn-new-game"]');
     this.btnResumeGame = page.locator('[data-testid="btn-resume-game"]');
     this.heroTitle     = page.locator('.home-hero__title');
+    this.heroSubtitle  = page.locator('.home-hero__subtitle');
+    this.btnHistory    = page.locator('[data-testid="btn-history"]');
   }
 
   async goto(): Promise<void> {
@@ -26,5 +30,10 @@ export class HomePage extends BasePage {
 
   async clickResumeGame(): Promise<void> {
     await this.btnResumeGame.click();
+  }
+
+  async clickHistory(): Promise<void> {
+    await this.btnHistory.click();
+    await this.waitForNavigation(/history/);
   }
 }

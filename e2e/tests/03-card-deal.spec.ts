@@ -8,12 +8,12 @@ test.describe('Distribution des cartes (/card-deal)', () => {
 
   // ── État initial (WAITING) ──────────────────────────────────────────
 
-  test('affiche le bouton "Voir ma carte" pour le premier joueur', async ({ page }) => {
-    await expect(page.locator('[data-testid="btn-im-ready"]')).toBeVisible();
+  test('affiche le bouton "Voir ma carte" pour le premier joueur', async ({ cardDealPage }) => {
+    await expect(cardDealPage.btnImReady).toBeVisible();
   });
 
-  test('affiche le nom du premier joueur (Alice)', async ({ page }) => {
-    await expect(page.locator('.deal-invite__name')).toContainText('Alice');
+  test('affiche le nom du premier joueur (Alice)', async ({ cardDealPage }) => {
+    await expect(cardDealPage.inviteName).toContainText('Alice');
   });
 
   // ── Carte face cachée après "Voir ma carte" ────────────────────────
