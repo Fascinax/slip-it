@@ -1,7 +1,7 @@
 // History Page Styles
 :host { display: flex; flex-direction: column; }
 
-ion-content { --background: var(--pam-bg-gradient); }
+ion-content { --background: var(--pam-bg-color); }
 
 // ── État vide ─────────────────────────────────────────────────────────
 .empty-state {

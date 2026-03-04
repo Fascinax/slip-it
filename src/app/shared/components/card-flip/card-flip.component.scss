@@ -29,7 +29,7 @@
   }
 
   &__face--front {
-    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
+    background: var(--ion-color-primary);
     box-shadow:
       var(--pam-shadow-lg),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -40,13 +40,13 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.10) 50%, transparent 70%);
+      background: transparent;
       pointer-events: none;
     }
   }
 
   &__face--back {
-    background: linear-gradient(170deg, #0e1a30 0%, #132442 50%, #101a2e 100%);
+    background: #0e1a30;
     transform: rotateY(180deg);
     box-shadow:
       var(--pam-shadow-lg),

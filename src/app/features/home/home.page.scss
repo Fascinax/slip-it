@@ -1,5 +1,5 @@
 ion-content.home-content {
-  --background: var(--pam-bg-gradient);
+  --background: var(--pam-bg-color);
 }
 
 // ── Hero Section avec logo animé ──
@@ -23,7 +23,8 @@ ion-content.home-content {
     position: absolute;
     inset: -12px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--ion-color-primary-rgb), 0.25) 0%, transparent 70%);
+    background: rgba(var(--ion-color-primary-rgb), 0.12);
+    border-radius: 50%;
     animation: pam-logo-breathe 3s ease-in-out infinite;
   }
 
