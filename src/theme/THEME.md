@@ -1,17 +1,17 @@
-# Slip It — "Nuit de Soirée" Theme
+# Slip It — "Arctic Blue" Theme
 
-A premium dark party theme inspired by Midnight Galaxy + Tech Innovation,
+A clean, high-contrast dark theme with vivid arctic blue and warm orange accents,
 designed for a mobile party game with Ionic/Angular.
 
 ## Color Palette
 
 | Role | Hex | Token | Usage |
 |------|-----|-------|-------|
-| **Crimson Party** | `#e94560` | `--ion-color-primary` | CTAs, active states, brand accent |
-| **Gold Rush** | `#f5a623` | `--ion-color-secondary` | Secondary actions, secret words, highlights |
-| **Violet Deep** | `#6a0dad` | `--ion-color-tertiary` | Rare accents, special modes |
-| **Navy Cosmos** | `#0f1117` | `--ion-background-color` | Base background |
-| **Champagne** | `#f0eff4` | `--ion-text-color` | Primary text (dark mode) |
+| **Arctic Blue** | `#4DA8FF` | `--ion-color-primary` | CTAs, active states, brand accent |
+| **Warm Orange** | `#FF8C42` | `--ion-color-secondary` | Secondary actions, secret words, highlights |
+| **Vivid Indigo** | `#7B61FF` | `--ion-color-tertiary` | Rare accents, special modes |
+| **Polar Night** | `#0c1220` | `--ion-background-color` | Base background |
+| **Frost White** | `#e8edf5` | `--ion-text-color` | Primary text (dark mode) |
 | **Muted Silver** | `#a8a9b4` | `--ion-color-medium` | Hints, labels, secondary text |
 
 ### Semantic Colors
@@ -73,9 +73,9 @@ designed for a mobile party game with Ionic/Angular.
 | Level | Token | Value |
 |-------|-------|-------|
 | 0 — Flat | — | No shadow (default) |
-| 1 — Subtle | `--pam-shadow-sm` | `0 2px 6px rgba(0,0,0, 0.15)` |
-| 2 — Raised | `--pam-shadow-md` | `0 4px 16px rgba(0,0,0, 0.22)` |
-| 3 — Floating | `--pam-shadow-lg` | `0 8px 24px rgba(0,0,0, 0.28)` |
+| 1 — Subtle | `--pam-shadow-sm` | `0 2px 6px rgba(0,0,0, 0.18)` |
+| 2 — Raised | `--pam-shadow-md` | `0 4px 16px rgba(0,0,0, 0.25)` |
+| 3 — Floating | `--pam-shadow-lg` | `0 8px 24px rgba(0,0,0, 0.32)` |
 
 ## Border Radius (Rounded system — friendly, modern)
 
