@@ -1,129 +1,482 @@
 [
-  {"word": "selfie", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "TikTok", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "story", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "like", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "hashtag", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "snap", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "emoji", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "notification", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "followers", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "profil", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "wifi", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "mème", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "tweet", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "reel", "category": "réseaux", "difficulty": "EASY"},
-  {"word": "live", "category": "réseaux", "difficulty": "EASY"},
-
-  {"word": "manette", "category": "gaming", "difficulty": "EASY"},
-  {"word": "console", "category": "gaming", "difficulty": "EASY"},
-  {"word": "Fortnite", "category": "gaming", "difficulty": "EASY"},
-  {"word": "Minecraft", "category": "gaming", "difficulty": "EASY"},
-  {"word": "Mario", "category": "gaming", "difficulty": "EASY"},
-  {"word": "Pokémon", "category": "gaming", "difficulty": "EASY"},
-  {"word": "boss", "category": "gaming", "difficulty": "EASY"},
-  {"word": "niveau", "category": "gaming", "difficulty": "EASY"},
-  {"word": "game over", "category": "gaming", "difficulty": "EASY"},
-  {"word": "joystick", "category": "gaming", "difficulty": "EASY"},
-  {"word": "gamer", "category": "gaming", "difficulty": "EASY"},
-  {"word": "skin", "category": "gaming", "difficulty": "EASY"},
-  {"word": "Tetris", "category": "gaming", "difficulty": "EASY"},
-  {"word": "triche", "category": "gaming", "difficulty": "EASY"},
-  {"word": "arcade", "category": "gaming", "difficulty": "EASY"},
-
-  {"word": "tacos", "category": "food", "difficulty": "EASY"},
-  {"word": "burger", "category": "food", "difficulty": "EASY"},
-  {"word": "sushi", "category": "food", "difficulty": "EASY"},
-  {"word": "kebab", "category": "food", "difficulty": "EASY"},
-  {"word": "pizza", "category": "food", "difficulty": "EASY"},
-  {"word": "frites", "category": "food", "difficulty": "EASY"},
-  {"word": "nuggets", "category": "food", "difficulty": "EASY"},
-  {"word": "glace", "category": "food", "difficulty": "EASY"},
-  {"word": "bonbon", "category": "food", "difficulty": "EASY"},
-  {"word": "bubble tea", "category": "food", "difficulty": "EASY"},
-  {"word": "crêpe", "category": "food", "difficulty": "EASY"},
-  {"word": "donut", "category": "food", "difficulty": "EASY"},
-  {"word": "smoothie", "category": "food", "difficulty": "EASY"},
-  {"word": "chocolat", "category": "food", "difficulty": "EASY"},
-  {"word": "cookie", "category": "food", "difficulty": "EASY"},
-
-  {"word": "Netflix", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "superhéros", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "zombie", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "manga", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "Disney", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "Star Wars", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "Harry Potter", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "Spider-Man", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "anime", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "série", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "Marvel", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "pirate", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "dragon", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "robot", "category": "pop culture", "difficulty": "EASY"},
-  {"word": "ninja", "category": "pop culture", "difficulty": "EASY"},
-
-  {"word": "rap", "category": "musique", "difficulty": "EASY"},
-  {"word": "DJ", "category": "musique", "difficulty": "EASY"},
-  {"word": "playlist", "category": "musique", "difficulty": "EASY"},
-  {"word": "clip", "category": "musique", "difficulty": "EASY"},
-  {"word": "micro", "category": "musique", "difficulty": "EASY"},
-  {"word": "guitare", "category": "musique", "difficulty": "EASY"},
-  {"word": "concert", "category": "musique", "difficulty": "EASY"},
-  {"word": "festival", "category": "musique", "difficulty": "EASY"},
-  {"word": "batterie", "category": "musique", "difficulty": "EASY"},
-  {"word": "karaoké", "category": "musique", "difficulty": "EASY"},
-  {"word": "piano", "category": "musique", "difficulty": "EASY"},
-  {"word": "Spotify", "category": "musique", "difficulty": "EASY"},
-  {"word": "danse", "category": "musique", "difficulty": "EASY"},
-  {"word": "tube", "category": "musique", "difficulty": "EASY"},
-  {"word": "refrain", "category": "musique", "difficulty": "EASY"},
-
-  {"word": "sneakers", "category": "mode", "difficulty": "EASY"},
-  {"word": "casquette", "category": "mode", "difficulty": "EASY"},
-  {"word": "hoodie", "category": "mode", "difficulty": "EASY"},
-  {"word": "jean", "category": "mode", "difficulty": "EASY"},
-  {"word": "lunettes de soleil", "category": "mode", "difficulty": "EASY"},
-  {"word": "jogging", "category": "mode", "difficulty": "EASY"},
-  {"word": "t-shirt", "category": "mode", "difficulty": "EASY"},
-  {"word": "sweat", "category": "mode", "difficulty": "EASY"},
-  {"word": "baskets", "category": "mode", "difficulty": "EASY"},
-  {"word": "sac à dos", "category": "mode", "difficulty": "EASY"},
-  {"word": "bob", "category": "mode", "difficulty": "EASY"},
-  {"word": "piercing", "category": "mode", "difficulty": "EASY"},
-  {"word": "tatouage", "category": "mode", "difficulty": "EASY"},
-  {"word": "bandana", "category": "mode", "difficulty": "EASY"},
-  {"word": "chaîne", "category": "mode", "difficulty": "EASY"},
-
-  {"word": "stylé", "category": "expressions", "difficulty": "EASY"},
-  {"word": "relou", "category": "expressions", "difficulty": "EASY"},
-  {"word": "grave", "category": "expressions", "difficulty": "EASY"},
-  {"word": "kiffer", "category": "expressions", "difficulty": "EASY"},
-  {"word": "boloss", "category": "expressions", "difficulty": "EASY"},
-  {"word": "trop bien", "category": "expressions", "difficulty": "EASY"},
-  {"word": "flemme", "category": "expressions", "difficulty": "EASY"},
-  {"word": "ouf", "category": "expressions", "difficulty": "EASY"},
-  {"word": "bg", "category": "expressions", "difficulty": "EASY"},
-  {"word": "seum", "category": "expressions", "difficulty": "EASY"},
-  {"word": "crush", "category": "expressions", "difficulty": "EASY"},
-  {"word": "daron", "category": "expressions", "difficulty": "EASY"},
-  {"word": "bail", "category": "expressions", "difficulty": "EASY"},
-  {"word": "frère", "category": "expressions", "difficulty": "EASY"},
-  {"word": "pélo", "category": "expressions", "difficulty": "EASY"},
-
-  {"word": "foot", "category": "sport", "difficulty": "EASY"},
-  {"word": "basket", "category": "sport", "difficulty": "EASY"},
-  {"word": "skate", "category": "sport", "difficulty": "EASY"},
-  {"word": "surf", "category": "sport", "difficulty": "EASY"},
-  {"word": "tennis", "category": "sport", "difficulty": "EASY"},
-  {"word": "rugby", "category": "sport", "difficulty": "EASY"},
-  {"word": "natation", "category": "sport", "difficulty": "EASY"},
-  {"word": "vélo", "category": "sport", "difficulty": "EASY"},
-  {"word": "boxe", "category": "sport", "difficulty": "EASY"},
-  {"word": "dribble", "category": "sport", "difficulty": "EASY"},
-  {"word": "goal", "category": "sport", "difficulty": "EASY"},
-  {"word": "stade", "category": "sport", "difficulty": "EASY"},
-  {"word": "arbitre", "category": "sport", "difficulty": "EASY"},
-  {"word": "musculation", "category": "sport", "difficulty": "EASY"},
-  {"word": "trottinette", "category": "sport", "difficulty": "EASY"}
+  {
+    "word": "selfie",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "TikTok",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "story",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "emoji",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "notification",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "wifi",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "reel",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "live",
+    "category": "réseaux",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "manette",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Fortnite",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Minecraft",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Mario",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Pokémon",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "gamer",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "skin",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "triche",
+    "category": "gaming",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "tacos",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "burger",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "sushi",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "kebab",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "pizza",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "frites",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "nuggets",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "glace",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "bonbon",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "bubble tea",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "crêpe",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "donut",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "chocolat",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "cookie",
+    "category": "food",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Netflix",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "superhéros",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "zombie",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "manga",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Disney",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Star Wars",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Harry Potter",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Spider-Man",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "anime",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "série",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Marvel",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "pirate",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "dragon",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "robot",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "ninja",
+    "category": "pop culture",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "rap",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "DJ",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "playlist",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "clip",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "micro",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "guitare",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "concert",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "festival",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "batterie",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "karaoké",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "piano",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "Spotify",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "danse",
+    "category": "musique",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "casquette",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "jean",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "lunettes de soleil",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "jogging",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "t-shirt",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "sweat",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "baskets",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "sac à dos",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "tatouage",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "chaîne",
+    "category": "mode",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "stylé",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "relou",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "grave",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "kiffer",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "trop bien",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "flemme",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "ouf",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "bg",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "seum",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "crush",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "daron",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "bail",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "frère",
+    "category": "expressions",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "foot",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "basket",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "skate",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "surf",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "tennis",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "rugby",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "natation",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "vélo",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "boxe",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "dribble",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "goal",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "stade",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "arbitre",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "musculation",
+    "category": "sport",
+    "difficulty": "EASY"
+  },
+  {
+    "word": "trottinette",
+    "category": "sport",
+    "difficulty": "EASY"
+  }
 ]

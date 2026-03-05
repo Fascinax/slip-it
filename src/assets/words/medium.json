@@ -1,129 +1,362 @@
 [
-  {"word": "influenceur", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "algorithme", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "viralité", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "abonnement", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "thread", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "buzz", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "troll", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "hater", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "communauté", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "blogueur", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "dark mode", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "podcast", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "trending", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "unboxing", "category": "réseaux", "difficulty": "MEDIUM"},
-  {"word": "ghosting", "category": "réseaux", "difficulty": "MEDIUM"},
-
-  {"word": "speedrun", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "streamer", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "loot", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "headshot", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "respawn", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "lag", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "multijoueur", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "mod", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "e-sport", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "battle royale", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "crafting", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "achievement", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "sandbox", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "GTA", "category": "gaming", "difficulty": "MEDIUM"},
-  {"word": "Zelda", "category": "gaming", "difficulty": "MEDIUM"},
-
-  {"word": "ramen", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "poke bowl", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "guacamole", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "mozzarella", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "croissant", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "burrito", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "food truck", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "mochi", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "avocado toast", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "milkshake", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "brioche", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "tiramisu", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "pancake", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "granola", "category": "food", "difficulty": "MEDIUM"},
-  {"word": "nachos", "category": "food", "difficulty": "MEDIUM"},
-
-  {"word": "One Piece", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "Squid Game", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "Stranger Things", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "Naruto", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "cosplay", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "fanfiction", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "saison", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "spoiler", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "cliffhanger", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "binge-watching", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "Joker", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "Batman", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "Demon Slayer", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "Avengers", "category": "pop culture", "difficulty": "MEDIUM"},
-  {"word": "K-pop", "category": "pop culture", "difficulty": "MEDIUM"},
-
-  {"word": "freestyle", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "beatbox", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "featuring", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "album", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "vinyle", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "remix", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "bass", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "flow", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "sample", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "drop", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "couplet", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "instru", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "platine", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "sono", "category": "musique", "difficulty": "MEDIUM"},
-  {"word": "synthé", "category": "musique", "difficulty": "MEDIUM"},
-
-  {"word": "streetwear", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "vintage", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "Nike", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "Adidas", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "cargo", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "bucket hat", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "crop top", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "oversize", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "customisation", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "tie-dye", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "thrift shop", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "grunge", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "Y2K", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "friperie", "category": "mode", "difficulty": "MEDIUM"},
-  {"word": "tendance", "category": "mode", "difficulty": "MEDIUM"},
-
-  {"word": "dead", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "askip", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "vénère", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "chanmé", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "la hess", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "poucave", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "cramé", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "daronne", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "les reuf", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "marave", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "wesh", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "la mif", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "tieks", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "chiller", "category": "expressions", "difficulty": "MEDIUM"},
-  {"word": "zouz", "category": "expressions", "difficulty": "MEDIUM"},
-
-  {"word": "parkour", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "MMA", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "crossfit", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "BMX", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "freestyle", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "roller", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "escalade", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "trampoline", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "longboard", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "wakeboard", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "spikeball", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "padel", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "handball", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "abdos", "category": "sport", "difficulty": "MEDIUM"},
-  {"word": "marathon", "category": "sport", "difficulty": "MEDIUM"}
+  {
+    "word": "influenceur",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "algorithme",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "viralité",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "abonnement",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "thread",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "buzz",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "troll",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "hater",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "communauté",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "blogueur",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "dark mode",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "podcast",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "trending",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "unboxing",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "ghosting",
+    "category": "réseaux",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "speedrun",
+    "category": "gaming",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "streamer",
+    "category": "gaming",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "headshot",
+    "category": "gaming",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "lag",
+    "category": "gaming",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "mod",
+    "category": "gaming",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Zelda",
+    "category": "gaming",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "ramen",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "poke bowl",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "guacamole",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "mozzarella",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "croissant",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "burrito",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "mochi",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "milkshake",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "brioche",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "tiramisu",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "pancake",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "granola",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "nachos",
+    "category": "food",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "One Piece",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Squid Game",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Stranger Things",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Naruto",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "cosplay",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "saison",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "spoiler",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Joker",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Batman",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Demon Slayer",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "Avengers",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "K-pop",
+    "category": "pop culture",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "freestyle",
+    "category": "musique",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "beatbox",
+    "category": "musique",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "album",
+    "category": "musique",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "vintage",
+    "category": "mode",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "crop top",
+    "category": "mode",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "oversize",
+    "category": "mode",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "tendance",
+    "category": "mode",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "dead",
+    "category": "expressions",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "cramé",
+    "category": "expressions",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "daronne",
+    "category": "expressions",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "wesh",
+    "category": "expressions",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "parkour",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "MMA",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "crossfit",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "BMX",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "freestyle",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "roller",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "escalade",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "trampoline",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "longboard",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "wakeboard",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "spikeball",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "padel",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "handball",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "abdos",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "word": "marathon",
+    "category": "sport",
+    "difficulty": "MEDIUM"
+  }
 ]

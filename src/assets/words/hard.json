@@ -1,105 +1,262 @@
 [
-  {"word": "shadowban", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "astroturfing", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "doomscrolling", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "catfishing", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "clickbait", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "deepfake", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "ratio", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "finfluencer", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "virtue signaling", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "doxing", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "cancel culture", "category": "réseaux", "difficulty": "HARD"},
-  {"word": "echo chamber", "category": "réseaux", "difficulty": "HARD"},
-
-  {"word": "roguelike", "category": "gaming", "difficulty": "HARD"},
-  {"word": "nerf", "category": "gaming", "difficulty": "HARD"},
-  {"word": "buff", "category": "gaming", "difficulty": "HARD"},
-  {"word": "hitbox", "category": "gaming", "difficulty": "HARD"},
-  {"word": "rage quit", "category": "gaming", "difficulty": "HARD"},
-  {"word": "pay-to-win", "category": "gaming", "difficulty": "HARD"},
-  {"word": "glitch", "category": "gaming", "difficulty": "HARD"},
-  {"word": "frame rate", "category": "gaming", "difficulty": "HARD"},
-  {"word": "open world", "category": "gaming", "difficulty": "HARD"},
-  {"word": "meta", "category": "gaming", "difficulty": "HARD"},
-  {"word": "noob", "category": "gaming", "difficulty": "HARD"},
-  {"word": "tryhard", "category": "gaming", "difficulty": "HARD"},
-
-  {"word": "matcha latte", "category": "food", "difficulty": "HARD"},
-  {"word": "kombucha", "category": "food", "difficulty": "HARD"},
-  {"word": "edamame", "category": "food", "difficulty": "HARD"},
-  {"word": "acai bowl", "category": "food", "difficulty": "HARD"},
-  {"word": "kimchi", "category": "food", "difficulty": "HARD"},
-  {"word": "bánh mì", "category": "food", "difficulty": "HARD"},
-  {"word": "gyoza", "category": "food", "difficulty": "HARD"},
-  {"word": "tempura", "category": "food", "difficulty": "HARD"},
-  {"word": "ceviche", "category": "food", "difficulty": "HARD"},
-  {"word": "shakshuka", "category": "food", "difficulty": "HARD"},
-  {"word": "pain perdu", "category": "food", "difficulty": "HARD"},
-  {"word": "croque-monsieur", "category": "food", "difficulty": "HARD"},
-
-  {"word": "isekai", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "shonen", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "multivers", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "waifu", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "retcon", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "plot armor", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "ship", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "fandom", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "crossover", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "reboot", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "dystopie", "category": "pop culture", "difficulty": "HARD"},
-  {"word": "plot twist", "category": "pop culture", "difficulty": "HARD"},
-
-  {"word": "autotune", "category": "musique", "difficulty": "HARD"},
-  {"word": "trap", "category": "musique", "difficulty": "HARD"},
-  {"word": "drill", "category": "musique", "difficulty": "HARD"},
-  {"word": "lo-fi", "category": "musique", "difficulty": "HARD"},
-  {"word": "phonk", "category": "musique", "difficulty": "HARD"},
-  {"word": "ad-lib", "category": "musique", "difficulty": "HARD"},
-  {"word": "ghostwriter", "category": "musique", "difficulty": "HARD"},
-  {"word": "bedroom pop", "category": "musique", "difficulty": "HARD"},
-  {"word": "mashup", "category": "musique", "difficulty": "HARD"},
-  {"word": "underground", "category": "musique", "difficulty": "HARD"},
-  {"word": "beatmaker", "category": "musique", "difficulty": "HARD"},
-  {"word": "plugg", "category": "musique", "difficulty": "HARD"},
-
-  {"word": "hypebeast", "category": "mode", "difficulty": "HARD"},
-  {"word": "capsule collection", "category": "mode", "difficulty": "HARD"},
-  {"word": "drop", "category": "mode", "difficulty": "HARD"},
-  {"word": "resell", "category": "mode", "difficulty": "HARD"},
-  {"word": "upcycling", "category": "mode", "difficulty": "HARD"},
-  {"word": "athleisure", "category": "mode", "difficulty": "HARD"},
-  {"word": "normcore", "category": "mode", "difficulty": "HARD"},
-  {"word": "techwear", "category": "mode", "difficulty": "HARD"},
-  {"word": "gorpcore", "category": "mode", "difficulty": "HARD"},
-  {"word": "cottagecore", "category": "mode", "difficulty": "HARD"},
-  {"word": "dark academia", "category": "mode", "difficulty": "HARD"},
-  {"word": "fast fashion", "category": "mode", "difficulty": "HARD"},
-
-  {"word": "glow up", "category": "expressions", "difficulty": "HARD"},
-  {"word": "no cap", "category": "expressions", "difficulty": "HARD"},
-  {"word": "slay", "category": "expressions", "difficulty": "HARD"},
-  {"word": "main character", "category": "expressions", "difficulty": "HARD"},
-  {"word": "red flag", "category": "expressions", "difficulty": "HARD"},
-  {"word": "green flag", "category": "expressions", "difficulty": "HARD"},
-  {"word": "ick", "category": "expressions", "difficulty": "HARD"},
-  {"word": "situationship", "category": "expressions", "difficulty": "HARD"},
-  {"word": "rizz", "category": "expressions", "difficulty": "HARD"},
-  {"word": "delulu", "category": "expressions", "difficulty": "HARD"},
-  {"word": "sus", "category": "expressions", "difficulty": "HARD"},
-  {"word": "era", "category": "expressions", "difficulty": "HARD"},
-
-  {"word": "calisthenics", "category": "sport", "difficulty": "HARD"},
-  {"word": "street workout", "category": "sport", "difficulty": "HARD"},
-  {"word": "slackline", "category": "sport", "difficulty": "HARD"},
-  {"word": "bouldering", "category": "sport", "difficulty": "HARD"},
-  {"word": "biathlon", "category": "sport", "difficulty": "HARD"},
-  {"word": "breakdance", "category": "sport", "difficulty": "HARD"},
-  {"word": "kitesurf", "category": "sport", "difficulty": "HARD"},
-  {"word": "aquaponey", "category": "sport", "difficulty": "HARD"},
-  {"word": "décathlon", "category": "sport", "difficulty": "HARD"},
-  {"word": "triathlon", "category": "sport", "difficulty": "HARD"},
-  {"word": "pentathlon", "category": "sport", "difficulty": "HARD"},
-  {"word": "haltérophilie", "category": "sport", "difficulty": "HARD"}
+  {
+    "word": "shadowban",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "astroturfing",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "doomscrolling",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "catfishing",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "clickbait",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "deepfake",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "ratio",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "finfluencer",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "virtue signaling",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "doxing",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "cancel culture",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "echo chamber",
+    "category": "réseaux",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "rage quit",
+    "category": "gaming",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "glitch",
+    "category": "gaming",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "meta",
+    "category": "gaming",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "noob",
+    "category": "gaming",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "tryhard",
+    "category": "gaming",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "matcha latte",
+    "category": "food",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "kombucha",
+    "category": "food",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "kimchi",
+    "category": "food",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "gyoza",
+    "category": "food",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "pain perdu",
+    "category": "food",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "croque-monsieur",
+    "category": "food",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "shonen",
+    "category": "pop culture",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "crossover",
+    "category": "pop culture",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "plot twist",
+    "category": "pop culture",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "autotune",
+    "category": "musique",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "trap",
+    "category": "musique",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "drill",
+    "category": "musique",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "lo-fi",
+    "category": "musique",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "fast fashion",
+    "category": "mode",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "glow up",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "no cap",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "slay",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "red flag",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "green flag",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "situationship",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "rizz",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "delulu",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "sus",
+    "category": "expressions",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "calisthenics",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "street workout",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "slackline",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "bouldering",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "biathlon",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "breakdance",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "kitesurf",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "aquaponey",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "décathlon",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "triathlon",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "pentathlon",
+    "category": "sport",
+    "difficulty": "HARD"
+  },
+  {
+    "word": "haltérophilie",
+    "category": "sport",
+    "difficulty": "HARD"
+  }
 ]
