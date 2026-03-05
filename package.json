@@ -19,7 +19,8 @@
     "cap:sync": "npm run build:prod && node node_modules/@capacitor/cli/bin/capacitor sync",
     "android": "npm run build:prod && node node_modules/@capacitor/cli/bin/capacitor sync android && node node_modules/@capacitor/cli/bin/capacitor open android",
     "cap:add:android": "node node_modules/@capacitor/cli/bin/capacitor add android",
-    "cap:add:ios": "node node_modules/@capacitor/cli/bin/capacitor add ios"
+    "cap:add:ios": "node node_modules/@capacitor/cli/bin/capacitor add ios",
+    "word-admin": "node scripts/word-admin/server.js"
   },
   "private": true,
   "dependencies": {

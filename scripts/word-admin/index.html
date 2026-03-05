@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Admin — Piège à Mots</title>
+  <style>
+    /* ── Design tokens (Arctic Blue) ──────────────────────────────────────── */
+    :root {
+      --bg:          #0c1220;
+      --surface:     #161e2e;
+      --surface2:    #1e2a3e;
+      --surface3:    #253347;
+      --primary:     #4DA8FF;
+      --primary-dim: rgba(77,168,255,0.15);
+      --danger:      #eb445a;
+      --danger-dim:  rgba(235,68,90,0.15);
+      --success:     #2dd36f;
+      --success-dim: rgba(45,211,111,0.15);
+      --warn:        #ffd700;
+      --text:        #e8edf5;
+      --muted:       #6b7280;
+      --muted2:      #3d4a5c;
+      --radius:      14px;
+      --radius-sm:   8px;
+      --transition:  0.18s ease;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      user-select: none;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────────────── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px 10px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface3);
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      flex: 1;
+    }
+    header h1 span { color: var(--text); }
+
+    .stats-strip {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .stat .val { font-weight: 600; font-size: 0.9rem; }
+    .stat.removed .val { color: var(--danger); }
+    .stat.kept    .val { color: var(--success); }
+    .stat.added   .val { color: var(--primary); }
+    .stat.remain  .val { color: var(--text); }
+
+    .btn-save {
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: none;
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .btn-save:hover   { opacity: 0.85; }
+    .btn-save:active  { transform: scale(0.95); }
+    .btn-save:disabled { opacity: 0.35; cursor: default; }
+
+    /* ── Filters ──────────────────────────────────────────────────────────── */
+    .filters {
+      display: flex;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface3);
+      flex-wrap: wrap;
+      flex-shrink: 0;
+      align-items: center;
+    }
+
+    .filter-label { font-size: 0.75rem; color: var(--muted); margin-right: 2px; }
+
+    .chip {
+      padding: 4px 11px;
+      border-radius: 20px;
+      border: 1px solid var(--muted2);
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .chip:hover { border-color: var(--primary); color: var(--primary); }
+    .chip.active {
+      background: var(--primary-dim);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .chip.easy   { --c: #2dd36f; }
+    .chip.medium { --c: #ffd700; }
+    .chip.hard   { --c: #eb445a; }
+    .chip.easy.active   { background: rgba(45,211,111,0.15); border-color: var(--c); color: var(--c); }
+    .chip.medium.active { background: rgba(255,215,0,0.15);   border-color: var(--c); color: var(--c); }
+    .chip.hard.active   { background: rgba(235,68,90,0.15);   border-color: var(--c); color: var(--c); }
+
+    .sep { width: 1px; height: 20px; background: var(--muted2); margin: 0 4px; }
+
+    /* ── Progress bar ─────────────────────────────────────────────────────── */
+    .progress-bar {
+      height: 3px;
+      background: var(--surface2);
+      flex-shrink: 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.3s ease;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── Main layout ──────────────────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    /* ── Card arena ───────────────────────────────────────────────────────── */
+    .arena {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      min-width: 0;
+    }
+
+    .card-stack {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 3/4;
+      max-height: 480px;
+      position: relative;
+    }
+
+    .card-ghost {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      background: var(--surface2);
+      transform-origin: bottom center;
+    }
+    .card-ghost:nth-child(1) { transform: translateY(8px) scale(0.94) rotate(-1deg); }
+    .card-ghost:nth-child(2) { transform: translateY(4px) scale(0.97) rotate(0.5deg); }
+
+    .card {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--surface3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 32px 24px;
+      cursor: grab;
+      transition: box-shadow var(--transition);
+      transform-origin: bottom center;
+      will-change: transform;
+      overflow: hidden;
+    }
+    .card:active { cursor: grabbing; }
+    .card.animating { transition: transform 0.35s cubic-bezier(.25,.8,.25,1), opacity 0.35s ease; }
+    .card.snap-back  { transition: transform 0.4s cubic-bezier(.34,1.56,.64,1); }
+
+    /* Decision overlays */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      font-weight: 900;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.1s ease;
+      border: 4px solid transparent;
+      padding-bottom: 40px;
+    }
+    .card-overlay.remove {
+      background: var(--danger-dim);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    .card-overlay.keep {
+      background: var(--success-dim);
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    /* Card content */
+    .card-word {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    .card-category {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 500;
+      background: var(--surface2);
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .card-difficulty {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+    .diff-easy   { background: rgba(45,211,111,0.15);  color: #2dd36f; }
+    .diff-medium { background: rgba(255,215,0,0.15);    color: #ffd700; }
+    .diff-hard   { background: rgba(235,68,90,0.15);    color: #eb445a; }
+
+    .card-counter {
+      position: absolute;
+      bottom: 14px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── Empty / Done states ─────────────────────────────────────────────── */
+    .state-msg {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+    .state-msg .icon { font-size: 4rem; }
+    .state-msg h2 { font-size: 1.4rem; font-weight: 700; }
+    .state-msg p  { color: var(--muted); font-size: 0.9rem; max-width: 280px; }
+    .state-msg .btn-action {
+      padding: 10px 24px;
+      border-radius: 24px;
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* ── Action buttons ───────────────────────────────────────────────────── */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-action-main {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 2px solid;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-action-main:hover  { opacity: 0.8; transform: scale(1.08); }
+    .btn-action-main:active { transform: scale(0.94); }
+    .btn-action-main.remove { border-color: var(--danger);  color: var(--danger); }
+    .btn-action-main.keep   { border-color: var(--success); color: var(--success); }
+    .btn-action-main.remove:hover { background: var(--danger-dim); }
+    .btn-action-main.keep:hover   { background: var(--success-dim); }
+
+    .btn-undo {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--muted2);
+      background: transparent;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-undo:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-undo:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+    .kbd-hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex; gap: 12px;
+    }
+    .kbd-hint kbd {
+      background: var(--surface2);
+      border: 1px solid var(--muted2);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: inherit;
+      font-size: 0.72rem;
+    }
+
+    /* ── Sidebar ──────────────────────────────────────────────────────────── */
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--surface3);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--surface3);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .panel-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+
+    /* Add word form */
+    .form-row { display: flex; flex-direction: column; gap: 6px; }
+    .form-row label { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+
+    .form-input, .form-select {
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--muted2);
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--transition);
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--primary); }
+    .form-input::placeholder { color: var(--muted); }
+
+    .diff-radio-group {
+      display: flex; gap: 6px;
+    }
+    .diff-radio-group label {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 7px 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--muted2);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .diff-radio-group input { display: none; }
+    .diff-radio-group input:checked + span {
+      font-weight: 800;
+    }
+    label:has(input[value="EASY"]:checked)   { background: rgba(45,211,111,0.2);  border-color: #2dd36f; color: #2dd36f; }
+    label:has(input[value="MEDIUM"]:checked) { background: rgba(255,215,0,0.2);    border-color: #ffd700; color: #ffd700; }
+    label:has(input[value="HARD"]:checked)   { background: rgba(235,68,90,0.2);    border-color: #eb445a; color: #eb445a; }
+
+    .btn-add {
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .btn-add:hover  { opacity: 0.85; }
+    .btn-add:active { transform: scale(0.97); }
+
+    /* Removed words list */
+    .word-list { display: flex; flex-direction: column; gap: 4px; max-height: 200px; overflow-y: auto; }
+    .word-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--surface2);
+      font-size: 0.83rem;
+      transition: background var(--transition);
+    }
+    .word-item:hover { background: var(--surface3); }
+    .word-item .w   { flex: 1; font-weight: 600; }
+    .word-item .cat { color: var(--muted); font-size: 0.75rem; }
+    .word-item .diff-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    }
+    .word-item .restore-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 0.8rem; padding: 2px 4px;
+      border-radius: 4px; transition: color var(--transition);
+    }
+    .word-item .restore-btn:hover { color: var(--success); }
+
+    .empty-list { color: var(--muted); font-size: 0.8rem; text-align: center; padding: 12px 0; }
+
+    /* Added words list */
+    .added-list { display: flex; flex-direction: column; gap: 4px; max-height: 160px; overflow-y: auto; }
+    .added-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--primary-dim);
+      border: 1px solid rgba(77,168,255,0.25);
+      font-size: 0.83rem;
+    }
+    .added-item .w   { flex: 1; font-weight: 600; color: var(--primary); }
+    .added-item .cat { color: var(--muted); font-size: 0.75rem; }
+    .added-item .del-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 0.85rem; padding: 2px 4px;
+      border-radius: 4px; transition: color var(--transition);
+    }
+    .added-item .del-btn:hover { color: var(--danger); }
+
+    /* ── Toast ────────────────────────────────────────────────────────────── */
+    #toast-container {
+      position: fixed;
+      bottom: 24px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; gap: 8px;
+      align-items: center;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .toast {
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      animation: toast-in 0.25s ease, toast-out 0.25s ease 1.75s forwards;
+    }
+    .toast.info    { background: var(--surface3); color: var(--text);    border: 1px solid var(--muted2); }
+    .toast.success { background: var(--success-dim); color: var(--success); border: 1px solid var(--success); }
+    .toast.danger  { background: var(--danger-dim);  color: var(--danger);  border: 1px solid var(--danger); }
+
+    @keyframes toast-in  { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes toast-out { from { opacity: 1; } to { opacity: 0; } }
+
+    /* ── Loading overlay ─────────────────────────────────────────────────── */
+    #loading {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      font-size: 1.1rem; color: var(--muted);
+      gap: 12px;
+    }
+    .spinner {
+      width: 20px; height: 20px;
+      border: 2px solid var(--muted2);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Scrollbar ───────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 4px; }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .stats-strip .stat:nth-child(n+3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loading">
+  <div class="spinner"></div>
+  <span>Chargement de la base…</span>
+</div>
+
+<!-- Header -->
+<header>
+  <h1>🎯 <span>Piège à Mots</span> — Word Admin</h1>
+
+  <div class="stats-strip">
+    <div class="stat removed"><span>🗑️</span> <span class="val" id="s-removed">0</span> supprimés</div>
+    <div class="stat kept">   <span>✅</span> <span class="val" id="s-kept">0</span> gardés</div>
+    <div class="stat added">  <span>➕</span> <span class="val" id="s-added">0</span> ajoutés</div>
+    <div class="stat remain"> <span>📦</span> <span class="val" id="s-remain">0</span> restants</div>
+  </div>
+
+  <button class="btn-save" id="btn-save" disabled>💾 Sauvegarder</button>
+</header>
+
+<!-- Filters -->
+<div class="filters">
+  <span class="filter-label">Difficulté :</span>
+  <button class="chip active" data-diff="ALL">Tous</button>
+  <button class="chip easy"   data-diff="EASY">Facile</button>
+  <button class="chip medium" data-diff="MEDIUM">Moyen</button>
+  <button class="chip hard"   data-diff="HARD">Difficile</button>
+
+  <div class="sep"></div>
+
+  <span class="filter-label">Catégorie :</span>
+  <div id="cat-chips"></div>
+</div>
+
+<!-- Progress -->
+<div class="progress-bar">
+  <div class="progress-fill" id="progress" style="width:0%"></div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Card arena -->
+  <div class="arena">
+    <!-- Pending state -->
+    <div class="card-stack" id="card-stack">
+      <div class="card-ghost"></div>
+      <div class="card-ghost"></div>
+      <div class="card" id="card">
+        <div class="card-overlay remove" id="overlay-remove">✕</div>
+        <div class="card-overlay keep"   id="overlay-keep">✓</div>
+        <div class="card-word"       id="card-word"></div>
+        <div class="card-category"   id="card-cat"></div>
+        <div class="card-difficulty" id="card-diff"></div>
+        <div class="card-counter"    id="card-counter"></div>
+      </div>
+    </div>
+
+    <!-- Done state -->
+    <div class="state-msg" id="state-done">
+      <div class="icon">🎉</div>
+      <h2>Tout revu !</h2>
+      <p>Tu as passé en revue tous les mots du filtre actuel.</p>
+      <button class="btn-action" onclick="resetQueue()">🔄 Recommencer</button>
+    </div>
+
+    <!-- Empty filter state -->
+    <div class="state-msg" id="state-empty">
+      <div class="icon">🔍</div>
+      <h2>Aucun mot</h2>
+      <p>Aucun mot ne correspond à ce filtre.</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions" id="actions">
+      <button class="btn-action-main remove" id="btn-remove" title="Supprimer (←)">✕</button>
+      <button class="btn-undo"              id="btn-undo"   title="Annuler">↩</button>
+      <button class="btn-action-main keep"  id="btn-keep"   title="Garder (→)">✓</button>
+    </div>
+
+    <div class="kbd-hint">
+      <span><kbd>←</kbd> Supprimer</span>
+      <span><kbd>→</kbd> Garder</span>
+      <span><kbd>↩</kbd> Annuler</span>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <!-- Add word -->
+    <div class="panel">
+      <div class="panel-header">➕ Ajouter un mot</div>
+      <div class="panel-body">
+        <div class="form-row">
+          <label>Mot</label>
+          <input id="new-word" class="form-input" type="text" placeholder="ex: FOMO" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label>Catégorie</label>
+          <input id="new-cat" class="form-input" type="text" placeholder="ex: réseaux" list="cat-list" autocomplete="off" />
+          <datalist id="cat-list"></datalist>
+        </div>
+        <div class="form-row">
+          <label>Difficulté</label>
+          <div class="diff-radio-group">
+            <label><input type="radio" name="diff" value="EASY"  /><span>Facile</span></label>
+            <label><input type="radio" name="diff" value="MEDIUM" checked /><span>Moyen</span></label>
+            <label><input type="radio" name="diff" value="HARD"  /><span>Difficile</span></label>
+          </div>
+        </div>
+        <button class="btn-add" id="btn-add-word">➕ Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Added words -->
+    <div class="panel">
+      <div class="panel-header">✨ Ajoutés (<span id="added-count">0</span>)</div>
+      <div class="panel-body" style="padding-top: 8px; padding-bottom: 8px;">
+        <div class="added-list" id="added-list">
+          <div class="empty-list">Aucun mot ajouté</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Removed words -->
+    <div class="panel">
+      <div class="panel-header">🗑️ Supprimés (<span id="removed-count">0</span>)</div>
+      <div class="panel-body" style="padding-top: 8px; padding-bottom: 8px;">
+        <div class="word-list" id="removed-list">
+          <div class="empty-list">Aucun mot supprimé</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<script>
+// ── State ────────────────────────────────────────────────────────────────────
+const state = {
+  db:       { easy: [], medium: [], hard: [] },
+  allWords: [],          // flat array, source of truth
+  queue:    [],          // words to review in current session
+  qIdx:     0,           // current position in queue
+  decisions: new Map(),  // key → 'keep' | 'remove'
+  added:    [],          // new WordEntry[] added this session
+  history:  [],          // for undo: [{key, prev}]
+  filter:   { diff: 'ALL', cat: 'ALL' },
+  dirty:    false,
+};
+
+function wordKey(w) { return `${w.word}|${w.category}|${w.difficulty}`; }
+
+// ── DOM refs ─────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const card        = $('card');
+const cardWord    = $('card-word');
+const cardCat     = $('card-cat');
+const cardDiff    = $('card-diff');
+const cardCounter = $('card-counter');
+const overlayR    = $('overlay-remove');
+const overlayK    = $('overlay-keep');
+const cardStack   = $('card-stack');
+const stateDone   = $('state-done');
+const stateEmpty  = $('state-empty');
+const actionsDiv  = $('actions');
+const sRemoved    = $('s-removed');
+const sKept       = $('s-kept');
+const sAdded      = $('s-added');
+const sRemain     = $('s-remain');
+const btnSave     = $('btn-save');
+const btnUndo     = $('btn-undo');
+const progress    = $('progress');
+const addedList   = $('added-list');
+const removedList = $('removed-list');
+const addedCount  = $('added-count');
+const removedCount= $('removed-count');
+
+// ── Load ──────────────────────────────────────────────────────────────────────
+async function init() {
+  try {
+    const res = await fetch('/api/words');
+    const data = await res.json();
+    state.db = data;
+    state.allWords = [
+      ...data.easy.map(w => ({...w})),
+      ...data.medium.map(w => ({...w})),
+      ...data.hard.map(w => ({...w})),
+    ];
+    buildCategoryFilters();
+    buildQueue();
+    $('loading').style.display = 'none';
+  } catch(e) {
+    $('loading').innerHTML = '<span style="color:#eb445a">❌ Impossible de contacter le serveur. Lance d\'abord <code>npm run word-admin</code></span>';
+  }
+}
+
+// ── Categories ────────────────────────────────────────────────────────────────
+function buildCategoryFilters() {
+  const cats = [...new Set(state.allWords.map(w => w.category))].sort((a,b) => a.localeCompare(b,'fr'));
+  const container = $('cat-chips');
+  container.innerHTML = '';
+
+  const all = document.createElement('button');
+  all.className = 'chip active';
+  all.dataset.cat = 'ALL';
+  all.textContent = 'Toutes';
+  all.onclick = () => setCatFilter('ALL');
+  container.appendChild(all);
+
+  cats.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.dataset.cat = cat;
+    btn.textContent = cat;
+    btn.onclick = () => setCatFilter(cat);
+    container.appendChild(btn);
+  });
+
+  // Datalist for add form
+  const dl = $('cat-list');
+  dl.innerHTML = '';
+  cats.forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat;
+    dl.appendChild(opt);
+  });
+}
+
+// ── Filters ───────────────────────────────────────────────────────────────────
+document.querySelectorAll('[data-diff]').forEach(btn => {
+  btn.onclick = () => {
+    state.filter.diff = btn.dataset.diff;
+    document.querySelectorAll('[data-diff]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildQueue(true);
+  };
+});
+
+function setCatFilter(cat) {
+  state.filter.cat = cat;
+  document.querySelectorAll('[data-cat]').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  buildQueue(true);
+}
+
+// ── Queue ─────────────────────────────────────────────────────────────────────
+function buildQueue(resetProgress = false) {
+  let pool = state.allWords;
+
+  if (state.filter.diff !== 'ALL') {
+    pool = pool.filter(w => w.difficulty === state.filter.diff);
+  }
+  if (state.filter.cat !== 'ALL') {
+    pool = pool.filter(w => w.category === state.filter.cat);
+  }
+
+  // Only unreviewed words
+  state.queue = pool.filter(w => !state.decisions.has(wordKey(w)));
+  state.qIdx = 0;
+  renderCard();
+  updateStats();
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function renderCard() {
+  const total     = state.queue.length + state.decisions.size;
+  const reviewed  = state.decisions.size;
+  const remaining = state.queue.length;
+
+  // Progress (across all words, not just filtered)
+  const allTotal = state.allWords.length;
+  const allReviewed = state.decisions.size;
+  progress.style.width = `${allTotal > 0 ? (allReviewed / allTotal * 100) : 0}%`;
+
+  if (state.queue.length === 0) {
+    cardStack.style.display = 'none';
+    actionsDiv.style.display = 'none';
+    stateEmpty.style.display = reviewed > 0 ? 'none' : 'flex';
+    stateDone.style.display  = reviewed > 0 ? 'flex' : 'none';
+    return;
+  }
+
+  cardStack.style.display = 'block';
+  actionsDiv.style.display = 'flex';
+  stateDone.style.display = 'none';
+  stateEmpty.style.display = 'none';
+
+  const w = state.queue[0];
+  cardWord.textContent = w.word;
+  cardCat.textContent  = w.category;
+  cardCounter.textContent = `${reviewed + 1} / ${reviewed + remaining}`;
+
+  cardDiff.className = 'card-difficulty diff-' + w.difficulty.toLowerCase();
+  const labels = { EASY: '⚡ Facile', MEDIUM: '🎯 Moyen', HARD: '🔥 Difficile' };
+  cardDiff.textContent = labels[w.difficulty] || w.difficulty;
+
+  overlayR.style.opacity = '0';
+  overlayK.style.opacity = '0';
+  card.style.transform = '';
+  card.style.opacity   = '';
+}
+
+function updateStats() {
+  const removed = [...state.decisions.values()].filter(v => v === 'remove').length;
+  const kept    = [...state.decisions.values()].filter(v => v === 'keep').length;
+  sRemoved.textContent = removed;
+  sKept.textContent    = kept;
+  sAdded.textContent   = state.added.length;
+  sRemain.textContent  = state.queue.length;
+  addedCount.textContent   = state.added.length;
+  removedCount.textContent = removed;
+  btnSave.disabled = !state.dirty;
+}
+
+// ── Decision ──────────────────────────────────────────────────────────────────
+function decide(action) {
+  if (state.queue.length === 0) return;
+  const w   = state.queue[0];
+  const key = wordKey(w);
+
+  state.history.push({ key, prev: state.decisions.get(key) });
+  state.decisions.set(key, action);
+  state.dirty = true;
+
+  const isRemove = action === 'remove';
+  animateCard(isRemove ? -1 : 1, () => {
+    state.queue.shift();
+    renderCard();
+    updateStats();
+    renderLists();
+  });
+
+  btnUndo.disabled = false;
+}
+
+function animateCard(direction, callback) {
+  const dist = direction * (window.innerWidth * 0.7);
+  const rot  = direction * 15;
+  card.classList.add('animating');
+  card.style.transform = `translateX(${dist}px) rotate(${rot}deg)`;
+  card.style.opacity   = '0';
+  setTimeout(() => {
+    card.classList.remove('animating');
+    callback();
+  }, 360);
+}
+
+// ── Undo ──────────────────────────────────────────────────────────────────────
+function undo() {
+  if (state.history.length === 0) return;
+  const last = state.history.pop();
+
+  const prevDecision = state.decisions.get(last.key);
+
+  if (last.prev === undefined) {
+    state.decisions.delete(last.key);
+  } else {
+    state.decisions.set(last.key, last.prev);
+  }
+
+  // Find the word and put it back at front of queue
+  const w = state.allWords.find(x => wordKey(x) === last.key);
+  if (w) state.queue.unshift(w);
+
+  state.dirty = state.decisions.size > 0 || state.added.length > 0;
+  btnUndo.disabled = state.history.length === 0;
+  renderCard();
+  updateStats();
+  renderLists();
+
+  showToast('↩ Annulé', 'info');
+}
+
+// ── Swipe drag ────────────────────────────────────────────────────────────────
+let drag = { active: false, startX: 0 };
+
+card.addEventListener('mousedown', e => {
+  if (state.queue.length === 0) return;
+  drag.active = true;
+  drag.startX = e.clientX;
+  card.classList.remove('animating', 'snap-back');
+});
+
+document.addEventListener('mousemove', e => {
+  if (!drag.active) return;
+  const dx  = e.clientX - drag.startX;
+  const rot = dx * 0.06;
+  card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
+  const ratio = Math.min(Math.abs(dx) / 80, 1);
+  if (dx < -20) { overlayR.style.opacity = ratio; overlayK.style.opacity = 0; }
+  else if (dx > 20) { overlayK.style.opacity = ratio; overlayR.style.opacity = 0; }
+  else { overlayR.style.opacity = 0; overlayK.style.opacity = 0; }
+});
+
+document.addEventListener('mouseup', e => {
+  if (!drag.active) return;
+  drag.active = false;
+  const dx = e.clientX - drag.startX;
+  if (dx < -80)      decide('remove');
+  else if (dx > 80)  decide('keep');
+  else {
+    card.classList.add('snap-back');
+    card.style.transform = '';
+    card.style.opacity   = '';
+    overlayR.style.opacity = 0;
+    overlayK.style.opacity = 0;
+    setTimeout(() => card.classList.remove('snap-back'), 400);
+  }
+});
+
+// Touch support
+card.addEventListener('touchstart', e => {
+  drag.active = true;
+  drag.startX = e.touches[0].clientX;
+  card.classList.remove('animating', 'snap-back');
+}, { passive: true });
+
+card.addEventListener('touchmove', e => {
+  if (!drag.active) return;
+  const dx  = e.touches[0].clientX - drag.startX;
+  const rot = dx * 0.06;
+  card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
+  const ratio = Math.min(Math.abs(dx) / 80, 1);
+  if (dx < -20)     { overlayR.style.opacity = ratio; overlayK.style.opacity = 0; }
+  else if (dx > 20) { overlayK.style.opacity = ratio; overlayR.style.opacity = 0; }
+  else              { overlayR.style.opacity = 0;     overlayK.style.opacity = 0; }
+}, { passive: true });
+
+card.addEventListener('touchend', e => {
+  if (!drag.active) return;
+  drag.active = false;
+  const dx = e.changedTouches[0].clientX - drag.startX;
+  if (dx < -80)     decide('remove');
+  else if (dx > 80) decide('keep');
+  else {
+    card.classList.add('snap-back');
+    card.style.transform = '';
+    overlayR.style.opacity = 0;
+    overlayK.style.opacity = 0;
+    setTimeout(() => card.classList.remove('snap-back'), 400);
+  }
+});
+
+// ── Keyboards ─────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  const tag = e.target.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); decide('remove'); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); decide('keep'); }
+  if (e.key === 'Backspace' || (e.key === 'z' && (e.ctrlKey || e.metaKey))) { e.preventDefault(); undo(); }
+});
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+$('btn-remove').onclick = () => decide('remove');
+$('btn-keep').onclick   = () => decide('keep');
+btnUndo.onclick         = undo;
+btnUndo.disabled        = true;
+
+function resetQueue() {
+  state.decisions.clear();
+  state.history = [];
+  state.dirty   = state.added.length > 0;
+  buildQueue();
+  renderLists();
+  updateStats();
+}
+
+// ── Add word ──────────────────────────────────────────────────────────────────
+$('btn-add-word').onclick = addWord;
+$('new-word').addEventListener('keydown', e => { if (e.key === 'Enter') addWord(); });
+
+function addWord() {
+  const word = $('new-word').value.trim();
+  const cat  = $('new-cat').value.trim();
+  const diff = document.querySelector('input[name="diff"]:checked')?.value || 'MEDIUM';
+
+  if (!word) { showToast('⚠️ Saisis un mot', 'danger'); return; }
+  if (!cat)  { showToast('⚠️ Saisis une catégorie', 'danger'); return; }
+
+  // Check duplicate
+  const exists = state.allWords.some(w => w.word.toLowerCase() === word.toLowerCase())
+               || state.added.some(w => w.word.toLowerCase() === word.toLowerCase());
+  if (exists) { showToast(`"${word}" existe déjà`, 'danger'); return; }
+
+  const entry = { word, category: cat, difficulty: diff };
+  state.added.push(entry);
+  state.dirty = true;
+
+  $('new-word').value = '';
+  showToast(`➕ "${word}" ajouté (${diff})`, 'success');
+  updateStats();
+  renderLists();
+}
+
+// ── Lists render ──────────────────────────────────────────────────────────────
+function renderLists() {
+  // Removed list
+  const removed = state.allWords
+    .filter(w => state.decisions.get(wordKey(w)) === 'remove')
+    .sort((a, b) => a.word.localeCompare(b.word, 'fr'));
+
+  if (removed.length === 0) {
+    removedList.innerHTML = '<div class="empty-list">Aucun mot supprimé</div>';
+  } else {
+    removedList.innerHTML = removed.map(w => {
+      const dotColor = { EASY: '#2dd36f', MEDIUM: '#ffd700', HARD: '#eb445a' }[w.difficulty];
+      const k = wordKey(w).replace(/'/g, "\\'");
+      return `<div class="word-item">
+        <span class="diff-dot" style="background:${dotColor}"></span>
+        <span class="w">${w.word}</span>
+        <span class="cat">${w.category}</span>
+        <button class="restore-btn" onclick="restoreWord('${k}')" title="Restaurer">↩</button>
+      </div>`;
+    }).join('');
+  }
+  removedCount.textContent = removed.length;
+
+  // Added list
+  if (state.added.length === 0) {
+    addedList.innerHTML = '<div class="empty-list">Aucun mot ajouté</div>';
+  } else {
+    addedList.innerHTML = state.added.map((w, i) => `
+      <div class="added-item">
+        <span class="w">${w.word}</span>
+        <span class="cat">${w.category}</span>
+        <button class="del-btn" onclick="removeAdded(${i})" title="Retirer">✕</button>
+      </div>
+    `).join('');
+  }
+  addedCount.textContent = state.added.length;
+}
+
+function restoreWord(key) {
+  state.decisions.delete(key);
+  // Add back to queue if matches current filter
+  const w = state.allWords.find(x => wordKey(x) === key);
+  if (w) {
+    const matchDiff = state.filter.diff === 'ALL' || w.difficulty === state.filter.diff;
+    const matchCat  = state.filter.cat  === 'ALL' || w.category  === state.filter.cat;
+    if (matchDiff && matchCat) state.queue.push(w);
+  }
+  state.dirty = state.decisions.size > 0 || state.added.length > 0;
+  renderCard();
+  updateStats();
+  renderLists();
+  showToast(`↩ "${w?.word}" restauré`, 'info');
+}
+
+function removeAdded(idx) {
+  const w = state.added.splice(idx, 1)[0];
+  state.dirty = state.decisions.size > 0 || state.added.length > 0;
+  updateStats();
+  renderLists();
+  showToast(`✕ "${w.word}" retiré`, 'info');
+}
+
+// ── Save ──────────────────────────────────────────────────────────────────────
+btnSave.onclick = async () => {
+  btnSave.disabled = true;
+  btnSave.textContent = '⏳ Sauvegarde…';
+
+  // Rebuild arrays: original words minus removed + new ones
+  const toRemove = new Set(
+    [...state.decisions.entries()]
+      .filter(([, v]) => v === 'remove')
+      .map(([k]) => k)
+  );
+
+  const filtered = state.allWords.filter(w => !toRemove.has(wordKey(w)));
+
+  const merged = {
+    easy:   [...filtered.filter(w => w.difficulty === 'EASY'),   ...state.added.filter(w => w.difficulty === 'EASY')],
+    medium: [...filtered.filter(w => w.difficulty === 'MEDIUM'), ...state.added.filter(w => w.difficulty === 'MEDIUM')],
+    hard:   [...filtered.filter(w => w.difficulty === 'HARD'),   ...state.added.filter(w => w.difficulty === 'HARD')],
+  };
+
+  try {
+    const res = await fetch('/api/words', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(merged),
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      const added   = state.added.length;
+      const removed = [...state.decisions.values()].filter(v => v === 'remove').length;
+      showToast(`✅ Sauvegardé — ${removed} supprimés, ${added} ajoutés`, 'success');
+      // Reload fresh state
+      await reloadAfterSave(merged);
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(e) {
+    showToast('❌ Erreur lors de la sauvegarde', 'danger');
+    btnSave.disabled  = false;
+  }
+  btnSave.textContent = '💾 Sauvegarder';
+};
+
+async function reloadAfterSave(merged) {
+  state.db      = merged;
+  state.allWords = [
+    ...merged.easy.map(w => ({...w})),
+    ...merged.medium.map(w => ({...w})),
+    ...merged.hard.map(w => ({...w})),
+  ];
+  state.decisions.clear();
+  state.history = [];
+  state.added   = [];
+  state.dirty   = false;
+  buildCategoryFilters();
+  buildQueue();
+  updateStats();
+  renderLists();
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'info') {
+  const container = $('toast-container');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 2100);
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
