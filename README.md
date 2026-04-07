@@ -1,5 +1,7 @@
 # Slip It
 
+> English documentation: [README-en.md](README-en.md)
+
 Slip It est un jeu de soirée mobile en français, pensé pour être joué en présentiel avec un seul téléphone partagé entre les joueurs. Chaque participant reçoit secrètement une cible et un mot à faire prononcer naturellement pendant la conversation. Quand la cible dit le mot, le piège est validé et le piégeur marque un point.
 
 L'application est construite en Ionic 8 + Angular 18, fonctionne comme une PWA, peut être empaquetée sur Android via Capacitor, et ne dépend d'aucun backend. L'état d'une partie est persisté localement sur l'appareil.
@@ -13,6 +15,18 @@ L'application est construite en Ionic 8 + Angular 18, fonctionne comme une PWA, 
 - Classement, manches, fin de partie et historique local.
 - Dictionnaire de mots statique administrable via un mini-outil interne.
 
+## Captures d'écran
+
+| Accueil | Configuration | Distribution |
+|---------|--------------|-------------|
+| ![Accueil](docs/screenshots/home.png) | ![Configuration](docs/screenshots/game-setup.png) | ![Distribution](docs/screenshots/card-deal.png) |
+
+| Jeu en cours | Classement | Podium final |
+|-------------|-----------|-------------|
+| ![Jeu en cours](docs/screenshots/gameplay.png) | ![Classement](docs/screenshots/scoreboard.png) | ![Podium](docs/screenshots/game-end.png) |
+
+> Les captures sont à placer dans `docs/screenshots/`. Voir [comment les générer](#générer-les-captures-décran) ci-dessous.
+
 ## Stack technique
 
 - Ionic 8
@@ -22,6 +36,31 @@ L'application est construite en Ionic 8 + Angular 18, fonctionne comme une PWA, 
 - Ionic Storage pour la persistance locale
 - Jasmine + Karma pour les tests unitaires
 - Playwright pour les tests end-to-end
+
+## Flux des écrans
+
+```mermaid
+flowchart TD
+    HOME([Accueil /home]) --> SETUP[Configuration /game-setup]
+    HOME -->|Partie en cours| GAMEPLAY
+
+    subgraph PARTIE["Cycle d'une partie"]
+        direction TB
+        SETUP -->|≥ 3 joueurs| DEAL[Distribution des cartes /card-deal]
+        DEAL -->|Tous servis| GAMEPLAY[Jeu en cours /gameplay]
+        GAMEPLAY -->|Manche suivante| SCORE[Classement /scoreboard]
+        SCORE --> DEAL
+        GAMEPLAY -->|Terminer| END([Fin de partie /game-end])
+    end
+
+    END --> HOME
+    HISTORY([Historique /history]) --- HOME
+
+    classDef guard fill:#fef3c7,stroke:#d97706,color:#000
+    class DEAL,GAMEPLAY,SCORE,END guard
+```
+
+> Les routes en jaune sont protégées par `GameActiveGuard`.
 
 ## Boucle de jeu
 
@@ -217,7 +256,7 @@ Cette interface permet de charger, éditer et sauvegarder les fichiers `easy.jso
 npm run word-admin:build-freq
 ```
 
-Ce script construit `scripts/word-admin/freq-db.json` à partir de sources lexicales externes afin de suggérer ou recalculer la difficulté des mots.
+Ce script construit `scripts/word-admin/freq-db.json` à partir de trois sources lexicales françaises (Lexique 3.83, CHACQFAM, Imag_1493) afin de calculer un score composite de difficulté pour chaque mot.
 
 ### Reclassification des mots
 
@@ -237,13 +276,98 @@ node scripts/word-admin/reclassify-words.js --write
 
 L'application est pensée comme une PWA. Une fois chargée, le jeu peut continuer à fonctionner sans backend, avec stockage local de l'état de partie. Le service worker et le manifest web sont présents dans le projet pour supporter ce mode d'usage.
 
+## Contribuer
+
+### Conventions code
+
+**Angular et TypeScript**
+
+- NgModule obligatoire: pas de composants standalone.
+- Pas de signals Angular ni de nouvelle API de réactivité.
+- State applicatif via `BehaviorSubject` dans les services façade.
+- `ChangeDetectionStrategy.OnPush` sur tous les composants.
+- Nettoyage des subscriptions dans `ngOnDestroy` via pattern `takeUntil` ou `Subscription.add`.
+- Noms de fichiers: `kebab-case`, suffixe `.service.ts`, `.component.ts`, `.page.ts`, `.guard.ts`, `.module.ts`, `.model.ts`.
+
+**Services**
+
+- Les services singletons sont déclarés avec `providedIn: 'root'` ou enregistrés dans `CoreModule`.
+- Les dépendances entre services passent par injection de constructeur, jamais par accès direct.
+- Aucune logique dans les composants qui devrait vivre dans un service.
+
+**Structure des modules**
+
+- Un module de feature par route (`home.module.ts`, `gameplay.module.ts`, etc.).
+- Le `CoreModule` importe `IonicStorageModule` et déclare les services partagés.
+- Le `SharedModule` contient uniquement des composants/pipes réutilisables entre features.
+
+**Dictionnaire de mots**
+
+- Le format JSON `src/assets/words/*.json` est `[{ word, category, difficulty }]`.
+- Ne pas modifier la difficulté manuellement si `freq-db.json` est présent: utiliser `reclassify-words.js`.
+
+### Conventions E2E (Playwright)
+
+- Chaque écran a un Page Object dans `e2e/pages/`.
+- Tout Page Object étend `BasePage` (`e2e/pages/base.page.ts`).
+- Les helpers partagés entre tests sont dans `e2e/helpers/`.
+- Les fixtures Playwright personnalisées sont dans `e2e/fixtures/`.
+- Nommer les fichiers de tests `NN-description-courte.spec.ts` avec un préfixe numérique.
+- Ne pas partager d'état entre deux tests (chaque test repart d'un `localStorage` vide).
+
+### Ajouter/modifier des mots
+
+1. Lancer l'interface d'administration: `npm run word-admin`.
+2. Ouvrir `http://localhost:4242`.
+3. Ajouter ou corriger les mots dans l'interface, puis sauvegarder.
+4. Optionnel: re-calculer les difficultés avec `reclassify-words.js --dry-run` puis `--write`.
+
+### Ajouter un écran
+
+1. Créer le module feature dans `src/app/features/nom-ecran/`.
+2. Déclarer la route lazy dans `app-routing.module.ts`.
+3. Ajouter le `canActivate: [GameActiveGuard]` si l'écran nécessite une partie active.
+4. Créer le Page Object correspondant dans `e2e/pages/`.
+5. Écrire des tests E2E dans `e2e/tests/`.
+
+### Générer les captures d'écran
+
+Les captures sont attendues dans `docs/screenshots/` au format PNG, idéalement prise sur Chrome mobile (375 × 812 px, viewport iPhone 13).
+
+Avec Playwright (recommandé) :
+
+```bash
+npm start &
+npx playwright screenshot --browser chromium --viewport-size="375,812" \
+  http://localhost:4200/home          docs/screenshots/home.png
+npx playwright screenshot --browser chromium --viewport-size="375,812" \
+  http://localhost:4200/game-setup    docs/screenshots/game-setup.png
+```
+
+Ou manuellement depuis Chrome DevTools (mode device « iPhone 13 ») :
+1. Ouvrir l'écran voulu.
+2. `Ctrl+Shift+P` → « Capture screenshot ».
+3. Enregistrer dans `docs/screenshots/<nom-ecran>.png`.
+
+Fichiers attendus :
+
+```text
+docs/screenshots/
+  home.png
+  game-setup.png
+  card-deal.png
+  gameplay.png
+  scoreboard.png
+  game-end.png
+```
+
 ## État du projet
 
 Le dépôt contient:
 
 - l'application principale Ionic/Angular
 - le projet Android Capacitor
-- la suite de tests E2E Playwright
+- 25 fichiers de tests E2E Playwright
 - des scripts d'administration pour le dictionnaire de mots
 
 ## Licence
